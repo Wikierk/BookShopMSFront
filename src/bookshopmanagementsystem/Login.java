@@ -26,63 +26,63 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        LoginPanel = new javax.swing.JPanel();
+        HeaderPanel = new javax.swing.JPanel();
+        LogInLabel = new javax.swing.JLabel();
+        LoginFormPanel = new javax.swing.JPanel();
+        EmailPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jPanel8 = new javax.swing.JPanel();
+        PasswordPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jPanel7 = new javax.swing.JPanel();
+        RememeberForgotPanel = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        LoginBtnPanel = new javax.swing.JPanel();
+        LoginButton = new javax.swing.JButton();
+        SignUpPanel = new javax.swing.JPanel();
+        SignUpLabel = new javax.swing.JLabel();
+        SidePanel = new javax.swing.JPanel();
+        IconLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(910, 500));
         setPreferredSize(new java.awt.Dimension(910, 500));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 0));
+        LoginPanel.setPreferredSize(new java.awt.Dimension(400, 0));
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(400, 100));
+        HeaderPanel.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Log in");
+        LogInLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LogInLabel.setText("Log in");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout HeaderPanelLayout = new javax.swing.GroupLayout(HeaderPanel);
+        HeaderPanel.setLayout(HeaderPanelLayout);
+        HeaderPanelLayout.setHorizontalGroup(
+            HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaderPanelLayout.createSequentialGroup()
                 .addGap(163, 163, 163)
-                .addComponent(jLabel1)
+                .addComponent(LogInLabel)
                 .addContainerGap(166, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        HeaderPanelLayout.setVerticalGroup(
+            HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaderPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel1)
+                .addComponent(LogInLabel)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3);
+        LoginPanel.add(HeaderPanel);
 
-        jPanel5.setPreferredSize(new java.awt.Dimension(400, 180));
+        LoginFormPanel.setPreferredSize(new java.awt.Dimension(400, 180));
 
-        jPanel6.setPreferredSize(new java.awt.Dimension(280, 50));
-        jPanel6.setLayout(new java.awt.BorderLayout(4, 4));
+        EmailPanel.setPreferredSize(new java.awt.Dimension(280, 50));
+        EmailPanel.setLayout(new java.awt.BorderLayout(4, 4));
 
         jLabel2.setText("Email Address");
-        jPanel6.add(jLabel2, java.awt.BorderLayout.PAGE_START);
+        EmailPanel.add(jLabel2, java.awt.BorderLayout.PAGE_START);
 
         jTextField1.setPreferredSize(new java.awt.Dimension(64, 25));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -90,15 +90,15 @@ public class Login extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jTextField1, java.awt.BorderLayout.CENTER);
+        EmailPanel.add(jTextField1, java.awt.BorderLayout.CENTER);
 
-        jPanel5.add(jPanel6);
+        LoginFormPanel.add(EmailPanel);
 
-        jPanel8.setPreferredSize(new java.awt.Dimension(280, 50));
-        jPanel8.setLayout(new java.awt.BorderLayout(4, 4));
+        PasswordPanel.setPreferredSize(new java.awt.Dimension(280, 50));
+        PasswordPanel.setLayout(new java.awt.BorderLayout(4, 4));
 
         jLabel4.setText("Password");
-        jPanel8.add(jLabel4, java.awt.BorderLayout.PAGE_START);
+        PasswordPanel.add(jLabel4, java.awt.BorderLayout.PAGE_START);
 
         jPasswordField1.setPreferredSize(new java.awt.Dimension(64, 25));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -106,12 +106,12 @@ public class Login extends javax.swing.JFrame {
                 jPasswordField1ActionPerformed(evt);
             }
         });
-        jPanel8.add(jPasswordField1, java.awt.BorderLayout.CENTER);
+        PasswordPanel.add(jPasswordField1, java.awt.BorderLayout.CENTER);
 
-        jPanel5.add(jPanel8);
+        LoginFormPanel.add(PasswordPanel);
 
-        jPanel7.setPreferredSize(new java.awt.Dimension(250, 25));
-        jPanel7.setLayout(new java.awt.BorderLayout());
+        RememeberForgotPanel.setPreferredSize(new java.awt.Dimension(250, 25));
+        RememeberForgotPanel.setLayout(new java.awt.BorderLayout());
 
         jCheckBox1.setText("Remember me");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,44 +119,48 @@ public class Login extends javax.swing.JFrame {
                 jCheckBox1ActionPerformed(evt);
             }
         });
-        jPanel7.add(jCheckBox1, java.awt.BorderLayout.WEST);
+        RememeberForgotPanel.add(jCheckBox1, java.awt.BorderLayout.WEST);
 
         jLabel3.setForeground(new java.awt.Color(255, 153, 153));
         jLabel3.setText("Forgot your password?");
-        jPanel7.add(jLabel3, java.awt.BorderLayout.EAST);
+        RememeberForgotPanel.add(jLabel3, java.awt.BorderLayout.EAST);
 
-        jPanel5.add(jPanel7);
+        LoginFormPanel.add(RememeberForgotPanel);
 
-        jPanel1.add(jPanel5);
+        LoginPanel.add(LoginFormPanel);
 
-        jPanel9.setPreferredSize(new java.awt.Dimension(400, 50));
+        LoginBtnPanel.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        jButton1.setText("Login");
-        jButton1.setPreferredSize(new java.awt.Dimension(250, 30));
-        jPanel9.add(jButton1);
+        LoginButton.setText("Login");
+        LoginButton.setPreferredSize(new java.awt.Dimension(250, 30));
+        LoginBtnPanel.add(LoginButton);
 
-        jPanel1.add(jPanel9);
+        LoginPanel.add(LoginBtnPanel);
 
-        jPanel10.setPreferredSize(new java.awt.Dimension(400, 50));
+        SignUpPanel.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        jLabel5.setText("Don't have an account? Sign up. ");
-        jPanel10.add(jLabel5);
+        SignUpLabel.setText("Don't have an account? Sign up. ");
+        SignUpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SignUpLabelMouseClicked(evt);
+            }
+        });
+        SignUpPanel.add(SignUpLabel);
 
-        jPanel1.add(jPanel10);
+        LoginPanel.add(SignUpPanel);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
+        getContentPane().add(LoginPanel, java.awt.BorderLayout.WEST);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(400, 430));
+        SidePanel.setBackground(new java.awt.Color(255, 255, 255));
+        SidePanel.setPreferredSize(new java.awt.Dimension(400, 430));
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 100);
         flowLayout1.setAlignOnBaseline(true);
-        jPanel2.setLayout(flowLayout1);
+        SidePanel.setLayout(flowLayout1);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/LoginIcon.png"))); // NOI18N
-        jLabel6.setPreferredSize(new java.awt.Dimension(200, 200));
-        jPanel2.add(jLabel6);
+        IconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/LoginIcon.png"))); // NOI18N
+        SidePanel.add(IconLabel);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(SidePanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -173,25 +177,29 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void SignUpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpLabelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SignUpLabelMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel EmailPanel;
+    private javax.swing.JPanel HeaderPanel;
+    private javax.swing.JLabel IconLabel;
+    private javax.swing.JLabel LogInLabel;
+    private javax.swing.JPanel LoginBtnPanel;
+    private javax.swing.JButton LoginButton;
+    private javax.swing.JPanel LoginFormPanel;
+    private javax.swing.JPanel LoginPanel;
+    private javax.swing.JPanel PasswordPanel;
+    private javax.swing.JPanel RememeberForgotPanel;
+    private javax.swing.JPanel SidePanel;
+    private javax.swing.JLabel SignUpLabel;
+    private javax.swing.JPanel SignUpPanel;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
