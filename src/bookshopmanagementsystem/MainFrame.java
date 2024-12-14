@@ -26,6 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         mainPanel.add(new LoginPanel(this), "login");
         mainPanel.add(new RegistrationPanel(this), "registration");
+        mainPanel.add(new ClientPanel(this), "client");
         
         add(mainPanel);
         cardLayout.show(mainPanel, "login");

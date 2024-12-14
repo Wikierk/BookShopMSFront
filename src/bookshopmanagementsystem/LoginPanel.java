@@ -133,6 +133,11 @@ public class LoginPanel extends javax.swing.JPanel {
 
         LoginButton.setText("Login");
         LoginButton.setPreferredSize(new java.awt.Dimension(250, 30));
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
         LoginBtnPanel.add(LoginButton);
 
         LoginPanel.add(LoginBtnPanel);
@@ -187,6 +192,10 @@ public class LoginPanel extends javax.swing.JPanel {
     private void SignUpLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpLabelMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_SignUpLabelMouseEntered
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+       mainFrame.showPanel("client");
+    }//GEN-LAST:event_LoginButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
