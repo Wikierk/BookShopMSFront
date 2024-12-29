@@ -17,16 +17,14 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     private CardLayout cardLayout;
-    private JPanel mainPanel;
-    
+    JPanel mainPanel;
     public MainFrame() {
-        
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
-        
         mainPanel.add(new LoginPanel(this), "login");
         mainPanel.add(new RegistrationPanel(this), "registration");
         mainPanel.add(new ClientPanel(this), "client");
+        mainPanel.add(new CartPanel(this), "cart");
         
         add(mainPanel);
         cardLayout.show(mainPanel, "login");

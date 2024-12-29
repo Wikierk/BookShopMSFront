@@ -4,10 +4,9 @@
  */
 package bookshopmanagementsystem;
 
+
 import bookshopmanagementsystem.interfaces.Book;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import java.math.BigDecimal;
 import javax.swing.JPanel;
 
 /**
@@ -24,22 +23,21 @@ public class ClientPanel extends javax.swing.JPanel {
         this.mainFrame = mainFrame;
         initComponents();
     Book[] books = new Book[10];
-    books[0] = new Book("The Great Gatsby", "F. Scott Fitzgerald", 29.99);
-    books[1] = new Book("1984", "George Orwell", 19.99);
-    books[2] = new Book("To Kill a Mockingbird", "Harper Lee", 24.99);
-    books[3] = new Book("The Great Gatsby", "F. Scott Fitzgerald", 29.99);
-    books[4] = new Book("1984", "George Orwell", 19.99);
-    books[5] = new Book("To Kill a Mockingbird", "Harper Lee", 24.99);
-    books[6] = new Book("1984", "George Orwell", 19.99);
-    books[7] = new Book("To Kill a Mockingbird", "Harper Lee", 24.99);
-    books[8] = new Book("The Great Gatsby", "F. Scott Fitzgerald", 29.99);
-    books[9] = new Book("1984", "George Orwell", 19.99);
+    books[0] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
+    books[1] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
+    books[2] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("24.99"));
+    books[3] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
+    books[4] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
+    books[5] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("24.99"));
+    books[6] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
+    books[7] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("19.99"));
+    books[8] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
+    books[9] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
     
     for (Book book : books) {
-    JPanel singleBookPanel = new BookPanel(book);
+    JPanel singleBookPanel = new BookPanel(book, this);
     BooksBoxPanel.add(singleBookPanel);
 }
-
     }
 
     /**
@@ -139,7 +137,7 @@ public class ClientPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BasketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BasketBtnActionPerformed
-        // TODO add your handling code here:
+            mainFrame.showPanel("cart");
     }//GEN-LAST:event_BasketBtnActionPerformed
 
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
