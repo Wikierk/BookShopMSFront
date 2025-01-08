@@ -18,7 +18,7 @@ public class BookShopManagementSystem {
      */
     public static void main(String[] args) {
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
         java.awt.EventQueue.invokeLater(BookShopManagementSystem::startClient);
     }
 
