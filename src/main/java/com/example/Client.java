@@ -1,4 +1,4 @@
-package bookshopmanagementsystem;
+package com.example;
 
 import java.net.*;
 import java.io.*;
