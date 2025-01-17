@@ -47,6 +47,7 @@ public class LoginPanel extends javax.swing.JPanel {
         SidePanel = new javax.swing.JPanel();
         IconLabel = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(700, 430));
         setLayout(new java.awt.BorderLayout());
 
         LoginPanel.setPreferredSize(new java.awt.Dimension(400, 0));
@@ -194,7 +195,7 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SignUpLabelMouseEntered
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-       mainFrame.showPanel("client");
+       mainFrame.showPanel("admin");
     }//GEN-LAST:event_LoginButtonActionPerformed
 
 

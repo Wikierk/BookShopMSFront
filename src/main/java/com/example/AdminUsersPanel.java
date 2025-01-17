@@ -13,31 +13,16 @@ import javax.swing.JPanel;
  *
  * @author Wiktor
  */
-public class ClientPanel extends javax.swing.JPanel {
+public class AdminUsersPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ClientPanel
      */
     private MainFrame mainFrame;
-    public ClientPanel(MainFrame mainFrame) {
+    public AdminUsersPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
-    Book[] books = new Book[10];
-    books[0] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
-    books[1] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
-    books[2] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("24.99"));
-    books[3] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
-    books[4] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
-    books[5] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("24.99"));
-    books[6] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
-    books[7] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("19.99"));
-    books[8] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
-    books[9] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
     
-    for (Book book : books) {
-    JPanel singleBookPanel = new BookPanel(book, this, mainFrame);
-    BooksBoxPanel.add(singleBookPanel);
-}
     }
 
     /**
@@ -51,41 +36,46 @@ public class ClientPanel extends javax.swing.JPanel {
 
         SidePanel = new javax.swing.JPanel();
         HelloLabel = new javax.swing.JLabel();
-        BasketBtn = new javax.swing.JButton();
+        AddUserBtn = new javax.swing.JButton();
         OrdersBtn = new javax.swing.JButton();
+        BooksBtn = new javax.swing.JButton();
         FiltersBtn = new javax.swing.JButton();
         LogOutBtn = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
         HeaderPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        BooksPanel = new javax.swing.JPanel();
-        BooksScrollPane = new javax.swing.JScrollPane();
-        BooksBoxPanel = new javax.swing.JPanel();
+        UsersPanel = new javax.swing.JPanel();
+        UsersScrollPane = new javax.swing.JScrollPane();
+        UsersBoxPanel = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(700, 430));
         setLayout(new java.awt.BorderLayout());
 
         SidePanel.setPreferredSize(new java.awt.Dimension(150, 485));
         SidePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
         HelloLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        HelloLabel.setText("Hello, Wiktor!");
+        HelloLabel.setText("Hello, Admin!");
         SidePanel.add(HelloLabel);
         HelloLabel.getAccessibleContext().setAccessibleDescription("");
 
-        BasketBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        BasketBtn.setText("Cart");
-        BasketBtn.setPreferredSize(new java.awt.Dimension(80, 30));
-        BasketBtn.addActionListener(new java.awt.event.ActionListener() {
+        AddUserBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AddUserBtn.setText("Add User");
+        AddUserBtn.setMaximumSize(new java.awt.Dimension(110, 30));
+        AddUserBtn.setMinimumSize(new java.awt.Dimension(110, 30));
+        AddUserBtn.setPreferredSize(new java.awt.Dimension(110, 30));
+        AddUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BasketBtnActionPerformed(evt);
+                AddUserBtnActionPerformed(evt);
             }
         });
-        SidePanel.add(BasketBtn);
+        SidePanel.add(AddUserBtn);
 
         OrdersBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         OrdersBtn.setText("Orders");
-        OrdersBtn.setPreferredSize(new java.awt.Dimension(80, 30));
+        OrdersBtn.setMaximumSize(new java.awt.Dimension(110, 30));
+        OrdersBtn.setMinimumSize(new java.awt.Dimension(110, 30));
+        OrdersBtn.setPreferredSize(new java.awt.Dimension(110, 30));
         OrdersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OrdersBtnActionPerformed(evt);
@@ -93,14 +83,30 @@ public class ClientPanel extends javax.swing.JPanel {
         });
         SidePanel.add(OrdersBtn);
 
+        BooksBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BooksBtn.setText("Books");
+        BooksBtn.setMaximumSize(new java.awt.Dimension(110, 30));
+        BooksBtn.setMinimumSize(new java.awt.Dimension(110, 30));
+        BooksBtn.setPreferredSize(new java.awt.Dimension(110, 30));
+        BooksBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BooksBtnActionPerformed(evt);
+            }
+        });
+        SidePanel.add(BooksBtn);
+
         FiltersBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         FiltersBtn.setText("Filters");
-        FiltersBtn.setPreferredSize(new java.awt.Dimension(80, 30));
+        FiltersBtn.setMaximumSize(new java.awt.Dimension(110, 30));
+        FiltersBtn.setMinimumSize(new java.awt.Dimension(110, 30));
+        FiltersBtn.setPreferredSize(new java.awt.Dimension(110, 30));
         SidePanel.add(FiltersBtn);
 
         LogOutBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LogOutBtn.setText("Log out");
-        LogOutBtn.setPreferredSize(new java.awt.Dimension(85, 30));
+        LogOutBtn.setMaximumSize(new java.awt.Dimension(110, 30));
+        LogOutBtn.setMinimumSize(new java.awt.Dimension(110, 30));
+        LogOutBtn.setPreferredSize(new java.awt.Dimension(110, 30));
         LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LogOutBtnActionPerformed(evt);
@@ -116,29 +122,29 @@ public class ClientPanel extends javax.swing.JPanel {
         HeaderPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 60, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Available Books:");
+        jLabel1.setText("Users:");
         HeaderPanel.add(jLabel1);
 
         MainPanel.add(HeaderPanel, java.awt.BorderLayout.PAGE_START);
 
-        BooksPanel.setPreferredSize(new java.awt.Dimension(750, 300));
-        BooksPanel.setLayout(new javax.swing.BoxLayout(BooksPanel, javax.swing.BoxLayout.LINE_AXIS));
+        UsersPanel.setPreferredSize(new java.awt.Dimension(750, 300));
+        UsersPanel.setLayout(new javax.swing.BoxLayout(UsersPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        BooksScrollPane.setPreferredSize(new java.awt.Dimension(690, 485));
+        UsersScrollPane.setPreferredSize(new java.awt.Dimension(690, 485));
 
-        BooksBoxPanel.setLayout(new javax.swing.BoxLayout(BooksBoxPanel, javax.swing.BoxLayout.Y_AXIS));
-        BooksScrollPane.setViewportView(BooksBoxPanel);
+        UsersBoxPanel.setLayout(new javax.swing.BoxLayout(UsersBoxPanel, javax.swing.BoxLayout.Y_AXIS));
+        UsersScrollPane.setViewportView(UsersBoxPanel);
 
-        BooksPanel.add(BooksScrollPane);
+        UsersPanel.add(UsersScrollPane);
 
-        MainPanel.add(BooksPanel, java.awt.BorderLayout.CENTER);
+        MainPanel.add(UsersPanel, java.awt.BorderLayout.CENTER);
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BasketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BasketBtnActionPerformed
-            mainFrame.showPanel("cart");
-    }//GEN-LAST:event_BasketBtnActionPerformed
+    private void AddUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserBtnActionPerformed
+            mainFrame.showPanel("bookForm");
+    }//GEN-LAST:event_AddUserBtnActionPerformed
 
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
         mainFrame.showPanel("orders");
@@ -148,12 +154,14 @@ public class ClientPanel extends javax.swing.JPanel {
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
+    private void BooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BooksBtnActionPerformed
+        mainFrame.showPanel("admin");
+    }//GEN-LAST:event_BooksBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BasketBtn;
-    private javax.swing.JPanel BooksBoxPanel;
-    private javax.swing.JPanel BooksPanel;
-    private javax.swing.JScrollPane BooksScrollPane;
+    private javax.swing.JButton AddUserBtn;
+    private javax.swing.JButton BooksBtn;
     private javax.swing.JButton FiltersBtn;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel HelloLabel;
@@ -161,6 +169,9 @@ public class ClientPanel extends javax.swing.JPanel {
     private javax.swing.JPanel MainPanel;
     private javax.swing.JButton OrdersBtn;
     private javax.swing.JPanel SidePanel;
+    private javax.swing.JPanel UsersBoxPanel;
+    private javax.swing.JPanel UsersPanel;
+    private javax.swing.JScrollPane UsersScrollPane;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

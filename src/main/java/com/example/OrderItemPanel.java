@@ -4,28 +4,25 @@
  */
 package com.example;
 
-import bookshopmanagementsystem.interfaces.Cart;
 import bookshopmanagementsystem.interfaces.Book;
+
 
 /**
  *
  * @author Wiktor
  */
-public class BookPanel extends javax.swing.JPanel {
+public class OrderItemPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form BookPanel
      */
-    private ClientPanel clientPanel;
-    private MainFrame mainFrame;
+    private int quantity = 1;
     private Book book;
-    public BookPanel(Book book, ClientPanel clientPanel, MainFrame mainFrame) {
+    public OrderItemPanel(Book book) {
         initComponents();
         TitleLabel.setText(book.getTitle());
         AuthorLabel.setText(book.getAuthor());
         PriceLabel.setText(String.valueOf(book.getPrice()) + " ZŁ");
-        this.clientPanel = clientPanel;
-        this.mainFrame = mainFrame;
         this.book = book;
     }
 
@@ -40,21 +37,22 @@ public class BookPanel extends javax.swing.JPanel {
 
         ImagePanel = new javax.swing.JPanel();
         ImageLabel = new javax.swing.JLabel();
-        BookInfoPanel = new javax.swing.JPanel();
+        OrderItemInfoPanel = new javax.swing.JPanel();
         TitlePanel = new javax.swing.JPanel();
         TitleLabel = new javax.swing.JLabel();
         AuthorPanel = new javax.swing.JPanel();
         AuthorLabel = new javax.swing.JLabel();
         PricePanel = new javax.swing.JPanel();
         PriceLabel = new javax.swing.JLabel();
-        BtnPanel = new javax.swing.JPanel();
-        AddToCartBtn = new javax.swing.JButton();
-        OrderNowBtn = new javax.swing.JButton();
+        StatusPanel = new javax.swing.JPanel();
+        StatusLabel = new javax.swing.JLabel();
+        DatePanel = new javax.swing.JPanel();
+        StatusLabel1 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(15, 1, 15, 1), javax.swing.BorderFactory.createTitledBorder("")));
-        setMaximumSize(new java.awt.Dimension(250, 420));
-        setPreferredSize(new java.awt.Dimension(250, 420));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+        setMaximumSize(new java.awt.Dimension(415, 255));
+        setPreferredSize(new java.awt.Dimension(415, 255));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.X_AXIS));
 
         ImagePanel.setPreferredSize(new java.awt.Dimension(218, 200));
         ImagePanel.setLayout(new java.awt.BorderLayout());
@@ -65,10 +63,10 @@ public class BookPanel extends javax.swing.JPanel {
 
         add(ImagePanel);
 
-        BookInfoPanel.setPreferredSize(new java.awt.Dimension(218, 120));
-        BookInfoPanel.setLayout(new javax.swing.BoxLayout(BookInfoPanel, javax.swing.BoxLayout.Y_AXIS));
+        OrderItemInfoPanel.setPreferredSize(new java.awt.Dimension(218, 120));
+        OrderItemInfoPanel.setLayout(new javax.swing.BoxLayout(OrderItemInfoPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        TitlePanel.setPreferredSize(new java.awt.Dimension(225, 30));
+        TitlePanel.setPreferredSize(new java.awt.Dimension(180, 30));
         TitlePanel.setLayout(new java.awt.BorderLayout());
 
         TitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -77,9 +75,9 @@ public class BookPanel extends javax.swing.JPanel {
         TitleLabel.setToolTipText("");
         TitlePanel.add(TitleLabel, java.awt.BorderLayout.CENTER);
 
-        BookInfoPanel.add(TitlePanel);
+        OrderItemInfoPanel.add(TitlePanel);
 
-        AuthorPanel.setPreferredSize(new java.awt.Dimension(225, 30));
+        AuthorPanel.setPreferredSize(new java.awt.Dimension(180, 30));
         AuthorPanel.setLayout(new java.awt.BorderLayout());
 
         AuthorLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -87,7 +85,7 @@ public class BookPanel extends javax.swing.JPanel {
         AuthorLabel.setText("Author");
         AuthorPanel.add(AuthorLabel, java.awt.BorderLayout.CENTER);
 
-        BookInfoPanel.add(AuthorPanel);
+        OrderItemInfoPanel.add(AuthorPanel);
 
         PricePanel.setPreferredSize(new java.awt.Dimension(225, 30));
         PricePanel.setLayout(new java.awt.BorderLayout());
@@ -97,58 +95,41 @@ public class BookPanel extends javax.swing.JPanel {
         PriceLabel.setText("Price");
         PricePanel.add(PriceLabel, java.awt.BorderLayout.CENTER);
 
-        BookInfoPanel.add(PricePanel);
+        OrderItemInfoPanel.add(PricePanel);
 
-        add(BookInfoPanel);
+        StatusPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
 
-        BtnPanel.setPreferredSize(new java.awt.Dimension(218, 50));
+        StatusLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        StatusLabel.setText("Status");
+        StatusPanel.add(StatusLabel);
 
-        AddToCartBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AddToCartBtn.setText("Add to cart");
-        AddToCartBtn.setPreferredSize(new java.awt.Dimension(110, 30));
-        AddToCartBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddToCartBtnActionPerformed(evt);
-            }
-        });
-        BtnPanel.add(AddToCartBtn);
+        OrderItemInfoPanel.add(StatusPanel);
 
-        OrderNowBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        OrderNowBtn.setText("Order now");
-        OrderNowBtn.setPreferredSize(new java.awt.Dimension(110, 30));
-        OrderNowBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderNowBtnActionPerformed(evt);
-            }
-        });
-        BtnPanel.add(OrderNowBtn);
+        DatePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
 
-        add(BtnPanel);
+        StatusLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        StatusLabel1.setText("Order Date");
+        DatePanel.add(StatusLabel1);
+
+        OrderItemInfoPanel.add(DatePanel);
+
+        add(OrderItemInfoPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void AddToCartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToCartBtnActionPerformed
-
-        Toast toast = new Toast(clientPanel, "Added to cart", 1000);
-        Cart.getInstance().addItem(book);
-    }//GEN-LAST:event_AddToCartBtnActionPerformed
-
-    private void OrderNowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderNowBtnActionPerformed
-        mainFrame.showPanel("orderForm");
-    }//GEN-LAST:event_OrderNowBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddToCartBtn;
     private javax.swing.JLabel AuthorLabel;
     private javax.swing.JPanel AuthorPanel;
-    private javax.swing.JPanel BookInfoPanel;
-    private javax.swing.JPanel BtnPanel;
+    private javax.swing.JPanel DatePanel;
     private javax.swing.JLabel ImageLabel;
     private javax.swing.JPanel ImagePanel;
-    private javax.swing.JButton OrderNowBtn;
+    private javax.swing.JPanel OrderItemInfoPanel;
     private javax.swing.JLabel PriceLabel;
     private javax.swing.JPanel PricePanel;
+    private javax.swing.JLabel StatusLabel;
+    private javax.swing.JLabel StatusLabel1;
+    private javax.swing.JPanel StatusPanel;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JPanel TitlePanel;
     // End of variables declaration//GEN-END:variables

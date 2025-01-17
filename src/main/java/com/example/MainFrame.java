@@ -25,6 +25,11 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(new RegistrationPanel(this), "registration");
         mainPanel.add(new ClientPanel(this), "client");
         mainPanel.add(new CartPanel(this), "cart");
+        mainPanel.add(new OrdersPanel(this), "orders");
+        mainPanel.add(new OrderFormPanel(this), "orderForm");
+        mainPanel.add(new AdminPanel(this), "admin");
+        mainPanel.add(new BookFormPanel(this), "bookForm");
+        mainPanel.add(new AdminUsersPanel(this), "adminUsers");
         
         add(mainPanel);
         cardLayout.show(mainPanel, "login");
@@ -46,6 +51,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bookstore");
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         pack();

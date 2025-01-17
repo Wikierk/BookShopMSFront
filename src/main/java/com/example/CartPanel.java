@@ -129,6 +129,11 @@ public class CartPanel extends javax.swing.JPanel {
         OrderBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         OrderBtn.setText("Order");
         OrderBtn.setPreferredSize(new java.awt.Dimension(110, 40));
+        OrderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OrderBtnActionPerformed(evt);
+            }
+        });
         CartSummaryPanel.add(OrderBtn);
 
         TotalValueLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -145,12 +150,16 @@ public class CartPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_BackBtnActionPerformed
 
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
-
+        mainFrame.showPanel("orders");
     }//GEN-LAST:event_OrdersBtnActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
+
+    private void OrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderBtnActionPerformed
+        mainFrame.showPanel("orderForm");
+    }//GEN-LAST:event_OrderBtnActionPerformed
      public JPanel getCartItemsBoxPanel() {
         return CartItemsBoxPanel;
     }
