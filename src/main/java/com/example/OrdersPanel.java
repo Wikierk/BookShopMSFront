@@ -98,7 +98,7 @@ public class OrdersPanel extends javax.swing.JPanel {
 
         MainPanel.add(HeaderPanel);
 
-        OrderItemsPanel.setPreferredSize(new java.awt.Dimension(740, 350));
+        OrderItemsPanel.setPreferredSize(new java.awt.Dimension(600, 350));
         OrderItemsPanel.setLayout(new javax.swing.BoxLayout(OrderItemsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         OrderItemsScrollPane.setPreferredSize(new java.awt.Dimension(690, 485));

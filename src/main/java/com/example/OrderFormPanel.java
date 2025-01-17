@@ -241,7 +241,7 @@ public class OrderFormPanel extends javax.swing.JPanel {
         flowLayout1.setAlignOnBaseline(true);
         SidePanel.setLayout(flowLayout1);
 
-        OrderItemsPanel.setPreferredSize(new java.awt.Dimension(500, 500));
+        OrderItemsPanel.setPreferredSize(new java.awt.Dimension(350, 500));
         OrderItemsPanel.setLayout(new javax.swing.BoxLayout(OrderItemsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         OrderItemsScrollPane.setPreferredSize(new java.awt.Dimension(690, 485));

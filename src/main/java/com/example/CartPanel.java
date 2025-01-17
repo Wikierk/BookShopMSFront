@@ -107,7 +107,7 @@ public class CartPanel extends javax.swing.JPanel {
 
         MainPanel.add(HeaderPanel);
 
-        CartItemsPanel.setPreferredSize(new java.awt.Dimension(740, 350));
+        CartItemsPanel.setPreferredSize(new java.awt.Dimension(600, 350));
         CartItemsPanel.setLayout(new javax.swing.BoxLayout(CartItemsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         CartItemsScrollPane.setPreferredSize(new java.awt.Dimension(690, 485));
