@@ -65,6 +65,7 @@ public class OrderFormPanel extends javax.swing.JPanel {
 
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(200, 62));
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setLayout(new java.awt.BorderLayout());
 
         OrderPanel.setPreferredSize(new java.awt.Dimension(400, 0));

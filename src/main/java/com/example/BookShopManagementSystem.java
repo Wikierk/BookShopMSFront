@@ -12,6 +12,7 @@ import java.io.IOException;
  */
 public class BookShopManagementSystem {
     public static final int port = 666;
+    private static Client client;
 
     /**
      * @param args the command line arguments
@@ -24,13 +25,14 @@ public class BookShopManagementSystem {
 
     public static void startClient() {
         try {
-            Client client = new Client();
+            client = new Client();
             client.startConnection("127.0.0.1", port);
-            String response = client.sendMessage("test");
-            System.out.println(response);
         } catch (IOException e) {
             System.out.println(e.toString());
         }
+    }
+     public static Client getClient() {
+        return client;
     }
     
 }

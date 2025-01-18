@@ -195,7 +195,7 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SignUpLabelMouseEntered
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-       mainFrame.showPanel("client");
+       mainFrame.showPanel("admin");
     }//GEN-LAST:event_LoginButtonActionPerformed
 
 

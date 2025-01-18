@@ -162,7 +162,7 @@ public class AdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_BasketBtnActionPerformed
 
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
-        mainFrame.showPanel("orders");
+        //mainFrame.showPanel("adminOrders");
     }//GEN-LAST:event_OrdersBtnActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed

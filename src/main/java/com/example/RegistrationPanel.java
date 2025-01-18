@@ -4,6 +4,9 @@
  */
 package com.example;
 
+import com.example.requests.AddUserDto;
+import com.example.requests.AddUserRequest;
+
 /**
  *
  * @author Wiktor
@@ -262,12 +265,28 @@ public class RegistrationPanel extends javax.swing.JPanel {
          String email = EmailTextField.getText();
          String password = new String(PasswordField.getPassword());
          String repeatPassword = new String(RepeatPasswordField.getPassword());
-         
+         String fullName = name + " " + lastName;
         
         if(!password.equals(repeatPassword)) {
             InfoLabel.setForeground(new java.awt.Color(255, 51, 51));
             InfoLabel.setText("Passwords are not the same.");
         }else{
+            
+            AddUserDto addUserDto = new AddUserDto(fullName,email,password,"user");
+            AddUserRequest addUserRequest = new AddUserRequest(addUserDto);
+            
+            try {
+                Client client = BookShopManagementSystem.getClient();
+                if (client != null) {
+                    String response = client.sendMessage(addUserRequest.create());
+                    System.out.println("Server response: " + response);
+            }   else {
+                    System.out.println("Client is not connected.");
+            }
+            }catch(Exception e) {
+                System.out.println(e);
+            }
+            
            InfoLabel.setText("");
            NameTextField.setText("");
            LastNameTextField.setText("");

@@ -143,11 +143,11 @@ public class AdminUsersPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserBtnActionPerformed
-            mainFrame.showPanel("bookForm");
+            mainFrame.showPanel("userForm");
     }//GEN-LAST:event_AddUserBtnActionPerformed
 
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
-        mainFrame.showPanel("orders");
+        //mainFrame.showPanel("adminOrders");
     }//GEN-LAST:event_OrdersBtnActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
