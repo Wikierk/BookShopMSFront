@@ -4,6 +4,7 @@
  */
 package com.example;
 
+import com.example.dto.NewUserDto;
 import com.example.requests.AddUserDto;
 import com.example.requests.AddUserRequest;
 
@@ -272,8 +273,8 @@ public class RegistrationPanel extends javax.swing.JPanel {
             InfoLabel.setText("Passwords are not the same.");
         }else{
             
-            AddUserDto addUserDto = new AddUserDto(fullName,email,password,"user");
-            AddUserRequest addUserRequest = new AddUserRequest(addUserDto);
+            NewUserDto newUserDto = new NewUserDto(fullName,email,password);
+            AddUserRequest addUserRequest = new AddUserRequest(newUserDto);
             
             try {
                 Client client = BookShopManagementSystem.getClient();

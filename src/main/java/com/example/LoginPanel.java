@@ -4,6 +4,9 @@
  */
 package com.example;
 
+import com.example.dto.BookDto;
+import com.example.requests.SelectBooksRequest;
+
 /**
  *
  * @author Wiktor

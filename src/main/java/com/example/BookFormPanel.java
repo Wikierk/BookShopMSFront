@@ -4,6 +4,10 @@
  */
 package com.example;
 
+import com.example.dto.BookDto;
+import com.example.requests.AddBookRequest;
+import java.math.BigDecimal;
+
 /**
  *
  * @author Wiktor
@@ -14,6 +18,7 @@ public class BookFormPanel extends javax.swing.JPanel {
      * Creates new form BookFormPanel
      */
     MainFrame mainFrame;
+
     public BookFormPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
@@ -170,8 +175,34 @@ public class BookFormPanel extends javax.swing.JPanel {
     private void AddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMouseClicked
         String title = TitleTextField.getText();
         String author = AuthorTextField.getText();
-        String price = PriceTextField.getText();
+        String priceText = PriceTextField.getText();
+        BigDecimal price = new BigDecimal(priceText);
 
+        if (!title.isEmpty() && !author.isEmpty() && !priceText.isEmpty()) {
+            BookDto newBookDto = new BookDto(title, author, price);
+            AddBookRequest addBookRequest = new AddBookRequest(newBookDto);
+
+            try {
+                Client client = BookShopManagementSystem.getClient();
+                if (client != null) {
+                    String response = client.sendMessage(addBookRequest.create());
+                    System.out.println("Server response: " + response);
+                } else {
+                    System.out.println("Client is not connected.");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            TitleTextField.setText("");
+            AuthorTextField.setText("");
+            PriceTextField.setText("");
+            InfoLabel.setForeground(new java.awt.Color(40, 252, 3));
+            InfoLabel.setText("Book added!");
+        } else {
+            InfoLabel.setForeground(new java.awt.Color(255, 51, 51));
+            InfoLabel.setText("Fill all field!");
+        }
 
     }//GEN-LAST:event_AddButtonMouseClicked
 

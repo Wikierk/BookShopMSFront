@@ -4,9 +4,11 @@
  */
 package com.example;
 
-
-import bookshopmanagementsystem.interfaces.Book;
-import java.math.BigDecimal;
+import com.example.dto.BookDto;
+import com.example.requests.SelectBooksRequest;
+import com.example.responses.Response;
+import com.example.responses.ResponseType;
+import com.example.responses.SelectBooksResponse;
 import javax.swing.JPanel;
 
 /**
@@ -19,9 +21,12 @@ public class AdminPanel extends javax.swing.JPanel {
      * Creates new form ClientPanel
      */
     private MainFrame mainFrame;
+
     public AdminPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
+       
+        /*
     Book[] books = new Book[10];
     books[0] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
     books[1] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
@@ -33,11 +38,12 @@ public class AdminPanel extends javax.swing.JPanel {
     books[7] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("19.99"));
     books[8] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
     books[9] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
-    
-    for (Book book : books) {
-    JPanel singleBookPanel = new BookAdminPanel(book, this, mainFrame);
-    BooksBoxPanel.add(singleBookPanel);
-}
+        
+        for (Book book : books) {
+            JPanel singleBookPanel = new BookAdminPanel(book, this, mainFrame);
+            BooksBoxPanel.add(singleBookPanel);
+        }
+         */
     }
 
     /**
@@ -64,6 +70,11 @@ public class AdminPanel extends javax.swing.JPanel {
         BooksBoxPanel = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(700, 430));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         setLayout(new java.awt.BorderLayout());
 
         SidePanel.setPreferredSize(new java.awt.Dimension(150, 485));
@@ -158,11 +169,11 @@ public class AdminPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BasketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BasketBtnActionPerformed
-            mainFrame.showPanel("bookForm");
+        mainFrame.showPanel("bookForm");
     }//GEN-LAST:event_BasketBtnActionPerformed
 
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
-        //mainFrame.showPanel("adminOrders");
+        mainFrame.showPanel("adminOrders");
     }//GEN-LAST:event_OrdersBtnActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
@@ -172,6 +183,36 @@ public class AdminPanel extends javax.swing.JPanel {
     private void UsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersBtnActionPerformed
         mainFrame.showPanel("adminUsers");
     }//GEN-LAST:event_UsersBtnActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        BooksBoxPanel.removeAll();
+        BooksBoxPanel.revalidate();
+        BooksBoxPanel.repaint();
+        BookDto[] books = {};
+        SelectBooksRequest selectBookRequest = new SelectBooksRequest();
+        try {
+            Client client = BookShopManagementSystem.getClient();
+            if (client != null) {
+                String response = client.sendMessage(selectBookRequest.create());
+                String[] result = Response.split(response);
+                 System.out.println("Server response: " + response);
+                 if((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
+                     SelectBooksResponse selectBooksResponse = new SelectBooksResponse(result[1]);
+                     books = selectBooksResponse.books;
+                 }
+                 
+            } else {
+                System.out.println("Client is not connected.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        for (BookDto book : books) {
+            JPanel singleBookPanel = new BookAdminPanel(book, this, mainFrame);
+            BooksBoxPanel.add(singleBookPanel);
+        }
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

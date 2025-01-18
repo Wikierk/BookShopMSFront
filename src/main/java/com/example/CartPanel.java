@@ -6,6 +6,7 @@ package com.example;
 
 import bookshopmanagementsystem.interfaces.Book;
 import bookshopmanagementsystem.interfaces.Cart;
+import com.example.dto.BookDto;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -166,8 +167,8 @@ public class CartPanel extends javax.swing.JPanel {
 
      private void refreshCartItems() {
          CartItemsBoxPanel.removeAll();
-          List<Book> books = Cart.getInstance().getItems();
-            for (Book book : books) {
+          List<BookDto> books = Cart.getInstance().getItems();
+            for (BookDto book : books) {
                 JPanel cartItemPanel = new CartItemPanel(book);
                 CartItemsBoxPanel.add(cartItemPanel);
             }

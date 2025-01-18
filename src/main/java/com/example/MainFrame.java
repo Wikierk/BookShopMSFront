@@ -31,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(new BookFormPanel(this), "bookForm");
         mainPanel.add(new AdminUsersPanel(this), "adminUsers");
         mainPanel.add(new UserFormPanel(this), "userForm");
+        mainPanel.add(new AdminOrdersPanel(this), "adminOrders");
         
         add(mainPanel);
         cardLayout.show(mainPanel, "login");

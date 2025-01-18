@@ -8,14 +8,14 @@ package com.example;
  *
  * @author Wiktor
  */
-public class AdminUsersPanel extends javax.swing.JPanel {
+public class AdminOrdersPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ClientPanel
      */
     private MainFrame mainFrame;
 
-    public AdminUsersPanel(MainFrame mainFrame) {
+    public AdminOrdersPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
 
@@ -32,17 +32,16 @@ public class AdminUsersPanel extends javax.swing.JPanel {
 
         SidePanel = new javax.swing.JPanel();
         HelloLabel = new javax.swing.JLabel();
-        AddUserBtn = new javax.swing.JButton();
-        OrdersBtn = new javax.swing.JButton();
+        UsersBtn = new javax.swing.JButton();
         BooksBtn = new javax.swing.JButton();
         FiltersBtn = new javax.swing.JButton();
         LogOutBtn = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
         HeaderPanel = new javax.swing.JPanel();
-        UsersLabel = new javax.swing.JLabel();
-        UsersPanel = new javax.swing.JPanel();
-        UsersScrollPane = new javax.swing.JScrollPane();
-        UsersBoxPanel = new javax.swing.JPanel();
+        OrdersLabel = new javax.swing.JLabel();
+        OrdersPanel = new javax.swing.JPanel();
+        OrdersScrollPane = new javax.swing.JScrollPane();
+        OrdersBoxPanel = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(700, 430));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -60,29 +59,17 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         SidePanel.add(HelloLabel);
         HelloLabel.getAccessibleContext().setAccessibleDescription("");
 
-        AddUserBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AddUserBtn.setText("Add User");
-        AddUserBtn.setMaximumSize(new java.awt.Dimension(110, 30));
-        AddUserBtn.setMinimumSize(new java.awt.Dimension(110, 30));
-        AddUserBtn.setPreferredSize(new java.awt.Dimension(110, 30));
-        AddUserBtn.addActionListener(new java.awt.event.ActionListener() {
+        UsersBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        UsersBtn.setText("Users");
+        UsersBtn.setMaximumSize(new java.awt.Dimension(110, 30));
+        UsersBtn.setMinimumSize(new java.awt.Dimension(110, 30));
+        UsersBtn.setPreferredSize(new java.awt.Dimension(110, 30));
+        UsersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddUserBtnActionPerformed(evt);
+                UsersBtnActionPerformed(evt);
             }
         });
-        SidePanel.add(AddUserBtn);
-
-        OrdersBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        OrdersBtn.setText("Orders");
-        OrdersBtn.setMaximumSize(new java.awt.Dimension(110, 30));
-        OrdersBtn.setMinimumSize(new java.awt.Dimension(110, 30));
-        OrdersBtn.setPreferredSize(new java.awt.Dimension(110, 30));
-        OrdersBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrdersBtnActionPerformed(evt);
-            }
-        });
-        SidePanel.add(OrdersBtn);
+        SidePanel.add(UsersBtn);
 
         BooksBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BooksBtn.setText("Books");
@@ -122,34 +109,30 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         HeaderPanel.setPreferredSize(new java.awt.Dimension(750, 80));
         HeaderPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 60, 30));
 
-        UsersLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        UsersLabel.setText("Users:");
-        HeaderPanel.add(UsersLabel);
+        OrdersLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        OrdersLabel.setText("Orders:");
+        HeaderPanel.add(OrdersLabel);
 
         MainPanel.add(HeaderPanel, java.awt.BorderLayout.PAGE_START);
 
-        UsersPanel.setPreferredSize(new java.awt.Dimension(750, 300));
-        UsersPanel.setLayout(new javax.swing.BoxLayout(UsersPanel, javax.swing.BoxLayout.LINE_AXIS));
+        OrdersPanel.setPreferredSize(new java.awt.Dimension(750, 300));
+        OrdersPanel.setLayout(new javax.swing.BoxLayout(OrdersPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        UsersScrollPane.setPreferredSize(new java.awt.Dimension(690, 485));
+        OrdersScrollPane.setPreferredSize(new java.awt.Dimension(690, 485));
 
-        UsersBoxPanel.setLayout(new javax.swing.BoxLayout(UsersBoxPanel, javax.swing.BoxLayout.Y_AXIS));
-        UsersScrollPane.setViewportView(UsersBoxPanel);
+        OrdersBoxPanel.setLayout(new javax.swing.BoxLayout(OrdersBoxPanel, javax.swing.BoxLayout.Y_AXIS));
+        OrdersScrollPane.setViewportView(OrdersBoxPanel);
 
-        UsersPanel.add(UsersScrollPane);
+        OrdersPanel.add(OrdersScrollPane);
 
-        MainPanel.add(UsersPanel, java.awt.BorderLayout.CENTER);
+        MainPanel.add(OrdersPanel, java.awt.BorderLayout.CENTER);
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserBtnActionPerformed
-        mainFrame.showPanel("userForm");
-    }//GEN-LAST:event_AddUserBtnActionPerformed
-
-    private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
-        mainFrame.showPanel("adminOrders");
-    }//GEN-LAST:event_OrdersBtnActionPerformed
+    private void UsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersBtnActionPerformed
+        mainFrame.showPanel("adminUsers");
+    }//GEN-LAST:event_UsersBtnActionPerformed
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
@@ -160,25 +143,24 @@ public class AdminUsersPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_BooksBtnActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        UsersBoxPanel.removeAll();
-        UsersBoxPanel.revalidate();
-        UsersBoxPanel.repaint();
+        OrdersBoxPanel.removeAll();
+        OrdersBoxPanel.revalidate();
+        OrdersBoxPanel.repaint();
     }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddUserBtn;
     private javax.swing.JButton BooksBtn;
     private javax.swing.JButton FiltersBtn;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel HelloLabel;
     private javax.swing.JButton LogOutBtn;
     private javax.swing.JPanel MainPanel;
-    private javax.swing.JButton OrdersBtn;
+    private javax.swing.JPanel OrdersBoxPanel;
+    private javax.swing.JLabel OrdersLabel;
+    private javax.swing.JPanel OrdersPanel;
+    private javax.swing.JScrollPane OrdersScrollPane;
     private javax.swing.JPanel SidePanel;
-    private javax.swing.JPanel UsersBoxPanel;
-    private javax.swing.JLabel UsersLabel;
-    private javax.swing.JPanel UsersPanel;
-    private javax.swing.JScrollPane UsersScrollPane;
+    private javax.swing.JButton UsersBtn;
     // End of variables declaration//GEN-END:variables
 }

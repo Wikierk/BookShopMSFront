@@ -26,21 +26,23 @@ public class UserAdminPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BookInfoPanel = new javax.swing.JPanel();
+        UserInfoPanel = new javax.swing.JPanel();
         NamePanel = new javax.swing.JPanel();
         TitleLabel = new javax.swing.JLabel();
         LastNamePanel = new javax.swing.JPanel();
         AuthorLabel = new javax.swing.JLabel();
         EmailPanel = new javax.swing.JPanel();
-        PriceLabel = new javax.swing.JLabel();
+        EmailLabel = new javax.swing.JLabel();
+        RolePanel = new javax.swing.JPanel();
+        RoleLabel = new javax.swing.JLabel();
         BtnPanel = new javax.swing.JPanel();
         EditBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        BookInfoPanel.setPreferredSize(new java.awt.Dimension(218, 120));
-        BookInfoPanel.setLayout(new javax.swing.BoxLayout(BookInfoPanel, javax.swing.BoxLayout.Y_AXIS));
+        UserInfoPanel.setPreferredSize(new java.awt.Dimension(218, 120));
+        UserInfoPanel.setLayout(new javax.swing.BoxLayout(UserInfoPanel, javax.swing.BoxLayout.Y_AXIS));
 
         NamePanel.setPreferredSize(new java.awt.Dimension(225, 10));
         NamePanel.setLayout(new java.awt.BorderLayout());
@@ -52,7 +54,7 @@ public class UserAdminPanel extends javax.swing.JPanel {
         TitleLabel.setPreferredSize(new java.awt.Dimension(38, 20));
         NamePanel.add(TitleLabel, java.awt.BorderLayout.CENTER);
 
-        BookInfoPanel.add(NamePanel);
+        UserInfoPanel.add(NamePanel);
 
         LastNamePanel.setPreferredSize(new java.awt.Dimension(225, 30));
         LastNamePanel.setLayout(new java.awt.BorderLayout());
@@ -62,20 +64,28 @@ public class UserAdminPanel extends javax.swing.JPanel {
         AuthorLabel.setText("Last Name");
         LastNamePanel.add(AuthorLabel, java.awt.BorderLayout.CENTER);
 
-        BookInfoPanel.add(LastNamePanel);
+        UserInfoPanel.add(LastNamePanel);
 
         EmailPanel.setPreferredSize(new java.awt.Dimension(225, 30));
         EmailPanel.setLayout(new java.awt.BorderLayout());
 
-        PriceLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        PriceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PriceLabel.setText("Email");
-        EmailPanel.add(PriceLabel, java.awt.BorderLayout.CENTER);
+        EmailLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        EmailLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EmailLabel.setText("Email");
+        EmailPanel.add(EmailLabel, java.awt.BorderLayout.CENTER);
 
-        BookInfoPanel.add(EmailPanel);
+        UserInfoPanel.add(EmailPanel);
+
+        RolePanel.setLayout(new java.awt.BorderLayout());
+
+        RoleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        RoleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RoleLabel.setText("Role");
+        RolePanel.add(RoleLabel, java.awt.BorderLayout.CENTER);
+
+        UserInfoPanel.add(RolePanel);
 
         BtnPanel.setPreferredSize(new java.awt.Dimension(218, 50));
-        BtnPanel.setLayout(new javax.swing.BoxLayout(BtnPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         EditBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         EditBtn.setText("Edit");
@@ -97,9 +107,9 @@ public class UserAdminPanel extends javax.swing.JPanel {
         });
         BtnPanel.add(DeleteBtn);
 
-        BookInfoPanel.add(BtnPanel);
+        UserInfoPanel.add(BtnPanel);
 
-        add(BookInfoPanel);
+        add(UserInfoPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
@@ -113,14 +123,16 @@ public class UserAdminPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AuthorLabel;
-    private javax.swing.JPanel BookInfoPanel;
     private javax.swing.JPanel BtnPanel;
     private javax.swing.JButton DeleteBtn;
     private javax.swing.JButton EditBtn;
+    private javax.swing.JLabel EmailLabel;
     private javax.swing.JPanel EmailPanel;
     private javax.swing.JPanel LastNamePanel;
     private javax.swing.JPanel NamePanel;
-    private javax.swing.JLabel PriceLabel;
+    private javax.swing.JLabel RoleLabel;
+    private javax.swing.JPanel RolePanel;
     private javax.swing.JLabel TitleLabel;
+    private javax.swing.JPanel UserInfoPanel;
     // End of variables declaration//GEN-END:variables
 }

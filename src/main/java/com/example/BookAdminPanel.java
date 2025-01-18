@@ -4,8 +4,7 @@
  */
 package com.example;
 
-import bookshopmanagementsystem.interfaces.Cart;
-import bookshopmanagementsystem.interfaces.Book;
+import com.example.dto.BookDto;
 
 /**
  *
@@ -18,8 +17,9 @@ public class BookAdminPanel extends javax.swing.JPanel {
      */
     private AdminPanel adminPanel;
     private MainFrame mainFrame;
-    private Book book;
-    public BookAdminPanel(Book book, AdminPanel adminPanel, MainFrame mainFrame) {
+    private BookDto book;
+
+    public BookAdminPanel(BookDto book, AdminPanel adminPanel, MainFrame mainFrame) {
         initComponents();
         TitleLabel.setText(book.getTitle());
         AuthorLabel.setText(book.getAuthor());
@@ -126,13 +126,13 @@ public class BookAdminPanel extends javax.swing.JPanel {
         add(BtnPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
 
     }//GEN-LAST:event_EditBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-       
+
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
 

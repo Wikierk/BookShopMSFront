@@ -7,6 +7,7 @@ package com.example;
 import bookshopmanagementsystem.interfaces.Cart;
 import bookshopmanagementsystem.interfaces.Book;
 import bookshopmanagementsystem.interfaces.Cart;
+import com.example.dto.BookDto;
 
 /**
  *
@@ -18,8 +19,8 @@ public class CartItemPanel extends javax.swing.JPanel {
      * Creates new form BookPanel
      */
     private int quantity = 1;
-    private Book book;
-    public CartItemPanel(Book book) {
+    private BookDto book;
+    public CartItemPanel(BookDto book) {
         initComponents();
         TitleLabel.setText(book.getTitle());
         AuthorLabel.setText(book.getAuthor());

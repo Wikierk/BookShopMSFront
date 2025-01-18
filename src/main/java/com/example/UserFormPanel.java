@@ -4,8 +4,10 @@
  */
 package com.example;
 
+import com.example.dto.NewUserDto;
 import com.example.requests.AddUserDto;
 import com.example.requests.AddUserRequest;
+
 
 /**
  *
@@ -234,8 +236,8 @@ public class UserFormPanel extends javax.swing.JPanel {
         String password = new String(PasswordField.getPassword());
         String fullName = name + " " + lastName;
 
-        AddUserDto addUserDto = new AddUserDto(fullName, email, password, "user");
-        AddUserRequest addUserRequest = new AddUserRequest(addUserDto);
+        NewUserDto newUserDto = new NewUserDto(fullName, email, password);
+        AddUserRequest addUserRequest = new AddUserRequest(newUserDto);
 
         try {
             Client client = BookShopManagementSystem.getClient();

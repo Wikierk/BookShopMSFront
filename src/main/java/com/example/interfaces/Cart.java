@@ -5,6 +5,7 @@
 package bookshopmanagementsystem.interfaces;
 
 import bookshopmanagementsystem.interfaces.Book;
+import com.example.dto.BookDto;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class Cart {
     private static Cart instance;
-    private final List<Book> books;
+    private final List<BookDto> books;
     private Runnable updateListener;
     private BigDecimal totalValue;
 
@@ -31,7 +32,7 @@ public class Cart {
         return instance;
     }
 
-    public void addItem(Book book) {
+    public void addItem(BookDto book) {
         books.add(book);
         this.totalValue = this.totalValue.add(book.getPrice());
         if (updateListener != null) {
@@ -39,7 +40,7 @@ public class Cart {
         }
     }
     
-    public void removeItem(Book book) {
+    public void removeItem(BookDto book) {
         books.remove(book);
         this.totalValue = this.totalValue.subtract(book.getPrice());
         if (updateListener != null) {
@@ -48,7 +49,7 @@ public class Cart {
     }
 
 
-    public List<Book> getItems() {
+    public List<BookDto> getItems() {
         return books;
     }
     

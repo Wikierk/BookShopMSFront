@@ -6,6 +6,7 @@ package com.example;
 
 import bookshopmanagementsystem.interfaces.Cart;
 import bookshopmanagementsystem.interfaces.Book;
+import com.example.dto.BookDto;
 
 /**
  *
@@ -18,8 +19,8 @@ public class BookPanel extends javax.swing.JPanel {
      */
     private ClientPanel clientPanel;
     private MainFrame mainFrame;
-    private Book book;
-    public BookPanel(Book book, ClientPanel clientPanel, MainFrame mainFrame) {
+    private BookDto book;
+    public BookPanel(BookDto book, ClientPanel clientPanel, MainFrame mainFrame) {
         initComponents();
         TitleLabel.setText(book.getTitle());
         AuthorLabel.setText(book.getAuthor());
