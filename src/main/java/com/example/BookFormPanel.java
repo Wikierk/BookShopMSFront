@@ -5,6 +5,7 @@
 package com.example;
 
 import com.example.dto.BookDto;
+import com.example.dto.NewBookDto;
 import com.example.requests.AddBookRequest;
 import java.math.BigDecimal;
 
@@ -179,7 +180,7 @@ public class BookFormPanel extends javax.swing.JPanel {
         BigDecimal price = new BigDecimal(priceText);
 
         if (!title.isEmpty() && !author.isEmpty() && !priceText.isEmpty()) {
-            BookDto newBookDto = new BookDto(title, author, price);
+            NewBookDto newBookDto = new NewBookDto(title, author, price);
             AddBookRequest addBookRequest = new AddBookRequest(newBookDto);
 
             try {

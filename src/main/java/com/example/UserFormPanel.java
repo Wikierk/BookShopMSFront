@@ -5,7 +5,6 @@
 package com.example;
 
 import com.example.dto.NewUserDto;
-import com.example.requests.AddUserDto;
 import com.example.requests.AddUserRequest;
 
 
