@@ -184,7 +184,7 @@ public class AdminPanel extends javax.swing.JPanel {
         mainFrame.showPanel("adminUsers");
     }//GEN-LAST:event_UsersBtnActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+    public void refreshBooksBoxPanel() {
         BooksBoxPanel.removeAll();
         BooksBoxPanel.revalidate();
         BooksBoxPanel.repaint();
@@ -195,23 +195,27 @@ public class AdminPanel extends javax.swing.JPanel {
             if (client != null) {
                 String response = client.sendMessage(selectBookRequest.create());
                 String[] result = Response.split(response);
-                 System.out.println("Server response: " + response);
-                 if((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
-                     SelectBooksResponse selectBooksResponse = new SelectBooksResponse(result[1]);
-                     books = selectBooksResponse.books;
-                 }
-                 
+                System.out.println("Server response: " + response);
+                if((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
+                    SelectBooksResponse selectBooksResponse = new SelectBooksResponse(result[1]);
+                    books = selectBooksResponse.books;
+                }
+
             } else {
                 System.out.println("Client is not connected.");
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         for (BookDto book : books) {
             JPanel singleBookPanel = new BookAdminPanel(book, this, mainFrame);
             BooksBoxPanel.add(singleBookPanel);
         }
+    }
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        refreshBooksBoxPanel();
     }//GEN-LAST:event_formComponentShown
 
 

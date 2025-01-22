@@ -5,7 +5,14 @@
 package com.example;
 
 import com.example.dto.BookDto;
+import com.example.dto.UserDto;
+import com.example.dto.UserLoginDto;
 import com.example.requests.SelectBooksRequest;
+import com.example.requests.SelectUserForLoginRequest;
+import com.example.responses.Response;
+import com.example.responses.ResponseType;
+import com.example.responses.SelectBooksResponse;
+import com.example.responses.SelectUserResponse;
 
 /**
  *
@@ -198,7 +205,38 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SignUpLabelMouseEntered
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-       mainFrame.showPanel("client");
+
+       String email = EmailTextField.getText();
+       String password = new String(PasswordField.getPassword());
+       UserLoginDto userLoginDto = new UserLoginDto(email, password);
+       SelectUserForLoginRequest selectUserForLoginRequest = new SelectUserForLoginRequest(userLoginDto);
+        UserDto user = new UserDto(0,"","","","");
+        try {
+            Client client = BookShopManagementSystem.getClient();
+            if (client != null) {
+                String response = client.sendMessage(selectUserForLoginRequest.create());
+                String[] result = Response.split(response);
+                System.out.println("Server response: " + response);
+                if((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
+                    SelectUserResponse selectUserResponse = new SelectUserResponse(result[1]);
+                    user = selectUserResponse.user;
+                    if(user.role.equals("admin")) {
+                        mainFrame.showPanel("admin");
+                    } else if(user.role.equals("user")) {
+                        mainFrame.showPanel("client");
+                    }
+                } else if(ResponseType.fromResponseHeader(result[0]) == ResponseType.NotFound) {
+                    System.out.println(user.email);
+                    System.out.println("Nie znaleziono usera");
+                }
+
+            } else {
+                System.out.println("Client is not connected.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }//GEN-LAST:event_LoginButtonActionPerformed
 
 

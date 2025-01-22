@@ -19,10 +19,18 @@ public class BookFormPanel extends javax.swing.JPanel {
      * Creates new form BookFormPanel
      */
     MainFrame mainFrame;
-
+    BookDto book;
     public BookFormPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
+    }
+    public BookFormPanel(MainFrame mainFrame, BookDto book) {
+        initComponents();
+        this.mainFrame = mainFrame;
+        this.book = book;
+        TitleTextField.setText(book.title);
+        AuthorTextField.setText(book.author);
+        PriceTextField.setText(String.valueOf(book.price));
     }
 
     /**
@@ -240,4 +248,26 @@ public class BookFormPanel extends javax.swing.JPanel {
     private javax.swing.JTextField TitleTextField;
     private javax.swing.JPanel infoPanel;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTextField getTitleTextField() {
+        return this.TitleTextField;
+    }
+
+    public javax.swing.JTextField getAuthorTextField() {
+        return this.AuthorTextField;
+    }
+
+    public javax.swing.JTextField getPriceTextField() {
+        return this.PriceTextField;
+    }
+
+    public javax.swing.JLabel getInfoLabel() {
+        return this.InfoLabel;
+    }
+    public javax.swing.JButton getAddButton() {
+        return this.AddButton;
+    }
+    public javax.swing.JLabel getTitleLabel() {
+        return this.NewBookLabel;
+    }
 }

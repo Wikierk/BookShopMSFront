@@ -5,6 +5,14 @@
 package com.example;
 
 import com.example.dto.BookDto;
+import com.example.dto.IdDto;
+import com.example.dto.NewBookDto;
+import com.example.requests.AddBookRequest;
+import com.example.requests.DeleteBookRequest;
+import com.example.requests.UpdateBookRequest;
+
+import java.awt.event.MouseListener;
+import java.math.BigDecimal;
 
 /**
  *
@@ -128,11 +136,67 @@ public class BookAdminPanel extends javax.swing.JPanel {
 
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
+        BookFormPanel bookFormPanel = new BookFormPanel(mainFrame,book);
+        mainFrame.mainPanel.add(bookFormPanel,"bookEditForm");
+        mainFrame.showPanel("bookEditForm");
+        bookFormPanel.getAddButton().setText("Edit");
+        bookFormPanel.getTitleLabel().setText("Edit Book");
+        MouseListener[] listeners = bookFormPanel.getAddButton().getMouseListeners();
+        for (MouseListener listener : listeners) {
+            bookFormPanel.getAddButton().removeMouseListener(listener);
+        }
+        bookFormPanel.getAddButton().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                String title = bookFormPanel.getTitleTextField().getText();
+                String author = bookFormPanel.getAuthorTextField().getText();
+                String priceText = bookFormPanel.getPriceTextField().getText();
+                BigDecimal price = new BigDecimal(priceText);
+
+                if (!title.isEmpty() && !author.isEmpty() && !priceText.isEmpty()) {
+                    BookDto updatedBookDto = new BookDto(book.id,title, author, price);
+                    UpdateBookRequest updateBookRequest = new UpdateBookRequest(updatedBookDto);
+
+                    try {
+                        Client client = BookShopManagementSystem.getClient();
+                        if (client != null) {
+                            String response = client.sendMessage(updateBookRequest.create());
+                            System.out.println("Server response: " + response);
+                        } else {
+                            System.out.println("Client is not connected.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+
+                    bookFormPanel.getTitleTextField().setText("");
+                    bookFormPanel.getAuthorTextField().setText("");
+                    bookFormPanel.getPriceTextField().setText("");
+                    bookFormPanel.getInfoLabel().setForeground(new java.awt.Color(40, 252, 3));
+                    bookFormPanel.getInfoLabel().setText("Book edited!");
+                } else {
+                    bookFormPanel.getInfoLabel().setForeground(new java.awt.Color(255, 51, 51));
+                    bookFormPanel.getInfoLabel().setText("Fill all field!");
+                }
+            }
+        });
 
     }//GEN-LAST:event_EditBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-
+        DeleteBookRequest deleteBookRequest = new DeleteBookRequest(new IdDto(book.id));
+        try {
+            Client client = BookShopManagementSystem.getClient();
+            if (client != null) {
+                String response = client.sendMessage(deleteBookRequest.create());
+                System.out.println("Server response: " + response);
+                adminPanel.refreshBooksBoxPanel();
+            }   else {
+                System.out.println("Client is not connected.");
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
 
