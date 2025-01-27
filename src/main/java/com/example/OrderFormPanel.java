@@ -4,14 +4,15 @@
  */
 package com.example;
 
-import com.example.dto.BookOrderInfo;
-import com.example.dto.NewBookDto;
+import com.example.dto.BookOrderInfoDto;
 import com.example.dto.NewOrderDto;
 import com.example.interfaces.BookInCart;
 import com.example.requests.AddBookRequest;
 import com.example.requests.AddOrderRequest;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 
@@ -284,11 +285,13 @@ public class OrderFormPanel extends javax.swing.JPanel {
         String street = StreetTextField.getText();
         String city = CityTextField.getText();
         String zip = ZipTextField.getText();
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmm").format(Calendar.getInstance().getTime());
-        BookOrderInfo[] bookOrderInfo = new BookOrderInfo[bookInCart.size()]; // Tworzymy tablicę o odpowiedniej wielkości
+         LocalDate today = LocalDate.now();
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String timeStamp = today.format(formatter);
+        BookOrderInfoDto[] bookOrderInfo = new BookOrderInfoDto[bookInCart.size()]; // Tworzymy tablicę o odpowiedniej wielkości
         int i = 0;
         for (BookInCart book : bookInCart) {
-            bookOrderInfo[i] = new BookOrderInfo(book.getQuantity(),book.getBook().id);
+            bookOrderInfo[i] = new BookOrderInfoDto(book.getQuantity(),book.getBook().id);
             i++;
         }
 

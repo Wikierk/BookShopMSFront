@@ -34,7 +34,6 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
         HelloLabel = new javax.swing.JLabel();
         UsersBtn = new javax.swing.JButton();
         BooksBtn = new javax.swing.JButton();
-        FiltersBtn = new javax.swing.JButton();
         LogOutBtn = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
         HeaderPanel = new javax.swing.JPanel();
@@ -82,13 +81,6 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
             }
         });
         SidePanel.add(BooksBtn);
-
-        FiltersBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        FiltersBtn.setText("Filters");
-        FiltersBtn.setMaximumSize(new java.awt.Dimension(110, 30));
-        FiltersBtn.setMinimumSize(new java.awt.Dimension(110, 30));
-        FiltersBtn.setPreferredSize(new java.awt.Dimension(110, 30));
-        SidePanel.add(FiltersBtn);
 
         LogOutBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LogOutBtn.setText("Log out");
@@ -151,7 +143,6 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BooksBtn;
-    private javax.swing.JButton FiltersBtn;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel HelloLabel;
     private javax.swing.JButton LogOutBtn;

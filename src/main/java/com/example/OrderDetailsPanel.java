@@ -5,14 +5,19 @@
 package com.example;
 
 import com.example.dto.BookDto;
+import com.example.dto.BookOrderDetailsDto;
+import com.example.dto.BookOrderInfoDto;
 import com.example.dto.IdDto;
 import com.example.dto.OrderDto;
+import com.example.requests.SelectBooksForOrderRequest;
 import com.example.requests.SelectBooksRequest;
 import com.example.requests.SelectOrdersForUserRequest;
 import com.example.responses.Response;
 import com.example.responses.ResponseType;
+import com.example.responses.SelectBooksForOrderResponse;
 import com.example.responses.SelectBooksResponse;
 import com.example.responses.SelectOrdersResponse;
+import java.math.BigDecimal;
 import javax.swing.JPanel;
 
 
@@ -21,15 +26,18 @@ import javax.swing.JPanel;
  *
  * @author Wiktor
  */
-public class OrdersPanel extends javax.swing.JPanel {
+public class OrderDetailsPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ClientPanel
      */
     private MainFrame mainFrame;
-    public OrdersPanel(MainFrame mainFrame) {
+    private OrderDto order;
+    private BigDecimal totalValue = new BigDecimal(0);
+    public OrderDetailsPanel(MainFrame mainFrame, OrderDto order) {
         this.mainFrame = mainFrame;
         initComponents();
+        this.order = order;
     }
 
     /**
@@ -52,6 +60,9 @@ public class OrdersPanel extends javax.swing.JPanel {
         OrderItemsPanel = new javax.swing.JPanel();
         OrderItemsScrollPane = new javax.swing.JScrollPane();
         OrderItemsBoxPanel = new javax.swing.JPanel();
+        CartSummaryPanel = new javax.swing.JPanel();
+        TotalValueInfoLabel = new javax.swing.JLabel();
+        TotalValueLabel = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(900, 600));
         setPreferredSize(new java.awt.Dimension(900, 600));
@@ -66,7 +77,7 @@ public class OrdersPanel extends javax.swing.JPanel {
         SidePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
         HelloLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        HelloLabel.setText("Your Orders");
+        HelloLabel.setText("Your Order");
         SidePanel.add(HelloLabel);
         HelloLabel.getAccessibleContext().setAccessibleDescription("");
 
@@ -109,7 +120,7 @@ public class OrdersPanel extends javax.swing.JPanel {
         HeaderPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 60, 30));
 
         OrderItemsLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        OrderItemsLabel.setText("Orders");
+        OrderItemsLabel.setText("Order Details");
         HeaderPanel.add(OrderItemsLabel);
 
         MainPanel.add(HeaderPanel);
@@ -126,11 +137,24 @@ public class OrdersPanel extends javax.swing.JPanel {
 
         MainPanel.add(OrderItemsPanel);
 
+        CartSummaryPanel.setPreferredSize(new java.awt.Dimension(770, 100));
+        CartSummaryPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 200, 5));
+
+        TotalValueInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        TotalValueInfoLabel.setText("Total Value:");
+        CartSummaryPanel.add(TotalValueInfoLabel);
+
+        TotalValueLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TotalValueLabel.setText("0 ZŁ");
+        CartSummaryPanel.add(TotalValueLabel);
+
+        MainPanel.add(CartSummaryPanel);
+
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
-        mainFrame.showPanel("client");
+        mainFrame.showPanel("orders");
     }//GEN-LAST:event_BackBtnActionPerformed
 
     private void CartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartBtnActionPerformed
@@ -145,17 +169,18 @@ public class OrdersPanel extends javax.swing.JPanel {
         OrderItemsBoxPanel.removeAll();
         OrderItemsBoxPanel.revalidate();
         OrderItemsBoxPanel.repaint();
-        OrderDto[] orders = {};
-        SelectOrdersForUserRequest selectOrdersForUserRequest = new SelectOrdersForUserRequest(new IdDto(mainFrame.getUser().id));
+        totalValue = new BigDecimal(0);
+        BookOrderDetailsDto[] books = {};
+        SelectBooksForOrderRequest selectBooksForOrderRequest = new SelectBooksForOrderRequest(new IdDto(order.id));
         try {
             Client client = BookShopManagementSystem.getClient();
             if (client != null) {
-                String response = client.sendMessage(selectOrdersForUserRequest.create());
+                String response = client.sendMessage(selectBooksForOrderRequest.create());
                 String[] result = Response.split(response);
                  System.out.println("Server response: " + response);
                  if((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
-                     SelectOrdersResponse selectOrdersResponse = new SelectOrdersResponse(result[1]);
-                     orders = selectOrdersResponse.orders;
+                     SelectBooksForOrderResponse selectBooksForOrderResponse = new SelectBooksForOrderResponse(result[1]);
+                     books = selectBooksForOrderResponse.books;
                  }
                  
             } else {
@@ -165,16 +190,21 @@ public class OrdersPanel extends javax.swing.JPanel {
             System.out.println(e);
         }
         
-        for (OrderDto order : orders) {
-            JPanel singleOrderPanel = new OrderItemPanel(order, mainFrame);
-            OrderItemsBoxPanel.add(singleOrderPanel);
+        for (BookOrderDetailsDto book : books) {
+            JPanel singleBookPanel = new BookInfoPanel(book);
+            OrderItemsBoxPanel.add(singleBookPanel);
+            totalValue = totalValue.add(book.getBook().getPrice().multiply(new BigDecimal(book.getQuantity())));
         }
+        
+        TotalValueLabel.setText(String.valueOf(totalValue) + "ZŁ");
+        
     }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackBtn;
     private javax.swing.JButton CartBtn;
+    private javax.swing.JPanel CartSummaryPanel;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel HelloLabel;
     private javax.swing.JButton LogOutBtn;
@@ -184,5 +214,7 @@ public class OrdersPanel extends javax.swing.JPanel {
     private javax.swing.JPanel OrderItemsPanel;
     private javax.swing.JScrollPane OrderItemsScrollPane;
     private javax.swing.JPanel SidePanel;
+    private javax.swing.JLabel TotalValueInfoLabel;
+    private javax.swing.JLabel TotalValueLabel;
     // End of variables declaration//GEN-END:variables
 }

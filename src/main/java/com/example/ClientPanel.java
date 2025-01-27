@@ -42,7 +42,6 @@ public class ClientPanel extends javax.swing.JPanel {
         HelloLabel = new javax.swing.JLabel();
         BasketBtn = new javax.swing.JButton();
         OrdersBtn = new javax.swing.JButton();
-        FiltersBtn = new javax.swing.JButton();
         LogOutBtn = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
         HeaderPanel = new javax.swing.JPanel();
@@ -90,13 +89,6 @@ public class ClientPanel extends javax.swing.JPanel {
             }
         });
         SidePanel.add(OrdersBtn);
-
-        FiltersBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        FiltersBtn.setText("Filters");
-        FiltersBtn.setMaximumSize(new java.awt.Dimension(85, 30));
-        FiltersBtn.setMinimumSize(new java.awt.Dimension(85, 30));
-        FiltersBtn.setPreferredSize(new java.awt.Dimension(85, 30));
-        SidePanel.add(FiltersBtn);
 
         LogOutBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         LogOutBtn.setText("Log out");
@@ -154,6 +146,7 @@ public class ClientPanel extends javax.swing.JPanel {
         BooksBoxPanel.removeAll();
         BooksBoxPanel.revalidate();
         BooksBoxPanel.repaint();
+        HelloLabel.setText("Hello " + mainFrame.getUser().name + "!");
         BookDto[] books = {};
         SelectBooksRequest selectBookRequest = new SelectBooksRequest();
         try {
@@ -186,7 +179,6 @@ public class ClientPanel extends javax.swing.JPanel {
     private javax.swing.JPanel BooksBoxPanel;
     private javax.swing.JPanel BooksPanel;
     private javax.swing.JScrollPane BooksScrollPane;
-    private javax.swing.JButton FiltersBtn;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel HelloLabel;
     private javax.swing.JButton LogOutBtn;

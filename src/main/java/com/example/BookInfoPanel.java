@@ -4,6 +4,8 @@
  */
 package com.example;
 
+import com.example.dto.BookOrderDetailsDto;
+import com.example.dto.BookOrderInfoDto;
 import com.example.interfaces.BookInCart;
 
 /**
@@ -25,6 +27,14 @@ public class BookInfoPanel extends javax.swing.JPanel {
         QuantityLabel.setText("Quantity: " + String.valueOf(book.getQuantity()));
         this.mainFrame = mainFrame;
         this.book = book;
+    }
+    
+    public BookInfoPanel(BookOrderDetailsDto book) {
+        initComponents();
+        TitleLabel.setText(book.getBook().title);
+        AuthorLabel.setText(book.getBook().author);
+        PriceLabel.setText(String.valueOf(book.getBook().price) + " ZŁ");
+        QuantityLabel.setText("Quantity: " + String.valueOf(book.quantity));
     }
     
     

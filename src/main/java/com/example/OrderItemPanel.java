@@ -4,8 +4,7 @@
  */
 package com.example;
 
-import bookshopmanagementsystem.interfaces.Book;
-
+import com.example.dto.OrderDto;
 
 /**
  *
@@ -14,16 +13,20 @@ import bookshopmanagementsystem.interfaces.Book;
 public class OrderItemPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form BookPanel
+     * Creates new form OrderAdminPanel
      */
-    private int quantity = 1;
-    private Book book;
-    public OrderItemPanel(Book book) {
+    MainFrame mainFrame;
+    OrderDto order;
+    public OrderItemPanel(OrderDto order, MainFrame mainFrame) {
         initComponents();
-        TitleLabel.setText(book.getTitle());
-        AuthorLabel.setText(book.getAuthor());
-        PriceLabel.setText(String.valueOf(book.getPrice()) + " ZŁ");
-        this.book = book;
+        IdLabel.setText("ID: " + String.valueOf(order.id));
+        StreetLabel.setText("Street: " +order.street);
+        CityLabel.setText("City: " + order.city);
+        ZipLabel.setText("Zip: " +order.zip);
+        DateLabel.setText("Date: " +order.date);
+        StatusLabel.setText("Status: " + order.status);
+        this.mainFrame = mainFrame;
+        this.order = order;
     }
 
     /**
@@ -35,102 +38,131 @@ public class OrderItemPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImagePanel = new javax.swing.JPanel();
-        ImageLabel = new javax.swing.JLabel();
-        OrderItemInfoPanel = new javax.swing.JPanel();
-        TitlePanel = new javax.swing.JPanel();
-        TitleLabel = new javax.swing.JLabel();
-        AuthorPanel = new javax.swing.JPanel();
-        AuthorLabel = new javax.swing.JLabel();
-        PricePanel = new javax.swing.JPanel();
-        PriceLabel = new javax.swing.JLabel();
+        OrderInfoPanel = new javax.swing.JPanel();
+        IdPanel = new javax.swing.JPanel();
+        IdLabel = new javax.swing.JLabel();
+        StreetPanel = new javax.swing.JPanel();
+        StreetLabel = new javax.swing.JLabel();
+        CityPanel = new javax.swing.JPanel();
+        CityLabel = new javax.swing.JLabel();
+        ZipPanel = new javax.swing.JPanel();
+        ZipLabel = new javax.swing.JLabel();
+        DatePanel = new javax.swing.JPanel();
+        DateLabel = new javax.swing.JLabel();
         StatusPanel = new javax.swing.JPanel();
         StatusLabel = new javax.swing.JLabel();
-        DatePanel = new javax.swing.JPanel();
-        StatusLabel1 = new javax.swing.JLabel();
+        BtnPanel = new javax.swing.JPanel();
+        Details = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(15, 1, 15, 1), javax.swing.BorderFactory.createTitledBorder("")));
-        setMaximumSize(new java.awt.Dimension(415, 255));
-        setPreferredSize(new java.awt.Dimension(415, 255));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.X_AXIS));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        ImagePanel.setPreferredSize(new java.awt.Dimension(218, 200));
-        ImagePanel.setLayout(new java.awt.BorderLayout());
+        OrderInfoPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), javax.swing.BorderFactory.createTitledBorder("")));
+        OrderInfoPanel.setPreferredSize(new java.awt.Dimension(250, 431));
+        OrderInfoPanel.setLayout(new javax.swing.BoxLayout(OrderInfoPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        ImageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-image-icon-23485.png"))); // NOI18N
-        ImagePanel.add(ImageLabel, java.awt.BorderLayout.CENTER);
+        IdPanel.setPreferredSize(new java.awt.Dimension(225, 10));
+        IdPanel.setLayout(new java.awt.BorderLayout());
 
-        add(ImagePanel);
+        IdLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        IdLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        IdLabel.setText("ID");
+        IdLabel.setToolTipText("");
+        IdLabel.setPreferredSize(new java.awt.Dimension(38, 20));
+        IdPanel.add(IdLabel, java.awt.BorderLayout.CENTER);
 
-        OrderItemInfoPanel.setPreferredSize(new java.awt.Dimension(218, 120));
-        OrderItemInfoPanel.setLayout(new javax.swing.BoxLayout(OrderItemInfoPanel, javax.swing.BoxLayout.Y_AXIS));
+        OrderInfoPanel.add(IdPanel);
 
-        TitlePanel.setPreferredSize(new java.awt.Dimension(180, 30));
-        TitlePanel.setLayout(new java.awt.BorderLayout());
+        StreetPanel.setPreferredSize(new java.awt.Dimension(225, 30));
+        StreetPanel.setLayout(new java.awt.BorderLayout());
 
-        TitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TitleLabel.setText("Title");
-        TitleLabel.setToolTipText("");
-        TitlePanel.add(TitleLabel, java.awt.BorderLayout.CENTER);
+        StreetLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        StreetLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StreetLabel.setText("STREET");
+        StreetPanel.add(StreetLabel, java.awt.BorderLayout.CENTER);
 
-        OrderItemInfoPanel.add(TitlePanel);
+        OrderInfoPanel.add(StreetPanel);
 
-        AuthorPanel.setPreferredSize(new java.awt.Dimension(180, 30));
-        AuthorPanel.setLayout(new java.awt.BorderLayout());
+        CityPanel.setPreferredSize(new java.awt.Dimension(225, 30));
+        CityPanel.setLayout(new java.awt.BorderLayout());
 
-        AuthorLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        AuthorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AuthorLabel.setText("Author");
-        AuthorPanel.add(AuthorLabel, java.awt.BorderLayout.CENTER);
+        CityLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        CityLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CityLabel.setText("CITY");
+        CityPanel.add(CityLabel, java.awt.BorderLayout.CENTER);
 
-        OrderItemInfoPanel.add(AuthorPanel);
+        OrderInfoPanel.add(CityPanel);
 
-        PricePanel.setPreferredSize(new java.awt.Dimension(225, 30));
-        PricePanel.setLayout(new java.awt.BorderLayout());
+        ZipPanel.setPreferredSize(new java.awt.Dimension(225, 30));
+        ZipPanel.setLayout(new java.awt.BorderLayout());
 
-        PriceLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        PriceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PriceLabel.setText("Price");
-        PricePanel.add(PriceLabel, java.awt.BorderLayout.CENTER);
+        ZipLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ZipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ZipLabel.setText("ZIP");
+        ZipPanel.add(ZipLabel, java.awt.BorderLayout.CENTER);
 
-        OrderItemInfoPanel.add(PricePanel);
+        OrderInfoPanel.add(ZipPanel);
 
-        StatusPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
+        DatePanel.setPreferredSize(new java.awt.Dimension(225, 30));
+        DatePanel.setLayout(new java.awt.BorderLayout());
+
+        DateLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        DateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DateLabel.setText("DATE");
+        DatePanel.add(DateLabel, java.awt.BorderLayout.CENTER);
+
+        OrderInfoPanel.add(DatePanel);
+
+        StatusPanel.setPreferredSize(new java.awt.Dimension(225, 10));
+        StatusPanel.setLayout(new java.awt.BorderLayout());
 
         StatusLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        StatusLabel.setText("Status");
-        StatusPanel.add(StatusLabel);
+        StatusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StatusLabel.setText("STATUS");
+        StatusLabel.setToolTipText("");
+        StatusLabel.setPreferredSize(new java.awt.Dimension(38, 20));
+        StatusPanel.add(StatusLabel, java.awt.BorderLayout.CENTER);
 
-        OrderItemInfoPanel.add(StatusPanel);
+        OrderInfoPanel.add(StatusPanel);
 
-        DatePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
+        BtnPanel.setPreferredSize(new java.awt.Dimension(218, 50));
 
-        StatusLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        StatusLabel1.setText("Order Date");
-        DatePanel.add(StatusLabel1);
+        Details.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Details.setText("Details");
+        Details.setPreferredSize(new java.awt.Dimension(110, 30));
+        Details.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DetailsActionPerformed(evt);
+            }
+        });
+        BtnPanel.add(Details);
 
-        OrderItemInfoPanel.add(DatePanel);
+        OrderInfoPanel.add(BtnPanel);
 
-        add(OrderItemInfoPanel);
+        add(OrderInfoPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
+        OrderDetailsPanel orderDetailsPanel = new OrderDetailsPanel(mainFrame,order);
+        mainFrame.mainPanel.add(orderDetailsPanel, "orderDetail");
+        mainFrame.showPanel("orderDetail");
+    }//GEN-LAST:event_DetailsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AuthorLabel;
-    private javax.swing.JPanel AuthorPanel;
+    private javax.swing.JPanel BtnPanel;
+    private javax.swing.JLabel CityLabel;
+    private javax.swing.JPanel CityPanel;
+    private javax.swing.JLabel DateLabel;
     private javax.swing.JPanel DatePanel;
-    private javax.swing.JLabel ImageLabel;
-    private javax.swing.JPanel ImagePanel;
-    private javax.swing.JPanel OrderItemInfoPanel;
-    private javax.swing.JLabel PriceLabel;
-    private javax.swing.JPanel PricePanel;
+    private javax.swing.JButton Details;
+    private javax.swing.JLabel IdLabel;
+    private javax.swing.JPanel IdPanel;
+    private javax.swing.JPanel OrderInfoPanel;
     private javax.swing.JLabel StatusLabel;
-    private javax.swing.JLabel StatusLabel1;
     private javax.swing.JPanel StatusPanel;
-    private javax.swing.JLabel TitleLabel;
-    private javax.swing.JPanel TitlePanel;
+    private javax.swing.JLabel StreetLabel;
+    private javax.swing.JPanel StreetPanel;
+    private javax.swing.JLabel ZipLabel;
+    private javax.swing.JPanel ZipPanel;
     // End of variables declaration//GEN-END:variables
 }
