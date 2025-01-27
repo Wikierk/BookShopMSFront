@@ -4,29 +4,25 @@
  */
 package com.example;
 
-import bookshopmanagementsystem.interfaces.Cart;
-import bookshopmanagementsystem.interfaces.Book;
+
 import com.example.dto.BookDto;
-import javax.swing.JPanel;
 
 /**
  *
  * @author Wiktor
  */
-public class BookPanel extends javax.swing.JPanel {
+public class BookInfoPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form BookPanel
      */
-    private ClientPanel clientPanel;
     private MainFrame mainFrame;
     private BookDto book;
-    public BookPanel(BookDto book, ClientPanel clientPanel, MainFrame mainFrame) {
+    public BookInfoPanel(BookDto book, MainFrame mainFrame) {
         initComponents();
         TitleLabel.setText(book.getTitle());
         AuthorLabel.setText(book.getAuthor());
         PriceLabel.setText(String.valueOf(book.getPrice()) + " ZŁ");
-        this.clientPanel = clientPanel;
         this.mainFrame = mainFrame;
         this.book = book;
     }
@@ -51,9 +47,6 @@ public class BookPanel extends javax.swing.JPanel {
         AuthorLabel = new javax.swing.JLabel();
         PricePanel = new javax.swing.JPanel();
         PriceLabel = new javax.swing.JLabel();
-        BtnPanel = new javax.swing.JPanel();
-        AddToCartBtn = new javax.swing.JButton();
-        OrderNowBtn = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(15, 1, 15, 1), javax.swing.BorderFactory.createTitledBorder("")));
         setMaximumSize(new java.awt.Dimension(250, 420));
@@ -104,58 +97,16 @@ public class BookPanel extends javax.swing.JPanel {
         BookInfoPanel.add(PricePanel);
 
         add(BookInfoPanel);
-
-        BtnPanel.setPreferredSize(new java.awt.Dimension(218, 50));
-
-        AddToCartBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        AddToCartBtn.setText("Add to cart");
-        AddToCartBtn.setPreferredSize(new java.awt.Dimension(110, 30));
-        AddToCartBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddToCartBtnActionPerformed(evt);
-            }
-        });
-        BtnPanel.add(AddToCartBtn);
-
-        OrderNowBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        OrderNowBtn.setText("Order now");
-        OrderNowBtn.setPreferredSize(new java.awt.Dimension(110, 30));
-        OrderNowBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderNowBtnActionPerformed(evt);
-            }
-        });
-        BtnPanel.add(OrderNowBtn);
-
-        add(BtnPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void AddToCartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToCartBtnActionPerformed
-
-        Toast toast = new Toast(clientPanel, "Added to cart", 1000);
-        Cart.getInstance().addItem(book);
-    }//GEN-LAST:event_AddToCartBtnActionPerformed
-
-    private void OrderNowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderNowBtnActionPerformed
-        OrderFormPanel orderFormPanel = new OrderFormPanel(mainFrame);
-        mainFrame.mainPanel.add(orderFormPanel, "orderForm");
-        BookInfoPanel bookInfoPanel = new BookInfoPanel(book,mainFrame);
-        orderFormPanel.getOrderItemsBoxPanel().add(bookInfoPanel);
-        orderFormPanel.getTotalValueLabel().setText(String.valueOf(book.price) + "ZŁ");
-        mainFrame.showPanel("orderForm");
-    }//GEN-LAST:event_OrderNowBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddToCartBtn;
     private javax.swing.JLabel AuthorLabel;
     private javax.swing.JPanel AuthorPanel;
     private javax.swing.JPanel BookInfoPanel;
-    private javax.swing.JPanel BtnPanel;
     private javax.swing.JLabel ImageLabel;
     private javax.swing.JPanel ImagePanel;
-    private javax.swing.JButton OrderNowBtn;
     private javax.swing.JLabel PriceLabel;
     private javax.swing.JPanel PricePanel;
     private javax.swing.JLabel TitleLabel;

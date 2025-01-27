@@ -255,7 +255,7 @@ public class OrderFormPanel extends javax.swing.JPanel {
         SidePanel.add(OrderItemsPanel);
 
         OrderSummaryPanel.setPreferredSize(new java.awt.Dimension(770, 100));
-        OrderSummaryPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 200, 5));
+        OrderSummaryPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 190, 10));
 
         TotalValueInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         TotalValueInfoLabel.setText("Total Value:");
@@ -329,7 +329,14 @@ public class OrderFormPanel extends javax.swing.JPanel {
     private void ZipFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZipFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ZipFieldActionPerformed
-
+    
+    public javax.swing.JPanel getOrderItemsBoxPanel() {
+        return this.OrderItemsBoxPanel;
+    }
+    
+    public javax.swing.JLabel getTotalValueLabel(){
+        return this.TotalValueLabel;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;

@@ -26,7 +26,6 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(new ClientPanel(this), "client");
         mainPanel.add(new CartPanel(this), "cart");
         mainPanel.add(new OrdersPanel(this), "orders");
-        mainPanel.add(new OrderFormPanel(this), "orderForm");
         mainPanel.add(new AdminPanel(this), "admin");
         mainPanel.add(new BookFormPanel(this), "bookForm");
         mainPanel.add(new AdminUsersPanel(this), "adminUsers");
