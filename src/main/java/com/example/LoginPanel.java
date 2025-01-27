@@ -220,6 +220,7 @@ public class LoginPanel extends javax.swing.JPanel {
                 if((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
                     SelectUserResponse selectUserResponse = new SelectUserResponse(result[1]);
                     user = selectUserResponse.user;
+                    mainFrame.setUser(user);
                     if(user.role.equals("admin")) {
                         mainFrame.showPanel("admin");
                     } else if(user.role.equals("user")) {

@@ -4,6 +4,7 @@
  */
 package com.example;
 
+import com.example.dto.UserDto;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,6 +18,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     private CardLayout cardLayout;
+    UserDto user;
     JPanel mainPanel;
     public MainFrame() {
         cardLayout = new CardLayout();
@@ -41,6 +43,14 @@ public class MainFrame extends javax.swing.JFrame {
     public void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
     }
+    public void setUser(UserDto user){
+        this.user = user;
+    }
+    
+    public UserDto getUser(){
+        return this.user;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

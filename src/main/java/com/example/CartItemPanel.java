@@ -5,9 +5,8 @@
 package com.example;
 
 import bookshopmanagementsystem.interfaces.Cart;
-import bookshopmanagementsystem.interfaces.Book;
-import bookshopmanagementsystem.interfaces.Cart;
-import com.example.dto.BookDto;
+import com.example.interfaces.BookInCart;
+import java.math.BigDecimal;
 
 /**
  *
@@ -18,15 +17,15 @@ public class CartItemPanel extends javax.swing.JPanel {
     /**
      * Creates new form BookPanel
      */
-    private int quantity = 1;
-    private BookDto book;
-    public CartItemPanel(BookDto book) {
+    private final BookInCart bookInCart;
+    public CartItemPanel(BookInCart bookInCart) {
         initComponents();
-        TitleLabel.setText(book.getTitle());
-        AuthorLabel.setText(book.getAuthor());
-        PriceLabel.setText(String.valueOf(book.getPrice()) + " ZŁ");
-        QuantitySpinner.setValue(quantity);
-        this.book = book;
+        TitleLabel.setText(bookInCart.getBook().getTitle());
+        AuthorLabel.setText(bookInCart.getBook().getAuthor());
+        PriceLabel.setText(String.valueOf(bookInCart.getBook().getPrice()) + " ZŁ");
+        this.bookInCart = bookInCart;
+        QuantitySpinner.setValue(bookInCart.getQuantity());
+        
     }
 
     /**
@@ -108,7 +107,14 @@ public class CartItemPanel extends javax.swing.JPanel {
         QuantityPanel.add(QuantityLabel);
 
         QuantitySpinner.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        QuantitySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        QuantitySpinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         QuantitySpinner.setPreferredSize(new java.awt.Dimension(50, 26));
+        QuantitySpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                QuantitySpinnerStateChanged(evt);
+            }
+        });
         QuantityPanel.add(QuantitySpinner);
 
         CartItemInfoPanel.add(QuantityPanel);
@@ -129,8 +135,14 @@ public class CartItemPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RemoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveBtnActionPerformed
-        Cart.getInstance().removeItem(book);
+        Cart.getInstance().removeItem(bookInCart);
     }//GEN-LAST:event_RemoveBtnActionPerformed
+
+    private void QuantitySpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_QuantitySpinnerStateChanged
+        int newQuantity = (int) QuantitySpinner.getValue();
+        bookInCart.setQuantity(newQuantity);
+        Cart.getInstance().recalculateTotalValue();
+    }//GEN-LAST:event_QuantitySpinnerStateChanged
 
     
 

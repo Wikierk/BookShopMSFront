@@ -4,6 +4,17 @@
  */
 package com.example;
 
+import com.example.dto.BookOrderInfo;
+import com.example.dto.NewBookDto;
+import com.example.dto.NewOrderDto;
+import com.example.interfaces.BookInCart;
+import com.example.requests.AddBookRequest;
+import com.example.requests.AddOrderRequest;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+
 /**
  *
  * @author Wiktor
@@ -14,9 +25,12 @@ public class OrderFormPanel extends javax.swing.JPanel {
      * Creates new form OrderFormPanel
      */
     private MainFrame mainFrame;
-    public OrderFormPanel(MainFrame mainFrame) {
+    private List<BookInCart> bookInCart;
+
+    public OrderFormPanel(MainFrame mainFrame, List<BookInCart> bookInCart) {
         this.mainFrame = mainFrame;
         initComponents();
+        this.bookInCart = bookInCart;
     }
 
     /**
@@ -38,18 +52,15 @@ public class OrderFormPanel extends javax.swing.JPanel {
         LastNamePanel = new javax.swing.JPanel();
         LastNameLabel = new javax.swing.JLabel();
         LastNameTextField = new javax.swing.JTextField();
-        EmailPanel = new javax.swing.JPanel();
-        EmailLabel = new javax.swing.JLabel();
-        EmailTextField = new javax.swing.JTextField();
         StreetPanel = new javax.swing.JPanel();
         StreetLabel = new javax.swing.JLabel();
-        StreetField = new javax.swing.JPasswordField();
+        StreetTextField = new javax.swing.JTextField();
         CityPanel = new javax.swing.JPanel();
         CityLabel = new javax.swing.JLabel();
-        CityField = new javax.swing.JPasswordField();
+        CityTextField = new javax.swing.JTextField();
         ZipPanel = new javax.swing.JPanel();
         ZipLabel = new javax.swing.JLabel();
-        ZipField = new javax.swing.JPasswordField();
+        ZipTextField = new javax.swing.JTextField();
         infoPanel = new javax.swing.JPanel();
         InfoLabel = new javax.swing.JLabel();
         OrderBtnPanel = new javax.swing.JPanel();
@@ -128,35 +139,19 @@ public class OrderFormPanel extends javax.swing.JPanel {
 
         OrderFormPanel.add(LastNamePanel);
 
-        EmailPanel.setPreferredSize(new java.awt.Dimension(280, 50));
-        EmailPanel.setLayout(new java.awt.BorderLayout(4, 4));
-
-        EmailLabel.setText("Email Address");
-        EmailPanel.add(EmailLabel, java.awt.BorderLayout.PAGE_START);
-
-        EmailTextField.setPreferredSize(new java.awt.Dimension(64, 25));
-        EmailTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailTextFieldActionPerformed(evt);
-            }
-        });
-        EmailPanel.add(EmailTextField, java.awt.BorderLayout.CENTER);
-
-        OrderFormPanel.add(EmailPanel);
-
         StreetPanel.setPreferredSize(new java.awt.Dimension(280, 50));
         StreetPanel.setLayout(new java.awt.BorderLayout(4, 4));
 
         StreetLabel.setText("Street");
         StreetPanel.add(StreetLabel, java.awt.BorderLayout.PAGE_START);
 
-        StreetField.setPreferredSize(new java.awt.Dimension(64, 25));
-        StreetField.addActionListener(new java.awt.event.ActionListener() {
+        StreetTextField.setPreferredSize(new java.awt.Dimension(64, 25));
+        StreetTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StreetFieldActionPerformed(evt);
+                StreetTextFieldActionPerformed(evt);
             }
         });
-        StreetPanel.add(StreetField, java.awt.BorderLayout.CENTER);
+        StreetPanel.add(StreetTextField, java.awt.BorderLayout.CENTER);
 
         OrderFormPanel.add(StreetPanel);
 
@@ -166,13 +161,13 @@ public class OrderFormPanel extends javax.swing.JPanel {
         CityLabel.setText("City");
         CityPanel.add(CityLabel, java.awt.BorderLayout.PAGE_START);
 
-        CityField.setPreferredSize(new java.awt.Dimension(64, 25));
-        CityField.addActionListener(new java.awt.event.ActionListener() {
+        CityTextField.setPreferredSize(new java.awt.Dimension(64, 25));
+        CityTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CityFieldActionPerformed(evt);
+                CityTextFieldActionPerformed(evt);
             }
         });
-        CityPanel.add(CityField, java.awt.BorderLayout.CENTER);
+        CityPanel.add(CityTextField, java.awt.BorderLayout.CENTER);
 
         OrderFormPanel.add(CityPanel);
 
@@ -182,13 +177,13 @@ public class OrderFormPanel extends javax.swing.JPanel {
         ZipLabel.setText("Zip");
         ZipPanel.add(ZipLabel, java.awt.BorderLayout.PAGE_START);
 
-        ZipField.setPreferredSize(new java.awt.Dimension(64, 25));
-        ZipField.addActionListener(new java.awt.event.ActionListener() {
+        ZipTextField.setPreferredSize(new java.awt.Dimension(64, 25));
+        ZipTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ZipFieldActionPerformed(evt);
+                ZipTextFieldActionPerformed(evt);
             }
         });
-        ZipPanel.add(ZipField, java.awt.BorderLayout.CENTER);
+        ZipPanel.add(ZipTextField, java.awt.BorderLayout.CENTER);
 
         OrderFormPanel.add(ZipPanel);
 
@@ -278,44 +273,53 @@ public class OrderFormPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_LastNameTextFieldActionPerformed
 
-    private void EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmailTextFieldActionPerformed
-
-    private void StreetFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StreetFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_StreetFieldActionPerformed
-
-    private void CityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CityFieldActionPerformed
-
     private void OrderButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderButtonMouseClicked
-        String name = NameTextField.getText();
-        String lastName = LastNameTextField.getText();
-        String email = EmailTextField.getText();
-        String password = new String(StreetField.getPassword());
-        String repeatPassword = new String(CityField.getPassword());
 
-        if(!password.equals(repeatPassword)) {
-            InfoLabel.setForeground(new java.awt.Color(255, 51, 51));
-            InfoLabel.setText("Passwords are not the same.");
-        }else{
-            InfoLabel.setText("");
-            NameTextField.setText("");
-            LastNameTextField.setText("");
-            EmailTextField.setText("");
-            StreetField.setText("");
-            CityField.setText("");
-            InfoLabel.setForeground(new java.awt.Color(40, 252, 3));
-            InfoLabel.setText("Success you have been registered!");
-
-        }
 
     }//GEN-LAST:event_OrderButtonMouseClicked
 
     private void OrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderButtonActionPerformed
-        // TODO add your handling code here:
+        String name = NameTextField.getText();
+        String lastName = LastNameTextField.getText();
+        String street = StreetTextField.getText();
+        String city = CityTextField.getText();
+        String zip = ZipTextField.getText();
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmm").format(Calendar.getInstance().getTime());
+        BookOrderInfo[] bookOrderInfo = new BookOrderInfo[bookInCart.size()]; // Tworzymy tablicę o odpowiedniej wielkości
+        int i = 0;
+        for (BookInCart book : bookInCart) {
+            bookOrderInfo[i] = new BookOrderInfo(book.getQuantity(),book.getBook().id);
+            i++;
+        }
+
+        if (!name.isEmpty() && !lastName.isEmpty() && !street.isEmpty() && !city.isEmpty() && !zip.isEmpty() && bookOrderInfo.length > 0) {
+            NewOrderDto newOrderDto = new NewOrderDto(name, lastName, street, city, zip, timeStamp, mainFrame.user.getId(), bookOrderInfo);
+            AddOrderRequest addOrderRequest = new AddOrderRequest(newOrderDto);
+
+            try {
+                Client client = BookShopManagementSystem.getClient();
+                if (client != null) {
+                    String response = client.sendMessage(addOrderRequest.create());
+                    System.out.println("Server response: " + response);
+                } else {
+                    System.out.println("Client is not connected.");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            NameTextField.setText("");
+            LastNameTextField.setText("");
+            StreetTextField.setText("");
+            CityTextField.setText("");
+            ZipTextField.setText("");
+
+            InfoLabel.setForeground(new java.awt.Color(40, 252, 3));
+            InfoLabel.setText("Book(s) ordered!");
+        } else {
+            InfoLabel.setForeground(new java.awt.Color(255, 51, 51));
+            InfoLabel.setText("Fill all field!");
+        }
     }//GEN-LAST:event_OrderButtonActionPerformed
 
     private void BackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackButtonMouseClicked
@@ -326,26 +330,31 @@ public class OrderFormPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_BackButtonActionPerformed
 
-    private void ZipFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZipFieldActionPerformed
+    private void StreetTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StreetTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ZipFieldActionPerformed
-    
+    }//GEN-LAST:event_StreetTextFieldActionPerformed
+
+    private void CityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CityTextFieldActionPerformed
+
+    private void ZipTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZipTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ZipTextFieldActionPerformed
+
     public javax.swing.JPanel getOrderItemsBoxPanel() {
         return this.OrderItemsBoxPanel;
     }
-    
-    public javax.swing.JLabel getTotalValueLabel(){
+
+    public javax.swing.JLabel getTotalValueLabel() {
         return this.TotalValueLabel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
-    private javax.swing.JPasswordField CityField;
     private javax.swing.JLabel CityLabel;
     private javax.swing.JPanel CityPanel;
-    private javax.swing.JLabel EmailLabel;
-    private javax.swing.JPanel EmailPanel;
-    private javax.swing.JTextField EmailTextField;
+    private javax.swing.JTextField CityTextField;
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel InfoLabel;
     private javax.swing.JLabel LastNameLabel;
@@ -364,14 +373,14 @@ public class OrderFormPanel extends javax.swing.JPanel {
     private javax.swing.JPanel OrderPanel;
     private javax.swing.JPanel OrderSummaryPanel;
     private javax.swing.JPanel SidePanel;
-    private javax.swing.JPasswordField StreetField;
     private javax.swing.JLabel StreetLabel;
     private javax.swing.JPanel StreetPanel;
+    private javax.swing.JTextField StreetTextField;
     private javax.swing.JLabel TotalValueInfoLabel;
     private javax.swing.JLabel TotalValueLabel;
-    private javax.swing.JPasswordField ZipField;
     private javax.swing.JLabel ZipLabel;
     private javax.swing.JPanel ZipPanel;
+    private javax.swing.JTextField ZipTextField;
     private javax.swing.JPanel infoPanel;
     // End of variables declaration//GEN-END:variables
 }

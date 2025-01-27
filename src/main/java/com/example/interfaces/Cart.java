@@ -4,8 +4,7 @@
  */
 package bookshopmanagementsystem.interfaces;
 
-import bookshopmanagementsystem.interfaces.Book;
-import com.example.dto.BookDto;
+import com.example.interfaces.BookInCart;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +15,9 @@ import java.util.List;
  */
 public class Cart {
     private static Cart instance;
-    private final List<BookDto> books;
+    private final List<BookInCart> books;
     private Runnable updateListener;
+    private Runnable updateValueListener;
     private BigDecimal totalValue;
 
     private Cart() {
@@ -32,24 +32,24 @@ public class Cart {
         return instance;
     }
 
-    public void addItem(BookDto book) {
+    public void addItem(BookInCart book) {
         books.add(book);
-        this.totalValue = this.totalValue.add(book.getPrice());
+        this.totalValue = this.totalValue.add(book.getBook().getPrice());
         if (updateListener != null) {
             updateListener.run();
         }
     }
     
-    public void removeItem(BookDto book) {
+    public void removeItem(BookInCart book) {
         books.remove(book);
-        this.totalValue = this.totalValue.subtract(book.getPrice());
+        this.totalValue = new BigDecimal(0);
         if (updateListener != null) {
             updateListener.run();
         }
     }
 
 
-    public List<BookDto> getItems() {
+    public List<BookInCart> getItems() {
         return books;
     }
     
@@ -57,7 +57,35 @@ public class Cart {
         return this.totalValue;
     }
     
+       public void setTotalValue(BigDecimal totalValue) {
+        this.totalValue = totalValue;
+         if (updateListener != null) {
+            updateListener.run();
+        }
+    }
+    
     public void setUpdateListener(Runnable listener) {
         this.updateListener = listener;
     }
+    
+        public void setUpdateValueListener(Runnable listener) {
+        this.updateValueListener = listener;
+    }
+    
+    public void recalculateTotalValue() {
+ 
+    BigDecimal newTotalValue = BigDecimal.ZERO;
+
+    for (BookInCart book : books) {
+        BigDecimal bookTotal = book.getBook().getPrice().multiply(BigDecimal.valueOf(book.getQuantity()));
+        newTotalValue = newTotalValue.add(bookTotal);
+    }
+
+    this.totalValue = newTotalValue;
+
+    if (updateValueListener != null) {
+        updateValueListener.run();
+    }
 }
+}
+

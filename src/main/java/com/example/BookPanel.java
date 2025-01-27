@@ -7,6 +7,9 @@ package com.example;
 import bookshopmanagementsystem.interfaces.Cart;
 import bookshopmanagementsystem.interfaces.Book;
 import com.example.dto.BookDto;
+import com.example.interfaces.BookInCart;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -134,13 +137,30 @@ public class BookPanel extends javax.swing.JPanel {
     private void AddToCartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToCartBtnActionPerformed
 
         Toast toast = new Toast(clientPanel, "Added to cart", 1000);
-        Cart.getInstance().addItem(book);
+            boolean found = false;
+
+    for (BookInCart item : Cart.getInstance().getItems()) {
+        if (item.getBook().id == book.id) {
+            item.setQuantity(item.getQuantity() + 1);
+            Cart.getInstance().setTotalValue(Cart.getInstance().getTotalValue().add(item.getBook().price));
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        BookInCart bookInCart = new BookInCart(book,1);
+        Cart.getInstance().addItem(bookInCart);
+    }
+
     }//GEN-LAST:event_AddToCartBtnActionPerformed
 
     private void OrderNowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderNowBtnActionPerformed
-        OrderFormPanel orderFormPanel = new OrderFormPanel(mainFrame);
+        List<BookInCart> bookInCart = new ArrayList<>();
+        bookInCart.add(new BookInCart(book,1));
+        OrderFormPanel orderFormPanel = new OrderFormPanel(mainFrame, bookInCart);
         mainFrame.mainPanel.add(orderFormPanel, "orderForm");
-        BookInfoPanel bookInfoPanel = new BookInfoPanel(book,mainFrame);
+        BookInfoPanel bookInfoPanel = new BookInfoPanel(bookInCart.get(0),mainFrame);
         orderFormPanel.getOrderItemsBoxPanel().add(bookInfoPanel);
         orderFormPanel.getTotalValueLabel().setText(String.valueOf(book.price) + "ZŁ");
         mainFrame.showPanel("orderForm");

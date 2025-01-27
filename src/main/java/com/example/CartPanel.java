@@ -7,6 +7,7 @@ package com.example;
 import bookshopmanagementsystem.interfaces.Book;
 import bookshopmanagementsystem.interfaces.Cart;
 import com.example.dto.BookDto;
+import com.example.interfaces.BookInCart;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -25,6 +26,7 @@ public class CartPanel extends javax.swing.JPanel {
         this.mainFrame = mainFrame;
         initComponents();
         Cart.getInstance().setUpdateListener(this::refreshCartItems);
+        Cart.getInstance().setUpdateValueListener(this::refreshCartValue);
     }
 
     /**
@@ -159,7 +161,17 @@ public class CartPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
     private void OrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderBtnActionPerformed
-        mainFrame.showPanel("orderForm");
+        
+        
+        List<BookInCart> booksInCart = Cart.getInstance().getItems();
+        OrderFormPanel orderFormPanel = new OrderFormPanel(mainFrame,booksInCart);
+        mainFrame.mainPanel.add(orderFormPanel, "ordersForm");
+        orderFormPanel.getTotalValueLabel().setText(String.valueOf(Cart.getInstance().getTotalValue()) + "ZŁ");
+        for (BookInCart book : booksInCart) {
+                BookInfoPanel bookInfoPanel = new BookInfoPanel(book,mainFrame);
+                orderFormPanel.getOrderItemsBoxPanel().add(bookInfoPanel);
+            }
+        mainFrame.showPanel("ordersForm");
     }//GEN-LAST:event_OrderBtnActionPerformed
      public JPanel getCartItemsBoxPanel() {
         return CartItemsBoxPanel;
@@ -167,14 +179,18 @@ public class CartPanel extends javax.swing.JPanel {
 
      private void refreshCartItems() {
          CartItemsBoxPanel.removeAll();
-          List<BookDto> books = Cart.getInstance().getItems();
-            for (BookDto book : books) {
+          List<BookInCart> books = Cart.getInstance().getItems();
+            for (BookInCart book : books) {
                 JPanel cartItemPanel = new CartItemPanel(book);
                 CartItemsBoxPanel.add(cartItemPanel);
             }
             TotalValueLabel.setText(Cart.getInstance().getTotalValue() + " ZŁ");
             CartItemsBoxPanel.revalidate();
             CartItemsBoxPanel.repaint();
+     }
+     
+     private void refreshCartValue(){
+         TotalValueLabel.setText(Cart.getInstance().getTotalValue() + " ZŁ");
      }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackBtn;

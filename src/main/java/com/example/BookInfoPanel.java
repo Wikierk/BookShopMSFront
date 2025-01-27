@@ -4,8 +4,7 @@
  */
 package com.example;
 
-
-import com.example.dto.BookDto;
+import com.example.interfaces.BookInCart;
 
 /**
  *
@@ -17,12 +16,13 @@ public class BookInfoPanel extends javax.swing.JPanel {
      * Creates new form BookPanel
      */
     private MainFrame mainFrame;
-    private BookDto book;
-    public BookInfoPanel(BookDto book, MainFrame mainFrame) {
+    private BookInCart book;
+    public BookInfoPanel(BookInCart book, MainFrame mainFrame) {
         initComponents();
-        TitleLabel.setText(book.getTitle());
-        AuthorLabel.setText(book.getAuthor());
-        PriceLabel.setText(String.valueOf(book.getPrice()) + " ZŁ");
+        TitleLabel.setText(book.getBook().getTitle());
+        AuthorLabel.setText(book.getBook().getAuthor());
+        PriceLabel.setText(String.valueOf(book.getBook().getPrice()) + " ZŁ");
+        QuantityLabel.setText("Quantity: " + String.valueOf(book.getQuantity()));
         this.mainFrame = mainFrame;
         this.book = book;
     }
@@ -45,6 +45,8 @@ public class BookInfoPanel extends javax.swing.JPanel {
         TitleLabel = new javax.swing.JLabel();
         AuthorPanel = new javax.swing.JPanel();
         AuthorLabel = new javax.swing.JLabel();
+        Quantity = new javax.swing.JPanel();
+        QuantityLabel = new javax.swing.JLabel();
         PricePanel = new javax.swing.JPanel();
         PriceLabel = new javax.swing.JLabel();
 
@@ -86,6 +88,16 @@ public class BookInfoPanel extends javax.swing.JPanel {
 
         BookInfoPanel.add(AuthorPanel);
 
+        Quantity.setPreferredSize(new java.awt.Dimension(225, 30));
+        Quantity.setLayout(new java.awt.BorderLayout());
+
+        QuantityLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        QuantityLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        QuantityLabel.setText("Quantity");
+        Quantity.add(QuantityLabel, java.awt.BorderLayout.CENTER);
+
+        BookInfoPanel.add(Quantity);
+
         PricePanel.setPreferredSize(new java.awt.Dimension(225, 30));
         PricePanel.setLayout(new java.awt.BorderLayout());
 
@@ -109,6 +121,8 @@ public class BookInfoPanel extends javax.swing.JPanel {
     private javax.swing.JPanel ImagePanel;
     private javax.swing.JLabel PriceLabel;
     private javax.swing.JPanel PricePanel;
+    private javax.swing.JPanel Quantity;
+    private javax.swing.JLabel QuantityLabel;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JPanel TitlePanel;
     // End of variables declaration//GEN-END:variables
