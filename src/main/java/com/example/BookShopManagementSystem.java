@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author Wiktor
  */
 public class BookShopManagementSystem {
-    public static final int port = 666;
+    public static final int port = 1024;
     private static Client client;
 
     /**

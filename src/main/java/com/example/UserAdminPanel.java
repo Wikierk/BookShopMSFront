@@ -4,6 +4,8 @@
  */
 package com.example;
 
+import com.example.dto.UserDto;
+
 /**
  *
  * @author Wiktor
@@ -13,8 +15,16 @@ public class UserAdminPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserPanel
      */
-    public UserAdminPanel() {
+    private MainFrame mainFrame;
+    UserDto user;
+    public UserAdminPanel(UserDto user,MainFrame mainFrame ) {
         initComponents();
+        this.mainFrame = mainFrame;
+        this.user = user;
+        NameLabel.setText(user.name);
+        EmailLabel.setText(user.email);
+        RoleLabel.setText(user.role);
+        
     }
 
     /**
@@ -28,9 +38,7 @@ public class UserAdminPanel extends javax.swing.JPanel {
 
         UserInfoPanel = new javax.swing.JPanel();
         NamePanel = new javax.swing.JPanel();
-        TitleLabel = new javax.swing.JLabel();
-        LastNamePanel = new javax.swing.JPanel();
-        AuthorLabel = new javax.swing.JLabel();
+        NameLabel = new javax.swing.JLabel();
         EmailPanel = new javax.swing.JPanel();
         EmailLabel = new javax.swing.JLabel();
         RolePanel = new javax.swing.JPanel();
@@ -41,30 +49,21 @@ public class UserAdminPanel extends javax.swing.JPanel {
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
+        UserInfoPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), javax.swing.BorderFactory.createTitledBorder("")));
         UserInfoPanel.setPreferredSize(new java.awt.Dimension(218, 120));
         UserInfoPanel.setLayout(new javax.swing.BoxLayout(UserInfoPanel, javax.swing.BoxLayout.Y_AXIS));
 
         NamePanel.setPreferredSize(new java.awt.Dimension(225, 10));
         NamePanel.setLayout(new java.awt.BorderLayout());
 
-        TitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TitleLabel.setText("Name");
-        TitleLabel.setToolTipText("");
-        TitleLabel.setPreferredSize(new java.awt.Dimension(38, 20));
-        NamePanel.add(TitleLabel, java.awt.BorderLayout.CENTER);
+        NameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        NameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NameLabel.setText("Name");
+        NameLabel.setToolTipText("");
+        NameLabel.setPreferredSize(new java.awt.Dimension(38, 20));
+        NamePanel.add(NameLabel, java.awt.BorderLayout.CENTER);
 
         UserInfoPanel.add(NamePanel);
-
-        LastNamePanel.setPreferredSize(new java.awt.Dimension(225, 30));
-        LastNamePanel.setLayout(new java.awt.BorderLayout());
-
-        AuthorLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        AuthorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AuthorLabel.setText("Last Name");
-        LastNamePanel.add(AuthorLabel, java.awt.BorderLayout.CENTER);
-
-        UserInfoPanel.add(LastNamePanel);
 
         EmailPanel.setPreferredSize(new java.awt.Dimension(225, 30));
         EmailPanel.setLayout(new java.awt.BorderLayout());
@@ -122,17 +121,15 @@ public class UserAdminPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AuthorLabel;
     private javax.swing.JPanel BtnPanel;
     private javax.swing.JButton DeleteBtn;
     private javax.swing.JButton EditBtn;
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JPanel EmailPanel;
-    private javax.swing.JPanel LastNamePanel;
+    private javax.swing.JLabel NameLabel;
     private javax.swing.JPanel NamePanel;
     private javax.swing.JLabel RoleLabel;
     private javax.swing.JPanel RolePanel;
-    private javax.swing.JLabel TitleLabel;
     private javax.swing.JPanel UserInfoPanel;
     // End of variables declaration//GEN-END:variables
 }

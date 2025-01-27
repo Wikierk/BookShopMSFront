@@ -68,7 +68,7 @@ public class BookAdminPanel extends javax.swing.JPanel {
         ImagePanel.setLayout(new java.awt.BorderLayout());
 
         ImageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/panTadeusz.jpg"))); // NOI18N
+        ImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/no-image-icon-23485.png"))); // NOI18N
         ImagePanel.add(ImageLabel, java.awt.BorderLayout.CENTER);
 
         add(ImagePanel);

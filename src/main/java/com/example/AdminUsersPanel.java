@@ -4,6 +4,16 @@
  */
 package com.example;
 
+import com.example.dto.BookDto;
+import com.example.dto.UserDto;
+import com.example.requests.SelectBooksRequest;
+import com.example.requests.SelectUsersRequest;
+import com.example.responses.Response;
+import com.example.responses.ResponseType;
+import com.example.responses.SelectBooksResponse;
+import com.example.responses.SelectUsersResponse;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Wiktor
@@ -159,10 +169,39 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         mainFrame.showPanel("admin");
     }//GEN-LAST:event_BooksBtnActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+    public void refreshUsersBoxPanel() {
         UsersBoxPanel.removeAll();
         UsersBoxPanel.revalidate();
         UsersBoxPanel.repaint();
+        UserDto[] users = {};
+        SelectUsersRequest selectUsersRequest = new SelectUsersRequest();
+        try {
+            Client client = BookShopManagementSystem.getClient();
+            if (client != null) {
+                String response = client.sendMessage(selectUsersRequest.create());
+                String[] result = Response.split(response);
+                System.out.println("Server response: " + response);
+                if ((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
+                    SelectUsersResponse selectUsersResponse = new SelectUsersResponse(result[1]);
+                    users = selectUsersResponse.users;
+                }
+
+            } else {
+                System.out.println("Client is not connected.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        for (UserDto user : users) {
+            JPanel singleUserPanel = new UserAdminPanel(user,mainFrame);
+            UsersBoxPanel.add(singleUserPanel);
+        }
+    }
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+
+        refreshUsersBoxPanel();
     }//GEN-LAST:event_formComponentShown
 
 
