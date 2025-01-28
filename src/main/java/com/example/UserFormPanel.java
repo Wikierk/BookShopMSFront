@@ -4,9 +4,14 @@
  */
 package com.example;
 
-import com.example.dto.NewUserDto;
-import com.example.requests.AddUserRequest;
-
+import com.example.dto.NewUserWithRoleDto;
+import com.example.dto.RoleDto;
+import com.example.dto.UserDto;
+import com.example.requests.AddUserWithRoleRequest;
+import com.example.requests.SelectRolesRequest;
+import com.example.responses.Response;
+import com.example.responses.ResponseType;
+import com.example.responses.SelectRolesResponse;
 
 /**
  *
@@ -18,10 +23,24 @@ public class UserFormPanel extends javax.swing.JPanel {
      * Creates new form UserFormPanel
      */
     MainFrame mainFrame;
-
+    RoleDto[] roles;
+    UserDto user;
+    Boolean rolesLoaded = false;
     public UserFormPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
+
+    }
+
+    public UserFormPanel(MainFrame mainFrame, UserDto user) {
+        initComponents();
+        this.mainFrame = mainFrame;
+        this.user = user;
+        String[] parts = user.name.split(" ");
+        NameTextField.setText(parts[0]);
+        LastNameTextField.setText(parts[1]);
+        EmailTextField.setText(user.email);
+        PasswordField.setText(user.password);
     }
 
     /**
@@ -61,6 +80,16 @@ public class UserFormPanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                formComponentAdded(evt);
+            }
+        });
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         setLayout(new java.awt.BorderLayout());
 
         AddUserPanel.setPreferredSize(new java.awt.Dimension(400, 0));
@@ -161,7 +190,6 @@ public class UserFormPanel extends javax.swing.JPanel {
         RoleLabel.setText("Role");
         RolePanel.add(RoleLabel, java.awt.BorderLayout.PAGE_START);
 
-        RoleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
         RolePanel.add(RoleComboBox, java.awt.BorderLayout.CENTER);
 
         AddUserFormPanel.add(RolePanel);
@@ -229,40 +257,43 @@ public class UserFormPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void AddUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddUserButtonMouseClicked
-        String name = NameTextField.getText();
-        String lastName = LastNameTextField.getText();
-        String email = EmailTextField.getText();
-        String password = new String(PasswordField.getPassword());
-        String fullName = name + " " + lastName;
-
-        NewUserDto newUserDto = new NewUserDto(fullName, email, password);
-        AddUserRequest addUserRequest = new AddUserRequest(newUserDto);
-
-        try {
-            Client client = BookShopManagementSystem.getClient();
-            if (client != null) {
-                String response = client.sendMessage(addUserRequest.create());
-                System.out.println("Server response: " + response);
-            } else {
-                System.out.println("Client is not connected.");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        InfoLabel.setText("");
-        NameTextField.setText("");
-        LastNameTextField.setText("");
-        EmailTextField.setText("");
-        PasswordField.setText("");
-        InfoLabel.setForeground(new java.awt.Color(40, 252, 3));
-        InfoLabel.setText("User Added!");
-
 
     }//GEN-LAST:event_AddUserButtonMouseClicked
 
     private void AddUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserButtonActionPerformed
-        // TODO add your handling code here:
+        String name = NameTextField.getText();
+        String lastName = LastNameTextField.getText();
+        String fullName = name + " " + lastName;
+        String email = EmailTextField.getText();
+        String password = new String(PasswordField.getPassword());
+        String role = RoleComboBox.getSelectedItem().toString();
+
+        if (!name.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !role.isEmpty()) {
+            NewUserWithRoleDto newUserWithRoleDto = new NewUserWithRoleDto(fullName, email, password, role);
+            AddUserWithRoleRequest addUserWithRoleRequest = new AddUserWithRoleRequest(newUserWithRoleDto);
+
+            try {
+                Client client = BookShopManagementSystem.getClient();
+                if (client != null) {
+                    String response = client.sendMessage(addUserWithRoleRequest.create());
+                    System.out.println("Server response: " + response);
+                } else {
+                    System.out.println("Client is not connected.");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            NameTextField.setText("");
+            LastNameTextField.setText("");
+            EmailTextField.setText("");
+            PasswordField.setText("");
+            InfoLabel.setForeground(new java.awt.Color(40, 252, 3));
+            InfoLabel.setText("User added!");
+        } else {
+            InfoLabel.setForeground(new java.awt.Color(255, 51, 51));
+            InfoLabel.setText("Fill all field!");
+        }
     }//GEN-LAST:event_AddUserButtonActionPerformed
 
     private void BackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackButtonMouseClicked
@@ -273,7 +304,72 @@ public class UserFormPanel extends javax.swing.JPanel {
         mainFrame.showPanel("adminUsers");
     }//GEN-LAST:event_BackButtonActionPerformed
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        if(!rolesLoaded)
+        this.setRoles();
+    }//GEN-LAST:event_formComponentShown
 
+    private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
+
+    }//GEN-LAST:event_formComponentAdded
+
+    public javax.swing.JButton getAddButton() {
+        return AddUserButton;
+    }
+
+    public javax.swing.JLabel getTitleLabel() {
+        return AddUserLabel;
+    }
+
+    public javax.swing.JTextField getNameTextField() {
+        return NameTextField;
+    }
+
+    public javax.swing.JTextField getLastNameTextField() {
+        return LastNameTextField;
+    }
+
+    public javax.swing.JTextField getEmailTextField() {
+        return EmailTextField;
+    }
+
+    public javax.swing.JPasswordField getPasswordField() {
+        return PasswordField;
+    }
+
+    public javax.swing.JComboBox<String> getRoleComboBox() {
+        return RoleComboBox;
+    }
+
+    public javax.swing.JLabel getInfoLabel() {
+        return InfoLabel;
+    }
+
+    private void setRoles() {
+        SelectRolesRequest selectRolesRequest = new SelectRolesRequest();
+        try {
+            Client client = BookShopManagementSystem.getClient();
+            if (client != null) {
+                String response = client.sendMessage(selectRolesRequest.create());
+                String[] result = Response.split(response);
+                System.out.println("Server response: " + response);
+                if ((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
+                    SelectRolesResponse selectRolesResponse = new SelectRolesResponse(result[1]);
+                    roles = selectRolesResponse.roles;
+                }
+
+            } else {
+                System.out.println("Client is not connected.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        for (RoleDto role : roles) {
+            RoleComboBox.addItem(role.name);
+        }
+        rolesLoaded = true;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddUserBtnPanel;
     private javax.swing.JButton AddUserButton;

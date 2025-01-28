@@ -43,6 +43,7 @@ public class OrderAdminPanel extends javax.swing.JPanel {
         StatusComboBox = new javax.swing.JComboBox<>();
         BtnPanel = new javax.swing.JPanel();
         EditStatusBtn = new javax.swing.JButton();
+        Details = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -132,6 +133,16 @@ public class OrderAdminPanel extends javax.swing.JPanel {
         });
         BtnPanel.add(EditStatusBtn);
 
+        Details.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Details.setText("Details");
+        Details.setPreferredSize(new java.awt.Dimension(110, 30));
+        Details.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DetailsActionPerformed(evt);
+            }
+        });
+        BtnPanel.add(Details);
+
         OrderInfoPanel.add(BtnPanel);
 
         add(OrderInfoPanel);
@@ -141,6 +152,10 @@ public class OrderAdminPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_EditStatusBtnActionPerformed
 
+    private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DetailsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BtnPanel;
@@ -148,6 +163,7 @@ public class OrderAdminPanel extends javax.swing.JPanel {
     private javax.swing.JPanel CityPanel;
     private javax.swing.JLabel DateLabel;
     private javax.swing.JPanel DatePanel;
+    private javax.swing.JButton Details;
     private javax.swing.JButton EditStatusBtn;
     private javax.swing.JLabel IdLabel;
     private javax.swing.JPanel IdPanel;

@@ -4,7 +4,15 @@
  */
 package com.example;
 
+import com.example.dto.BookDto;
+import com.example.dto.IdDto;
 import com.example.dto.UserDto;
+import com.example.requests.DeleteBookRequest;
+import com.example.requests.DeleteUserRequest;
+import com.example.requests.UpdateBookRequest;
+import com.example.requests.UpdateUserRequest;
+import java.awt.event.MouseListener;
+import java.math.BigDecimal;
 
 /**
  *
@@ -17,14 +25,15 @@ public class UserAdminPanel extends javax.swing.JPanel {
      */
     private MainFrame mainFrame;
     UserDto user;
-    public UserAdminPanel(UserDto user,MainFrame mainFrame ) {
+    AdminUsersPanel adminUsersPanel;
+    public UserAdminPanel(UserDto user,MainFrame mainFrame, AdminUsersPanel adminUsersPanel ) {
         initComponents();
         this.mainFrame = mainFrame;
         this.user = user;
         NameLabel.setText(user.name);
         EmailLabel.setText(user.email);
         RoleLabel.setText(user.role);
-        
+        this.adminUsersPanel = adminUsersPanel;
     }
 
     /**
@@ -47,13 +56,14 @@ public class UserAdminPanel extends javax.swing.JPanel {
         EditBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
 
+        setMinimumSize(new java.awt.Dimension(218, 120));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         UserInfoPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), javax.swing.BorderFactory.createTitledBorder("")));
         UserInfoPanel.setPreferredSize(new java.awt.Dimension(218, 120));
         UserInfoPanel.setLayout(new javax.swing.BoxLayout(UserInfoPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        NamePanel.setPreferredSize(new java.awt.Dimension(225, 10));
+        NamePanel.setPreferredSize(new java.awt.Dimension(225, 30));
         NamePanel.setLayout(new java.awt.BorderLayout());
 
         NameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -112,11 +122,65 @@ public class UserAdminPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
+        UserFormPanel userFormPanel = new UserFormPanel(mainFrame,user);
+        mainFrame.mainPanel.add(userFormPanel,"userEditForm");
+        mainFrame.showPanel("userEditForm");
+        userFormPanel.getAddButton().setText("Edit");
+        userFormPanel.getTitleLabel().setText("Edit User");
+        MouseListener[] listeners = userFormPanel.getAddButton().getMouseListeners();
+        for (MouseListener listener : listeners) {
+            userFormPanel.getAddButton().removeMouseListener(listener);
+        }
+        userFormPanel.getAddButton().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        String name = userFormPanel.getNameTextField().getText();
+        String lastName = userFormPanel.getLastNameTextField().getText();
+        String fullName = name + " " + lastName;
+        String email = userFormPanel.getEmailTextField().getText();
+        String password = new String(userFormPanel.getPasswordField().getPassword());
+        String role = userFormPanel.getRoleComboBox().getSelectedItem().toString();
 
+                if (!name.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !role.isEmpty()) {
+                    UserDto updatedUserDto = new UserDto(user.id,fullName, email, password,role);
+                    UpdateUserRequest updateUserRequest = new UpdateUserRequest(updatedUserDto);
+
+                    try {
+                        Client client = BookShopManagementSystem.getClient();
+                        if (client != null) {
+                            String response = client.sendMessage(updateUserRequest.create());
+                            System.out.println("Server response: " + response);
+                        } else {
+                            System.out.println("Client is not connected.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+
+                    userFormPanel.getInfoLabel().setForeground(new java.awt.Color(40, 252, 3));
+                    userFormPanel.getInfoLabel().setText("User edited!");
+                } else {
+                    userFormPanel.getInfoLabel().setForeground(new java.awt.Color(255, 51, 51));
+                    userFormPanel.getInfoLabel().setText("Fill all field!");
+                }
+            }
+        });
     }//GEN-LAST:event_EditBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-
+        DeleteUserRequest deleteUserRequest = new DeleteUserRequest(new IdDto(user.id));
+        try {
+            Client client = BookShopManagementSystem.getClient();
+            if (client != null) {
+                String response = client.sendMessage(deleteUserRequest.create());
+                System.out.println("Server response: " + response);
+                adminUsersPanel.refreshUsersBoxPanel();
+            }   else {
+                System.out.println("Client is not connected.");
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
 

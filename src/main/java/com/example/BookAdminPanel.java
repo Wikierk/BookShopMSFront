@@ -169,9 +169,6 @@ public class BookAdminPanel extends javax.swing.JPanel {
                         System.out.println(e);
                     }
 
-                    bookFormPanel.getTitleTextField().setText("");
-                    bookFormPanel.getAuthorTextField().setText("");
-                    bookFormPanel.getPriceTextField().setText("");
                     bookFormPanel.getInfoLabel().setForeground(new java.awt.Color(40, 252, 3));
                     bookFormPanel.getInfoLabel().setText("Book edited!");
                 } else {

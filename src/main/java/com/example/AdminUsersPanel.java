@@ -186,8 +186,10 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         }
 
         for (UserDto user : users) {
-            JPanel singleUserPanel = new UserAdminPanel(user,mainFrame);
-            UsersBoxPanel.add(singleUserPanel);
+            if(!user.role.equals("admin")){
+                JPanel singleUserPanel = new UserAdminPanel(user,mainFrame, this);
+                UsersBoxPanel.add(singleUserPanel);
+            }
         }
     }
 
