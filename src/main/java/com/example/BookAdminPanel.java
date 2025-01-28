@@ -5,9 +5,6 @@
 package com.example;
 
 import com.example.dto.BookDto;
-import com.example.dto.IdDto;
-import com.example.dto.NewBookDto;
-import com.example.requests.AddBookRequest;
 import com.example.requests.DeleteBookRequest;
 import com.example.requests.UpdateBookRequest;
 
@@ -181,7 +178,7 @@ public class BookAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_EditBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-        DeleteBookRequest deleteBookRequest = new DeleteBookRequest(new IdDto(book.id));
+        DeleteBookRequest deleteBookRequest = new DeleteBookRequest(book.id);
         try {
             Client client = BookShopManagementSystem.getClient();
             if (client != null) {

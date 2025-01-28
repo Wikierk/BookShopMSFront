@@ -5,13 +5,11 @@
 package com.example;
 
 import com.example.dto.NewUserWithRoleDto;
-import com.example.dto.RoleDto;
+import com.example.dto.Role;
 import com.example.dto.UserDto;
 import com.example.requests.AddUserWithRoleRequest;
-import com.example.requests.SelectRolesRequest;
 import com.example.responses.Response;
 import com.example.responses.ResponseType;
-import com.example.responses.SelectRolesResponse;
 
 /**
  *
@@ -23,9 +21,8 @@ public class UserFormPanel extends javax.swing.JPanel {
      * Creates new form UserFormPanel
      */
     MainFrame mainFrame;
-    RoleDto[] roles;
+    Role[] roles;
     UserDto user;
-    Boolean rolesLoaded = false;
     public UserFormPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
@@ -190,6 +187,7 @@ public class UserFormPanel extends javax.swing.JPanel {
         RoleLabel.setText("Role");
         RolePanel.add(RoleLabel, java.awt.BorderLayout.PAGE_START);
 
+        RoleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
         RolePanel.add(RoleComboBox, java.awt.BorderLayout.CENTER);
 
         AddUserFormPanel.add(RolePanel);
@@ -269,7 +267,7 @@ public class UserFormPanel extends javax.swing.JPanel {
         String role = RoleComboBox.getSelectedItem().toString();
 
         if (!name.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !role.isEmpty()) {
-            NewUserWithRoleDto newUserWithRoleDto = new NewUserWithRoleDto(fullName, email, password, role);
+            NewUserWithRoleDto newUserWithRoleDto = new NewUserWithRoleDto(fullName, email, password, Role.fromString(role));
             AddUserWithRoleRequest addUserWithRoleRequest = new AddUserWithRoleRequest(newUserWithRoleDto);
 
             try {
@@ -305,8 +303,7 @@ public class UserFormPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        if(!rolesLoaded)
-        this.setRoles();
+
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
@@ -345,31 +342,6 @@ public class UserFormPanel extends javax.swing.JPanel {
         return InfoLabel;
     }
 
-    private void setRoles() {
-        SelectRolesRequest selectRolesRequest = new SelectRolesRequest();
-        try {
-            Client client = BookShopManagementSystem.getClient();
-            if (client != null) {
-                String response = client.sendMessage(selectRolesRequest.create());
-                String[] result = Response.split(response);
-                System.out.println("Server response: " + response);
-                if ((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
-                    SelectRolesResponse selectRolesResponse = new SelectRolesResponse(result[1]);
-                    roles = selectRolesResponse.roles;
-                }
-
-            } else {
-                System.out.println("Client is not connected.");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        for (RoleDto role : roles) {
-            RoleComboBox.addItem(role.name);
-        }
-        rolesLoaded = true;
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddUserBtnPanel;
     private javax.swing.JButton AddUserButton;

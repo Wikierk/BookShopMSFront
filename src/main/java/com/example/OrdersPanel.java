@@ -5,7 +5,6 @@
 package com.example;
 
 import com.example.dto.BookDto;
-import com.example.dto.IdDto;
 import com.example.dto.OrderDto;
 import com.example.requests.SelectBooksRequest;
 import com.example.requests.SelectOrdersForUserRequest;
@@ -146,7 +145,7 @@ public class OrdersPanel extends javax.swing.JPanel {
         OrderItemsBoxPanel.revalidate();
         OrderItemsBoxPanel.repaint();
         OrderDto[] orders = {};
-        SelectOrdersForUserRequest selectOrdersForUserRequest = new SelectOrdersForUserRequest(new IdDto(mainFrame.getUser().id));
+        SelectOrdersForUserRequest selectOrdersForUserRequest = new SelectOrdersForUserRequest(mainFrame.getUser().id);
         try {
             Client client = BookShopManagementSystem.getClient();
             if (client != null) {

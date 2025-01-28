@@ -5,7 +5,7 @@
 package com.example;
 
 import com.example.dto.BookDto;
-import com.example.dto.IdDto;
+import com.example.dto.Role;
 import com.example.dto.UserDto;
 import com.example.requests.DeleteBookRequest;
 import com.example.requests.DeleteUserRequest;
@@ -32,7 +32,7 @@ public class UserAdminPanel extends javax.swing.JPanel {
         this.user = user;
         NameLabel.setText(user.name);
         EmailLabel.setText(user.email);
-        RoleLabel.setText(user.role);
+        RoleLabel.setText(user.role.toString());
         this.adminUsersPanel = adminUsersPanel;
     }
 
@@ -142,12 +142,14 @@ public class UserAdminPanel extends javax.swing.JPanel {
         String role = userFormPanel.getRoleComboBox().getSelectedItem().toString();
 
                 if (!name.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !role.isEmpty()) {
-                    UserDto updatedUserDto = new UserDto(user.id,fullName, email, password,role);
+                    UserDto updatedUserDto = new UserDto(user.id,fullName, email, password,Role.fromString(role));
                     UpdateUserRequest updateUserRequest = new UpdateUserRequest(updatedUserDto);
+                 
 
                     try {
                         Client client = BookShopManagementSystem.getClient();
                         if (client != null) {
+                            System.out.println(updateUserRequest.create());
                             String response = client.sendMessage(updateUserRequest.create());
                             System.out.println("Server response: " + response);
                         } else {
@@ -168,7 +170,7 @@ public class UserAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_EditBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-        DeleteUserRequest deleteUserRequest = new DeleteUserRequest(new IdDto(user.id));
+        DeleteUserRequest deleteUserRequest = new DeleteUserRequest(user.id);
         try {
             Client client = BookShopManagementSystem.getClient();
             if (client != null) {

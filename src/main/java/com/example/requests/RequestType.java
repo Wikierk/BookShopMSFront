@@ -3,10 +3,8 @@ package com.example.requests;
 public enum RequestType {
     AddBook,
     AddOrder,
-    AddRole,
     AddUser,
     AddUserWithRole,
-    ChangeOrderStatus,
     DeleteBook,
     DeleteUser,
     SelectBook,
@@ -14,11 +12,13 @@ public enum RequestType {
     SelectBooksForOrder,
     SelectOrders,
     SelectOrdersForUser,
+    SelectStatusForOrder,
     SelectUser,
     SelectUserForLogin,
+    SelectUserForOrder,
     SelectUsers,
-    SelectRoles,
     UpdateBook,
+    UpdateOrderStatus,
     UpdateUser,
     Invalid;
 
@@ -26,10 +26,8 @@ public enum RequestType {
         switch (header) {
             case "AddBook" -> { return RequestType.AddBook; }
             case "AddOrder" -> { return RequestType.AddOrder; }
-            case "AddRole" -> { return RequestType.AddRole; }
             case "AddUser" -> { return RequestType.AddUser; }
             case "AddUserWithRole" -> { return RequestType.AddUserWithRole; }
-            case "ChangeOrderStatus" -> { return RequestType.ChangeOrderStatus; }
             case "DeleteBook" -> { return RequestType.DeleteBook; }
             case "DeleteUser" -> { return RequestType.DeleteUser; }
             case "SelectBook" -> { return RequestType.SelectBook; }
@@ -37,11 +35,13 @@ public enum RequestType {
             case "SelectBooksForOrder" -> { return RequestType.SelectBooksForOrder; }
             case "SelectOrders" -> { return RequestType.SelectOrders; }
             case "SelectOrdersForUser" -> { return RequestType.SelectOrdersForUser; }
+            case "SelectStatusForOrder" -> { return RequestType.SelectStatusForOrder; }
             case "SelectUser" -> { return RequestType.SelectUser; }
             case "SelectUserForLogin" -> { return RequestType.SelectUserForLogin; }
+            case "SelectUserForOrder" -> { return RequestType.SelectUserForOrder; }
             case "SelectUsers" -> { return RequestType.SelectUsers; }
-            case "SelectRoles" -> { return RequestType.SelectRoles; }
             case "UpdateBook" -> { return RequestType.UpdateBook; }
+            case "UpdateOrderStatus" -> { return RequestType.UpdateOrderStatus; }
             case "UpdateUser" -> { return RequestType.UpdateUser; }
             default -> { return RequestType.Invalid; }
         }
@@ -51,10 +51,8 @@ public enum RequestType {
         switch (type) {
             case AddBook -> { return "AddBook"; }
             case AddOrder -> { return "AddOrder"; }
-            case AddRole -> { return "AddRole"; }
             case AddUser -> { return "AddUser"; }
             case AddUserWithRole -> { return "AddUserWithRole"; }
-            case ChangeOrderStatus -> { return "ChangeOrderStatus"; }
             case DeleteBook -> { return "DeleteBook"; }
             case DeleteUser -> { return "DeleteUser"; }
             case SelectBook -> { return "SelectBook"; }
@@ -62,11 +60,13 @@ public enum RequestType {
             case SelectBooksForOrder -> { return "SelectBooksForOrder"; }
             case SelectOrders -> { return "SelectOrders"; }
             case SelectOrdersForUser -> { return "SelectOrdersForUser"; }
+            case SelectStatusForOrder -> { return "SelectStatusForOrder"; }
             case SelectUser -> { return "SelectUser"; }
             case SelectUserForLogin -> { return "SelectUserForLogin"; }
+            case SelectUserForOrder -> { return "SelectUserForOrder"; }
             case SelectUsers -> { return "SelectUsers"; }
-            case SelectRoles -> { return "SelectRoles"; }
             case UpdateBook -> { return "UpdateBook"; }
+            case UpdateOrderStatus -> { return "UpdateOrderStatus"; }
             case UpdateUser -> { return "UpdateUser"; }
             default -> { return "Invalid"; }
         }

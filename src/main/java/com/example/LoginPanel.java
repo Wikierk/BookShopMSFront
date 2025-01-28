@@ -4,14 +4,12 @@
  */
 package com.example;
 
-import com.example.dto.BookDto;
+import static com.example.dto.Role.User;
 import com.example.dto.UserDto;
 import com.example.dto.UserLoginDto;
-import com.example.requests.SelectBooksRequest;
 import com.example.requests.SelectUserForLoginRequest;
 import com.example.responses.Response;
 import com.example.responses.ResponseType;
-import com.example.responses.SelectBooksResponse;
 import com.example.responses.SelectUserResponse;
 
 /**
@@ -210,7 +208,7 @@ public class LoginPanel extends javax.swing.JPanel {
        String password = new String(PasswordField.getPassword());
        UserLoginDto userLoginDto = new UserLoginDto(email, password);
        SelectUserForLoginRequest selectUserForLoginRequest = new SelectUserForLoginRequest(userLoginDto);
-        UserDto user = new UserDto(0,"","","","");
+        UserDto user = new UserDto(0,"","","",User);
         try {
             Client client = BookShopManagementSystem.getClient();
             if (client != null) {
@@ -221,9 +219,9 @@ public class LoginPanel extends javax.swing.JPanel {
                     SelectUserResponse selectUserResponse = new SelectUserResponse(result[1]);
                     user = selectUserResponse.user;
                     mainFrame.setUser(user);
-                    if(user.role.equals("admin")) {
+                    if(user.role.toString().equals("Admin")) {
                         mainFrame.showPanel("admin");
-                    } else if(user.role.equals("user")) {
+                    } else if(user.role.toString().equals("User")) {
                         mainFrame.showPanel("client");
                     }
                 } else if(ResponseType.fromResponseHeader(result[0]) == ResponseType.NotFound) {

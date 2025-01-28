@@ -4,19 +4,12 @@
  */
 package com.example;
 
-import com.example.dto.BookDto;
 import com.example.dto.BookOrderDetailsDto;
-import com.example.dto.BookOrderInfoDto;
-import com.example.dto.IdDto;
 import com.example.dto.OrderDto;
 import com.example.requests.SelectBooksForOrderRequest;
-import com.example.requests.SelectBooksRequest;
-import com.example.requests.SelectOrdersForUserRequest;
 import com.example.responses.Response;
 import com.example.responses.ResponseType;
 import com.example.responses.SelectBooksForOrderResponse;
-import com.example.responses.SelectBooksResponse;
-import com.example.responses.SelectOrdersResponse;
 import java.math.BigDecimal;
 import javax.swing.JPanel;
 
@@ -171,7 +164,7 @@ public class OrderDetailsPanel extends javax.swing.JPanel {
         OrderItemsBoxPanel.repaint();
         totalValue = new BigDecimal(0);
         BookOrderDetailsDto[] books = {};
-        SelectBooksForOrderRequest selectBooksForOrderRequest = new SelectBooksForOrderRequest(new IdDto(order.id));
+        SelectBooksForOrderRequest selectBooksForOrderRequest = new SelectBooksForOrderRequest(order.id);
         try {
             Client client = BookShopManagementSystem.getClient();
             if (client != null) {

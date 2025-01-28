@@ -3,13 +3,13 @@ package com.example.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ChangeOrderStatusDto {
+public class UpdateOrderStatusDto {
     public int id;
-    public String newStatus;
+    public OrderStatus newStatus;
 
     @JsonCreator
-    public ChangeOrderStatusDto(@JsonProperty("id") int id,
-                         @JsonProperty("newStatus") String newStatus) {
+    public UpdateOrderStatusDto(@JsonProperty("id") int id,
+                                @JsonProperty("newStatus") OrderStatus newStatus) {
         this.id = id;
         this.newStatus = newStatus;
     }
@@ -22,11 +22,11 @@ public class ChangeOrderStatusDto {
         this.id = id;
     }
 
-    public String getNewStatus() {
+    public OrderStatus getNewStatus() {
         return newStatus;
     }
 
-    public void setNewStatus(String newStatus) {
+    public void setNewStatus(OrderStatus newStatus) {
         this.newStatus = newStatus;
     }
 }
