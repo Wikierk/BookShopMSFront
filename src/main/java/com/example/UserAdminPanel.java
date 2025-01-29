@@ -4,18 +4,21 @@
  */
 package com.example;
 
-import com.example.dto.BookDto;
 import com.example.dto.Role;
 import com.example.dto.UserDto;
-import com.example.requests.DeleteBookRequest;
 import com.example.requests.DeleteUserRequest;
-import com.example.requests.UpdateBookRequest;
 import com.example.requests.UpdateUserRequest;
 import java.awt.event.MouseListener;
-import java.math.BigDecimal;
 
 /**
- *
+ * This class represents the admin panel for managing user information. It displays
+ * user details such as name, email, and role, and provides options to edit or delete
+ * a user.
+ * 
+ * The UserAdminPanel allows an administrator to view, edit, or delete user
+ * information from the system. The user information is displayed in a structured format,
+ * and clicking on buttons allows the user to edit or delete the user data.
+ * 
  * @author Wiktor
  */
 public class UserAdminPanel extends javax.swing.JPanel {
@@ -26,6 +29,14 @@ public class UserAdminPanel extends javax.swing.JPanel {
     private MainFrame mainFrame;
     UserDto user;
     AdminUsersPanel adminUsersPanel;
+    
+     /**
+     * Constructs a new UserAdminPanel to display information about a specific user.
+     * 
+     * @param user the user whose information will be displayed in the panel
+     * @param mainFrame the main frame containing the application
+     * @param adminUsersPanel the panel containing a list of all users in the system
+     */
     public UserAdminPanel(UserDto user,MainFrame mainFrame, AdminUsersPanel adminUsersPanel ) {
         initComponents();
         this.mainFrame = mainFrame;
@@ -124,6 +135,15 @@ public class UserAdminPanel extends javax.swing.JPanel {
         add(UserInfoPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+     * Handles the event when the "Edit" button is clicked. This action opens a form to
+     * edit the user details. The form allows modifying the user's name, email, password,
+     * and role.
+     * 
+     * The user details are validated before sending a request to update the user on the server.
+     * 
+     * @param evt the action event triggered by the "Edit" button click
+     */
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
         UserFormPanel userFormPanel = new UserFormPanel(mainFrame,user);
         mainFrame.mainPanel.add(userFormPanel,"userEditForm");
@@ -171,7 +191,12 @@ public class UserAdminPanel extends javax.swing.JPanel {
             }
         });
     }//GEN-LAST:event_EditBtnActionPerformed
-
+    /**
+     * Handles the event when the "Delete" button is clicked. This action sends a request
+     * to delete the user from the system.
+     * 
+     * @param evt the action event triggered by the "Delete" button click
+     */
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         DeleteUserRequest deleteUserRequest = new DeleteUserRequest(user.id);
         try {

@@ -4,21 +4,24 @@
  */
 package com.example;
 
-import com.example.dto.BookDto;
 import com.example.dto.OrderDto;
-import com.example.requests.SelectBooksRequest;
 import com.example.requests.SelectOrdersForUserRequest;
 import com.example.responses.Response;
 import com.example.responses.ResponseType;
-import com.example.responses.SelectBooksResponse;
 import com.example.responses.SelectOrdersResponse;
 import javax.swing.JPanel;
 
 
 
 /**
- *
- * @author Wiktor
+ * This class represents the panel for displaying the list of orders associated with a user.
+ * It contains UI elements and logic for loading and displaying order data, handling user interactions
+ * like navigating to different panels or logging out.
+ * 
+ * The OrdersPanel fetches orders for the current user from a server and displays them dynamically.
+ * It also provides the ability to navigate to other panels, such as the cart or client panels.
+ * 
+ * Author: Wiktor
  */
 public class OrdersPanel extends javax.swing.JPanel {
 
@@ -26,6 +29,12 @@ public class OrdersPanel extends javax.swing.JPanel {
      * Creates new form ClientPanel
      */
     private MainFrame mainFrame;
+    
+     /**
+     * Constructor to initialize the OrdersPanel with the mainFrame reference.
+     * 
+     * @param mainFrame the MainFrame that contains the overall application layout
+     */
     public OrdersPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -127,19 +136,28 @@ public class OrdersPanel extends javax.swing.JPanel {
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+   /**
+     * Action handler for the "Back" button. Navigates to the client panel.
+     */
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         mainFrame.showPanel("client");
     }//GEN-LAST:event_BackBtnActionPerformed
-
+    /**
+     * Action handler for the "Cart" button. Navigates to the cart panel.
+     */
     private void CartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartBtnActionPerformed
         mainFrame.showPanel("cart");
     }//GEN-LAST:event_CartBtnActionPerformed
-
+    /**
+     * Action handler for the "Log out" button. Logs the user out and navigates to the login panel.
+     */
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
-
+    /**
+     * Method that runs when the OrdersPanel is shown. It fetches and displays orders for the user.
+     * It sends a request to the server to fetch the user's orders and updates the UI with the order data.
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         OrderItemsBoxPanel.removeAll();
         OrderItemsBoxPanel.revalidate();

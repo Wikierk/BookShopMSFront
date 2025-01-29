@@ -8,11 +8,12 @@ import com.example.dto.NewUserWithRoleDto;
 import com.example.dto.Role;
 import com.example.dto.UserDto;
 import com.example.requests.AddUserWithRoleRequest;
-import com.example.responses.Response;
-import com.example.responses.ResponseType;
 
 /**
- *
+ * UserFormPanel is a JPanel that provides a graphical user interface (GUI) for adding or editing a user's information.
+ * This panel allows the user to enter their name, last name, email, password, and role.
+ * It also handles the submission of the form to add the user, and displays a confirmation message or error if validation fails.
+ * 
  * @author Wiktor
  */
 public class UserFormPanel extends javax.swing.JPanel {
@@ -23,12 +24,26 @@ public class UserFormPanel extends javax.swing.JPanel {
     MainFrame mainFrame;
     Role[] roles;
     UserDto user;
+    
+    
+     /**
+     * Constructs a new UserFormPanel for adding a user.
+     * 
+     * @param mainFrame The main frame of the application.
+     */
     public UserFormPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
 
     }
 
+    
+     /**
+     * Constructs a new UserFormPanel for editing an existing user.
+     * 
+     * @param mainFrame The main frame of the application.
+     * @param user The user data to pre-fill the form.
+     */
     public UserFormPanel(MainFrame mainFrame, UserDto user) {
         initComponents();
         this.mainFrame = mainFrame;
@@ -257,7 +272,13 @@ public class UserFormPanel extends javax.swing.JPanel {
     private void AddUserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddUserButtonMouseClicked
 
     }//GEN-LAST:event_AddUserButtonMouseClicked
-
+    /**
+     * Handles the action when the AddUserButton is clicked.
+     * It validates the form fields and sends a request to the server to add a new user.
+     * If the user is added successfully, it clears the form and displays a success message.
+     * 
+     * @param evt The event triggered by the AddUserButton click.
+     */
     private void AddUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserButtonActionPerformed
         String name = NameTextField.getText();
         String lastName = LastNameTextField.getText();
@@ -294,6 +315,12 @@ public class UserFormPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_AddUserButtonActionPerformed
 
+     /**
+     * Handles the action when the BackButton is clicked.
+     * It navigates back to the user management panel.
+     * 
+     * @param evt The event triggered by the BackButton click.
+     */
     private void BackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackButtonMouseClicked
         mainFrame.showPanel("adminUsers");
     }//GEN-LAST:event_BackButtonMouseClicked
@@ -309,35 +336,68 @@ public class UserFormPanel extends javax.swing.JPanel {
     private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
 
     }//GEN-LAST:event_formComponentAdded
-
+    /**
+     * Returns the AddUserButton component.
+     * 
+     * @return The AddUserButton.
+     */
     public javax.swing.JButton getAddButton() {
         return AddUserButton;
     }
-
+    /**
+     * Returns the title label of the panel.
+     * 
+     * @return The AddUserLabel.
+     */
     public javax.swing.JLabel getTitleLabel() {
         return AddUserLabel;
     }
 
+     /**
+     * Returns the text field for the user's first name.
+     * 
+     * @return The NameTextField.
+     */
     public javax.swing.JTextField getNameTextField() {
         return NameTextField;
     }
-
+    /**
+     * Returns the text field for the user's last name.
+     * 
+     * @return The LastNameTextField.
+     */
     public javax.swing.JTextField getLastNameTextField() {
         return LastNameTextField;
     }
-
+    /**
+     * Returns the text field for the user's email address.
+     * 
+     * @return The EmailTextField.
+     */
     public javax.swing.JTextField getEmailTextField() {
         return EmailTextField;
     }
-
+    /**
+     * Returns the password field for the user's password.
+     * 
+     * @return The PasswordField.
+     */
     public javax.swing.JPasswordField getPasswordField() {
         return PasswordField;
     }
-
+    /**
+     * Returns the combo box for selecting the user's role.
+     * 
+     * @return The RoleComboBox.
+     */
     public javax.swing.JComboBox<String> getRoleComboBox() {
         return RoleComboBox;
     }
-
+    /**
+     * Returns the label displaying information about the form status (e.g., success or error).
+     * 
+     * @return The InfoLabel.
+     */
     public javax.swing.JLabel getInfoLabel() {
         return InfoLabel;
     }

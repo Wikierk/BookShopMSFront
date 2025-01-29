@@ -17,21 +17,29 @@ import java.awt.Font;
 import java.math.BigDecimal;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /**
- *
+ * OrderAdminDetailsPanel is a panel in the admin interface of the application
+ * that displays the details of a specific order. It shows order information,
+ * including the user who placed the order and the books included in the order.
+ * It also calculates and displays the total value of the order.
+ * 
  * @author Wiktor
  */
 public class OrderAdminDetailsPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ClientPanel
-     */
+    
     private MainFrame mainFrame;
     private OrderDto order;
     private BigDecimal totalValue = new BigDecimal(0);
 
+     /**
+     * Constructor initializes the panel with the main frame and order details.
+     * It sets up the initial display, including the order ID.
+     * 
+     * @param mainFrame the main frame of the application
+     * @param order the order whose details are to be displayed
+     */
     public OrderAdminDetailsPanel(MainFrame mainFrame, OrderDto order) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -140,15 +148,24 @@ public class OrderAdminDetailsPanel extends javax.swing.JPanel {
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Event handler for the "Back" button. Navigates back to the admin orders panel.
+     */
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         mainFrame.showPanel("adminOrders");
     }//GEN-LAST:event_BackBtnActionPerformed
-
+    /**
+     * Event handler for the "Log out" button. Logs out and navigates back to the login screen.
+     */
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
+     /**
+     * Called when the panel is displayed. This method fetches and displays the order details,
+     * including the user who placed the order and the list of books in the order.
+     * It also calculates the total value of the order and updates the display accordingly.
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         OrderItemsBoxPanel.removeAll();
         OrderItemsBoxPanel.revalidate();

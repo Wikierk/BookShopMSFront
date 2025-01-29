@@ -5,25 +5,29 @@
 package com.example;
 
 
-import bookshopmanagementsystem.interfaces.Book;
 import com.example.dto.BookDto;
 import com.example.requests.SelectBooksRequest;
 import com.example.responses.Response;
 import com.example.responses.ResponseType;
 import com.example.responses.SelectBooksResponse;
-import java.math.BigDecimal;
 import javax.swing.JPanel;
 
 /**
- *
+ * The ClientPanel class represents the main user interface for the client in the bookshop management system.
+ * It provides buttons for accessing different panels (e.g., Cart, Orders) and displays available books retrieved from the server.
+ * The panel is dynamically populated with book information when it is displayed.
+ * 
  * @author Wiktor
  */
 public class ClientPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ClientPanel
-     */
+
     private MainFrame mainFrame;
+     /**
+     * Constructs a ClientPanel and initializes the components.
+     * 
+     * @param mainFrame the MainFrame that contains this panel.
+     */
     public ClientPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -129,11 +133,19 @@ public class ClientPanel extends javax.swing.JPanel {
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the action of the "Cart" button. Displays the cart panel in the main frame.
+     * 
+     * @param evt the action event triggered by the button click.
+     */
     private void BasketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BasketBtnActionPerformed
             mainFrame.showPanel("cart");
     }//GEN-LAST:event_BasketBtnActionPerformed
-
+    /**
+     * Handles the action of the "Orders" button. Displays the orders panel in the main frame.
+     * 
+     * @param evt the action event triggered by the button click.
+     */
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
         mainFrame.showPanel("orders");
     }//GEN-LAST:event_OrdersBtnActionPerformed
@@ -141,7 +153,12 @@ public class ClientPanel extends javax.swing.JPanel {
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
-
+    /**
+     * Updates the content of the ClientPanel when it is shown. It fetches the list of available books from the server,
+     * displays the user's name, and dynamically adds book panels to the view.
+     * 
+     * @param evt the component event triggered when the panel is shown.
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         BooksBoxPanel.removeAll();
         BooksBoxPanel.revalidate();

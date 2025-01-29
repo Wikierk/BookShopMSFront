@@ -16,7 +16,13 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 /**
- *
+ * This class displays a toast notification with a failure message as a small 
+ * pop-up window. The toast will automatically disappear after the specified duration.
+ * The toast uses a red color background to indicate an error or failure.
+ * 
+ * A toast is typically used to show brief information to the user without blocking 
+ * interaction with the rest of the application.
+ * 
  * @author Wiktor
  */
 public class ToastFailed {
@@ -24,6 +30,14 @@ public class ToastFailed {
     private JPanel parent;
     private int duration;
     
+    
+     /**
+     * Constructs a new ToastFailed notification with the specified failure message and duration.
+     * 
+     * @param parentPanel the parent panel where the toast will be displayed near
+     * @param message the failure message to be displayed in the toast
+     * @param duration the duration (in milliseconds) for which the toast will remain visible
+     */
     public ToastFailed(JPanel parentPanel, String message, int duration) {
     JWindow toastWindow = new JWindow();
     toastWindow.setLayout(new BorderLayout());

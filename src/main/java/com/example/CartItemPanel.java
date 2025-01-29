@@ -6,18 +6,23 @@ package com.example;
 
 import bookshopmanagementsystem.interfaces.Cart;
 import com.example.interfaces.BookInCart;
-import java.math.BigDecimal;
 
 /**
- *
+ * This class represents a panel displaying information about a book in the shopping cart.
+ * It allows the user to view the book's title, author, price, and quantity, as well as
+ * remove the book from the cart or adjust its quantity.
+ * This class uses the BookInCart object to manage the book's information and update the cart.
+ * 
  * @author Wiktor
  */
 public class CartItemPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form BookPanel
-     */
     private final BookInCart bookInCart;
+     /**
+     * Creates a new CartItemPanel for a given book in the cart.
+     * 
+     * @param bookInCart The BookInCart object representing the book in the cart.
+     */
     public CartItemPanel(BookInCart bookInCart) {
         initComponents();
         TitleLabel.setText(bookInCart.getBook().getTitle());
@@ -133,11 +138,21 @@ public class CartItemPanel extends javax.swing.JPanel {
 
         add(CartItemInfoPanel);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the action when the "Remove" button is clicked. 
+     * Removes the current book from the shopping cart.
+     * 
+     * @param evt The event triggered by the button click.
+     */
     private void RemoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveBtnActionPerformed
         Cart.getInstance().removeItem(bookInCart);
     }//GEN-LAST:event_RemoveBtnActionPerformed
-
+    /**
+     * Handles the change in quantity when the user adjusts the quantity spinner.
+     * Updates the quantity of the book in the cart and recalculates the total value of the cart.
+     * 
+     * @param evt The event triggered by the spinner value change.
+     */
     private void QuantitySpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_QuantitySpinnerStateChanged
         int newQuantity = (int) QuantitySpinner.getValue();
         bookInCart.setQuantity(newQuantity);

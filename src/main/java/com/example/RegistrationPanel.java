@@ -8,15 +8,24 @@ import com.example.dto.NewUserDto;
 import com.example.requests.AddUserRequest;
 
 /**
- *
+ * This class represents a panel used for registering a new user in the application.
+ * It provides fields for inputting user data such as name, last name, email, password, 
+ * and repeating the password, as well as buttons for submitting the registration or 
+ * navigating back to the login screen.
+ * 
+ * It communicates with a server to register a new user through the BookShopManagementSystem.
+ * 
  * @author Wiktor
  */
 public class RegistrationPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RegisterPanel
-     */
     private MainFrame mainFrame;
+    
+     /**
+     * Constructs a RegistrationPanel.
+     * 
+     * @param mainFrame The main frame of the application, used to navigate between panels.
+     */
     public RegistrationPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -259,6 +268,14 @@ public class RegistrationPanel extends javax.swing.JPanel {
         mainFrame.showPanel("login");
     }//GEN-LAST:event_BackToLoginButtonMouseClicked
 
+     /**
+     * Handles the action when the user clicks on the "Register" button.
+     * Collects the user's input data, checks for password confirmation, 
+     * creates a new user object, and sends it to the server for registration.
+     * Displays success or error messages based on the outcome.
+     * 
+     * @param evt The event triggered by the user clicking the "Register" button.
+     */
     private void RegisterButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterButtonMouseClicked
          String name = NameTextField.getText();
          String lastName = LastNameTextField.getText();

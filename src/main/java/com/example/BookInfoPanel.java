@@ -5,10 +5,18 @@
 package com.example;
 
 import com.example.dto.BookOrderDetailsDto;
-import com.example.dto.BookOrderInfoDto;
 import com.example.interfaces.BookInCart;
 
 /**
+ * BookInfoPanel is a JPanel that displays information about a book, including its title, author,
+ * price, and quantity. It supports two constructors: one for books in the cart and another
+ * for books in an order.
+ *
+ * This panel consists of:
+ * - An image section displaying a placeholder image.
+ * - A book details section with labels for title, author, price, and quantity.
+ *
+ * It integrates with MainFrame for potential interactions.
  *
  * @author Wiktor
  */
@@ -19,6 +27,13 @@ public class BookInfoPanel extends javax.swing.JPanel {
      */
     private MainFrame mainFrame;
     private BookInCart book;
+    
+     /**
+     * Constructs a BookInfoPanel displaying details for a book in the shopping cart.
+     *
+     * @param book      The book in the cart.
+     * @param mainFrame The main application frame.
+     */
     public BookInfoPanel(BookInCart book, MainFrame mainFrame) {
         initComponents();
         TitleLabel.setText(book.getBook().getTitle());
@@ -29,6 +44,11 @@ public class BookInfoPanel extends javax.swing.JPanel {
         this.book = book;
     }
     
+     /**
+     * Constructs a BookInfoPanel displaying details for a book in an order.
+     *
+     * @param book The book order details.
+     */
     public BookInfoPanel(BookOrderDetailsDto book) {
         initComponents();
         TitleLabel.setText(book.getBook().title);

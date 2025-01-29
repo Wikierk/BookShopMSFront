@@ -5,16 +5,18 @@
 package com.example;
 
 import bookshopmanagementsystem.interfaces.Cart;
-import bookshopmanagementsystem.interfaces.Book;
 import com.example.dto.BookDto;
 import com.example.interfaces.BookInCart;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JPanel;
 
 /**
  *
  * @author Wiktor
+ * 
+ * BookPanel is a custom JPanel that displays book information and allows users to interact with the book.
+ * Users can add the book to their cart or place an order immediately.
+ *
  */
 public class BookPanel extends javax.swing.JPanel {
 
@@ -24,6 +26,14 @@ public class BookPanel extends javax.swing.JPanel {
     private ClientPanel clientPanel;
     private MainFrame mainFrame;
     private BookDto book;
+     
+    /**
+     * Creates a new BookPanel.
+     * 
+     * @param book The book data transfer object containing book details.
+     * @param clientPanel The client panel that interacts with this book panel.
+     * @param mainFrame The main frame of the application.
+     */
     public BookPanel(BookDto book, ClientPanel clientPanel, MainFrame mainFrame) {
         initComponents();
         TitleLabel.setText(book.getTitle());
@@ -133,7 +143,13 @@ public class BookPanel extends javax.swing.JPanel {
         add(BtnPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+     /**
+     * Handles the event of adding the book to the cart.
+     * If the book is already in the cart, its quantity is increased.
+     * Otherwise, it is added as a new item.
+     * 
+     * @param evt The action event triggered by the "Add to Cart" button.
+     */
     private void AddToCartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddToCartBtnActionPerformed
 
         Toast toast = new Toast(clientPanel, "Added to cart", 1000);
@@ -154,7 +170,12 @@ public class BookPanel extends javax.swing.JPanel {
     }
 
     }//GEN-LAST:event_AddToCartBtnActionPerformed
-
+    /**
+     * Handles the event of ordering the book immediately.
+     * Creates a new order form with the selected book.
+     * 
+     * @param evt The action event triggered by the "Order Now" button.
+     */
     private void OrderNowBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderNowBtnActionPerformed
         List<BookInCart> bookInCart = new ArrayList<>();
         bookInCart.add(new BookInCart(book,1));

@@ -9,17 +9,21 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
- *
+ * MainFrame is the central JFrame of the application. It manages the main layout and handles the 
+ * navigation between different panels, such as login, registration, client dashboard, and admin sections.
+ * It utilizes a CardLayout to switch between these panels.
+ * 
  * @author Wiktor
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainFrame
-     */
     private CardLayout cardLayout;
     UserDto user;
     JPanel mainPanel;
+     /**
+     * Constructor that initializes the main frame, the card layout, and adds all the panels to the 
+     * mainPanel. Initially, the login panel is displayed.
+     */
     public MainFrame() {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
@@ -40,13 +44,24 @@ public class MainFrame extends javax.swing.JFrame {
 
         
     }
+     /**
+     * Switches to the panel with the given name.
+     * @param panelName the name of the panel to display
+     */
     public void showPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
     }
+    /**
+     * Sets the current user.
+     * @param user the UserDto object representing the current user
+     */
     public void setUser(UserDto user){
         this.user = user;
     }
-    
+     /**
+     * Returns the current user.
+     * @return the UserDto object representing the current user
+     */
     public UserDto getUser(){
         return this.user;
     }
@@ -69,12 +84,8 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
 
-    // TODO: Rename main to sth else? this is not really main
-    public static void main(String args[]) {
+    public static void setMainFrame() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

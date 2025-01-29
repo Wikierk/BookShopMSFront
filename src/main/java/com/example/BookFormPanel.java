@@ -10,6 +10,10 @@ import com.example.requests.AddBookRequest;
 import java.math.BigDecimal;
 
 /**
+ * The {@code BookFormPanel} class represents a JPanel that allows users to input
+ * book details such as title, author, and price, and add a new book to the system.
+ * This panel interacts with the {@code MainFrame} and communicates with the server
+ * to add books.
  *
  * @author Wiktor
  */
@@ -20,12 +24,21 @@ public class BookFormPanel extends javax.swing.JPanel {
      */
     MainFrame mainFrame;
     BookDto book;
-
+    /**
+     * Creates a new BookFormPanel for adding a new book.
+     *
+     * @param mainFrame the main frame of the application
+     */
     public BookFormPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
     }
-
+    /**
+     * Creates a new BookFormPanel pre-filled with an existing book's details.
+     *
+     * @param mainFrame the main frame of the application
+     * @param book      the book whose details will be pre-filled in the form
+     */
     public BookFormPanel(MainFrame mainFrame, BookDto book) {
         initComponents();
         this.mainFrame = mainFrame;
@@ -183,7 +196,12 @@ public class BookFormPanel extends javax.swing.JPanel {
     private void PriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriceTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PriceTextFieldActionPerformed
-
+    /**
+     * Handles the event when the Add button is clicked.
+     * It validates input fields, converts price to BigDecimal, and sends a request to the server.
+     *
+     * @param evt the mouse click event
+     */
     private void AddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMouseClicked
         String title = TitleTextField.getText();
         String author = AuthorTextField.getText();
@@ -233,7 +251,12 @@ public class BookFormPanel extends javax.swing.JPanel {
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AddButtonActionPerformed
-
+    /**
+     * Handles the event when the Back button is clicked.
+     * Returns to the admin panel.
+     *
+     * @param evt the mouse click event
+     */
     private void BackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackButtonMouseClicked
         mainFrame.showPanel("admin");
     }//GEN-LAST:event_BackButtonMouseClicked
@@ -264,26 +287,42 @@ public class BookFormPanel extends javax.swing.JPanel {
     private javax.swing.JPanel infoPanel;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * @return the TitleTextField component
+     */
     public javax.swing.JTextField getTitleTextField() {
         return this.TitleTextField;
     }
 
+    /**
+     * @return the AuthorTextField component
+     */
     public javax.swing.JTextField getAuthorTextField() {
         return this.AuthorTextField;
     }
-
+    /**
+     * @return the PriceTextField component
+     */
     public javax.swing.JTextField getPriceTextField() {
         return this.PriceTextField;
     }
-
+  /**
+     * @return the InfoLabel component
+     */
     public javax.swing.JLabel getInfoLabel() {
         return this.InfoLabel;
     }
 
+    /**
+     * @return the AddButton component
+     */
     public javax.swing.JButton getAddButton() {
         return this.AddButton;
     }
 
+    /**
+     * @return the NewBookLabel component
+     */
     public javax.swing.JLabel getTitleLabel() {
         return this.NewBookLabel;
     }

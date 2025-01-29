@@ -9,16 +9,25 @@ import com.example.dto.UserDto;
 
 
 /**
- *
+ * This class represents a JPanel displaying the information of a user 
+ * in the admin panel. It shows the user's name, email, and role.
+ * 
+ * The information displayed is based on the UserDto object passed during 
+ * the instantiation of the panel.
+ * 
  * @author Wiktor
  */
 public class UserInfoAdminPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form UserPanel
-     */
     private MainFrame mainFrame;
     UserDto user;
+    
+     /**
+     * Creates a new UserInfoAdminPanel with the provided user information.
+     * 
+     * @param user The UserDto object containing the user's data to display
+     * @param mainFrame The main frame of the application
+     */
     public UserInfoAdminPanel(UserDto user, MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;

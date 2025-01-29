@@ -7,16 +7,25 @@ package com.example;
 import com.example.dto.OrderDto;
 
 /**
- *
+ * OrderItemPanel is a JPanel that displays the details of a specific order in a user interface.
+ * It presents the order's ID, street, city, zip code, date, and status in a structured format.
+ * The panel also includes a button that, when clicked, opens a detailed view of the order.
+ * This panel is used within the main application window to provide a quick overview of an order.
+ * 
  * @author Wiktor
  */
 public class OrderItemPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form OrderAdminPanel
-     */
     MainFrame mainFrame;
     OrderDto order;
+    
+    
+     /**
+     * Constructs a new OrderItemPanel for displaying order details.
+     * 
+     * @param order the order data to display in the panel
+     * @param mainFrame the main frame to handle the display of detailed order view
+     */
     public OrderItemPanel(OrderDto order, MainFrame mainFrame) {
         initComponents();
         IdLabel.setText("ID: " + String.valueOf(order.id));
@@ -140,7 +149,12 @@ public class OrderItemPanel extends javax.swing.JPanel {
 
         add(OrderInfoPanel);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the action when the "Details" button is clicked. 
+     * It opens a new panel displaying detailed information about the current order.
+     * 
+     * @param evt the action event triggered by clicking the "Details" button
+     */
     private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
         OrderDetailsPanel orderDetailsPanel = new OrderDetailsPanel(mainFrame,order);
         mainFrame.mainPanel.add(orderDetailsPanel, "orderDetail");

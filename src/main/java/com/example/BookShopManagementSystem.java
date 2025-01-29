@@ -7,11 +7,19 @@ package com.example;
 import java.io.IOException;
 
 /**
- *
+ * The BookShopManagementSystem class serves as the entry point of the application.
+ * It initializes the main GUI frame and starts the client connection to the server.
+ * 
  * @author Wiktor
  */
 public class BookShopManagementSystem {
+     /**
+     * The port number on which the client connects to the server.
+     */
     public static final int port = 4200;
+     /**
+     * The client instance used for communication with the server.
+     */
     private static Client client;
 
     /**
@@ -22,7 +30,10 @@ public class BookShopManagementSystem {
         java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
         java.awt.EventQueue.invokeLater(BookShopManagementSystem::startClient);
     }
-
+    /**
+     * Initializes and starts the client connection to the server.
+     * The client attempts to connect to the localhost at the predefined port.
+     */
     public static void startClient() {
         try {
             client = new Client();
@@ -31,6 +42,11 @@ public class BookShopManagementSystem {
             System.out.println(e.toString());
         }
     }
+     /**
+     * Retrieves the client instance.
+     * 
+     * @return the current client instance
+     */
      public static Client getClient() {
         return client;
     }

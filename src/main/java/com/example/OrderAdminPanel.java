@@ -10,20 +10,30 @@ import com.example.dto.UpdateOrderStatusDto;
 import com.example.requests.UpdateOrderStatusRequest;
 import com.example.responses.Response;
 import com.example.responses.ResponseType;
-import com.example.responses.SelectBooksResponse;
 
 /**
- *
+ * OrderAdminPanel is a Swing JPanel that provides an interface for administrators to view and edit order details.
+ * It displays order-related information, including the order ID, delivery address, order date, and status.
+ * It also allows administrators to update the status of an order and view more detailed information about the order.
+ * 
+ * The panel is constructed with components like labels, combo boxes, and buttons. The actions associated with the
+ * buttons send requests to the backend system to update the order status or display detailed information about the order.
+ * 
  * @author Wiktor
  */
 public class OrderAdminPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form OrderAdminPanel
-     */
     OrderDto order;
     MainFrame mainFrame;
     AdminOrdersPanel adminOrdersPanel;
+    
+     /**
+     * Constructs a new OrderAdminPanel with the given order data, main frame, and admin orders panel.
+     * 
+     * @param order The OrderDto object containing the order details to be displayed
+     * @param mainFrame The main frame of the application
+     * @param adminOrdersPanel The parent panel managing orders
+     */
     public OrderAdminPanel(OrderDto order, MainFrame mainFrame, AdminOrdersPanel adminOrdersPanel) {
         initComponents();
         this.order = order;
@@ -170,6 +180,13 @@ public class OrderAdminPanel extends javax.swing.JPanel {
         add(OrderInfoPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     /**
+     * Event handler for the "Edit Status" button. Sends a request to update the order status when clicked.
+     * It communicates with the backend and provides feedback to the user based on the success or failure of the operation.
+     * 
+     * @param evt The event triggered by the button click
+     */
     private void EditStatusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditStatusBtnActionPerformed
         String newStatus = StatusComboBox.getSelectedItem().toString();
         if (!newStatus.isEmpty()) {
@@ -198,7 +215,11 @@ public class OrderAdminPanel extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_EditStatusBtnActionPerformed
-
+    /**
+     * Event handler for the "Details" button. Displays a detailed view of the order in a separate panel.
+     * 
+     * @param evt The event triggered by the button click
+     */
     private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
         OrderAdminDetailsPanel orderAdminDetailsPanel = new OrderAdminDetailsPanel(mainFrame,order);
         mainFrame.mainPanel.add(orderAdminDetailsPanel, "orderAdminDetail");

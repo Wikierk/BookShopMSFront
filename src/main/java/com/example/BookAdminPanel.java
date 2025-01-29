@@ -12,18 +12,32 @@ import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 
 /**
- *
+ * This panel represents an administrative interface for managing books.
+ * It displays book information and provides options to edit or delete a book.
+ * 
  * @author Wiktor
  */
 public class BookAdminPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form BookPanel
+     /**
+     * Reference to the AdminPanel that contains this panel.
      */
     private AdminPanel adminPanel;
+     /**
+     * Reference to the main application frame.
+     */
     private MainFrame mainFrame;
+     /**
+     * Data object representing the book displayed in this panel.
+     */
     private BookDto book;
-
+    /**
+     * Creates a new BookAdminPanel with the given book details.
+     * 
+     * @param book The book information to be displayed.
+     * @param adminPanel Reference to the admin panel.
+     * @param mainFrame Reference to the main application frame.
+     */
     public BookAdminPanel(BookDto book, AdminPanel adminPanel, MainFrame mainFrame) {
         initComponents();
         TitleLabel.setText(book.getTitle());
@@ -131,7 +145,12 @@ public class BookAdminPanel extends javax.swing.JPanel {
         add(BtnPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-
+    /**
+     * Handles the action of the "Edit" button.
+     * Opens the book edit form and allows modifying the book details.
+     * 
+     * @param evt The action event triggered by clicking the edit button.
+     */
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
         BookFormPanel bookFormPanel = new BookFormPanel(mainFrame,book);
         mainFrame.mainPanel.add(bookFormPanel,"bookEditForm");
@@ -176,7 +195,12 @@ public class BookAdminPanel extends javax.swing.JPanel {
         });
 
     }//GEN-LAST:event_EditBtnActionPerformed
-
+    /**
+     * Handles the action of the "Delete" button.
+     * Sends a request to delete the book from the system.
+     * 
+     * @param evt The action event triggered by clicking the delete button.
+     */
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         DeleteBookRequest deleteBookRequest = new DeleteBookRequest(book.id);
         try {

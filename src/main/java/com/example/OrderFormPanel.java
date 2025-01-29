@@ -7,27 +7,26 @@ package com.example;
 import com.example.dto.BookOrderInfoDto;
 import com.example.dto.NewOrderDto;
 import com.example.interfaces.BookInCart;
-import com.example.requests.AddBookRequest;
 import com.example.requests.AddOrderRequest;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.List;
 
-/**
- *
- * @author Wiktor
+/*
+ * This class represents a JPanel that provides a user interface for placing an order. It allows users to enter their personal details (name, address) and order items. 
+ * It displays order items in a scrollable list, a summary of the total value, and provides options to place the order or go back.
  */
 public class OrderFormPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form OrderFormPanel
-     */
     private MainFrame mainFrame;
     private List<BookInCart> bookInCart;
 
+     /**
+     * Constructor for initializing the OrderFormPanel.
+     * 
+     * @param mainFrame Reference to the main frame, used for navigation.
+     * @param bookInCart List of books currently in the cart.
+     */
     public OrderFormPanel(MainFrame mainFrame, List<BookInCart> bookInCart) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -278,7 +277,10 @@ public class OrderFormPanel extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_OrderButtonMouseClicked
-
+    /**
+     * Handles the event when the user clicks the 'Order' button.
+     * It validates the user input and sends the order details to the server.
+     */
     private void OrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderButtonActionPerformed
         String name = NameTextField.getText();
         String lastName = LastNameTextField.getText();
@@ -324,7 +326,10 @@ public class OrderFormPanel extends javax.swing.JPanel {
             InfoLabel.setText("Fill all field!");
         }
     }//GEN-LAST:event_OrderButtonActionPerformed
-
+    /**
+     * Handles the event when the user clicks the 'Back' button.
+     * It switches back to the "client" panel.
+     */
     private void BackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackButtonMouseClicked
         mainFrame.showPanel("client");
     }//GEN-LAST:event_BackButtonMouseClicked

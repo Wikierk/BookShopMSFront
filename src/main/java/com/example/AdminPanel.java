@@ -13,37 +13,27 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Wiktor
+ * @author Wiktor 
+ * AdminPanel class represents the main panel for administrators.
+ * It provides functionalities such as managing books, orders, and users.
+ * The panel also allows administrators to log out.
+ *
  */
 public class AdminPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ClientPanel
+     * Reference to the main application frame.
      */
     private MainFrame mainFrame;
-
+    /**
+     * Creates a new AdminPanel.
+     *
+     * @param mainFrame The main application frame.
+     */
     public AdminPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
        
-        /*
-    Book[] books = new Book[10];
-    books[0] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
-    books[1] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
-    books[2] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("24.99"));
-    books[3] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
-    books[4] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
-    books[5] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("24.99"));
-    books[6] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
-    books[7] = new Book("To Kill a Mockingbird", "Harper Lee", new BigDecimal("19.99"));
-    books[8] = new Book("The Great Gatsby", "F. Scott Fitzgerald", new BigDecimal("29.99"));
-    books[9] = new Book("1984", "George Orwell", new BigDecimal("19.99"));
-        
-        for (Book book : books) {
-            JPanel singleBookPanel = new BookAdminPanel(book, this, mainFrame);
-            BooksBoxPanel.add(singleBookPanel);
-        }
-         */
     }
 
     /**
@@ -159,23 +149,46 @@ public class AdminPanel extends javax.swing.JPanel {
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the action event for the "Add Book" button.
+     * Navigates to the book form panel.
+     *
+     * @param evt The action event.
+     */
     private void BasketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BasketBtnActionPerformed
         mainFrame.showPanel("bookForm");
     }//GEN-LAST:event_BasketBtnActionPerformed
-
+    /**
+     * Handles the action event for the "Orders" button.
+     * Navigates to the admin orders panel.
+     *
+     * @param evt The action event.
+     */
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
         mainFrame.showPanel("adminOrders");
     }//GEN-LAST:event_OrdersBtnActionPerformed
-
+    /**
+     * Handles the action event for the "Log Out" button.
+     * Navigates to the login panel.
+     *
+     * @param evt The action event.
+     */
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
-
+    /**
+     * Handles the action event for the "Users" button.
+     * Navigates to the admin users panel.
+     *
+     * @param evt The action event.
+     */
     private void UsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersBtnActionPerformed
         mainFrame.showPanel("adminUsers");
     }//GEN-LAST:event_UsersBtnActionPerformed
-
+    /**
+     * Refreshes the book display panel by fetching the latest book data from the server.
+     * It removes all existing book entries and repopulates the list.
+     */
     public void refreshBooksBoxPanel() {
         BooksBoxPanel.removeAll();
         BooksBoxPanel.revalidate();
@@ -205,7 +218,12 @@ public class AdminPanel extends javax.swing.JPanel {
             BooksBoxPanel.add(singleBookPanel);
         }
     }
-
+    /**
+     * Invoked when the panel becomes visible.
+     * Refreshes the book display panel.
+     *
+     * @param evt The component event.
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         refreshBooksBoxPanel();
     }//GEN-LAST:event_formComponentShown

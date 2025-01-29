@@ -14,14 +14,22 @@ import javax.swing.JPanel;
 /**
  *
  * @author Wiktor
+ * 
+ * AdminUsersPanel is a JPanel that allows the admin to manage users.
+ * It provides options to add users, navigate to orders, books, and log out.
+ *
  */
 public class AdminUsersPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ClientPanel
+     * Reference to the main application frame.
      */
     private MainFrame mainFrame;
-
+    /**
+     * Creates a new AdminUsersPanel.
+     *
+     * @param mainFrame The main frame of the application.
+     */
     public AdminUsersPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -141,23 +149,47 @@ public class AdminUsersPanel extends javax.swing.JPanel {
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the action when the "Add User" button is clicked.
+     * Navigates to the user form panel.
+     *
+     * @param evt The action event.
+     */
     private void AddUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddUserBtnActionPerformed
         mainFrame.showPanel("userForm");
     }//GEN-LAST:event_AddUserBtnActionPerformed
-
+    /**
+     * Handles the action when the "Orders" button is clicked.
+     * Navigates to the admin orders panel.
+     *
+     * @param evt The action event.
+     */
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
         mainFrame.showPanel("adminOrders");
     }//GEN-LAST:event_OrdersBtnActionPerformed
 
+    /**
+     * Handles the action when the "Log Out" button is clicked.
+     * Navigates to the login panel.
+     *
+     * @param evt The action event.
+     */
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
-
+    /**
+     * Handles the action when the "Books" button is clicked.
+     * Navigates to the admin books panel.
+     *
+     * @param evt The action event.
+     */
     private void BooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BooksBtnActionPerformed
         mainFrame.showPanel("admin");
     }//GEN-LAST:event_BooksBtnActionPerformed
-
+    /**
+     * Refreshes the users list in the UsersBoxPanel by fetching updated user data from the server.
+     * Only non-admin users are displayed.
+     */
     public void refreshUsersBoxPanel() {
         UsersBoxPanel.removeAll();
         UsersBoxPanel.revalidate();
@@ -189,6 +221,12 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Called when the panel becomes visible.
+     * Refreshes the list of users.
+     *
+     * @param evt The component event.
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
         refreshUsersBoxPanel();

@@ -13,15 +13,22 @@ import com.example.responses.ResponseType;
 import com.example.responses.SelectUserResponse;
 
 /**
- *
+ * The LoginPanel class represents the login screen of the application.
+ * It provides a graphical user interface (GUI) for the user to log into the application.
+ * This panel allows the user to enter their email address and password,
+ * Depending on the entered credentials, the user is authenticated and directed to the appropriate panel (Admin or Client).
+ * 
  * @author Wiktor
  */
 public class LoginPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form LoginPanel
-     */
+
     private MainFrame mainFrame;
+    
+     /**
+     * Creates new form LoginPanel
+     * @param mainFrame Reference to the main frame to facilitate panel transitions
+     */
     public LoginPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -202,6 +209,11 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_SignUpLabelMouseEntered
 
+    /**
+     * Triggered when the user presses the "Login" button.
+     * This method validates the user credentials by sending a login request to the server.
+     * If the response is successful, the user is logged in and directed to either the Admin or Client panel.
+     */    
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
 
        String email = EmailTextField.getText();

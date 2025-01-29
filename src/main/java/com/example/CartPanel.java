@@ -4,24 +4,28 @@
  */
 package com.example;
 
-import bookshopmanagementsystem.interfaces.Book;
 import bookshopmanagementsystem.interfaces.Cart;
-import com.example.dto.BookDto;
 import com.example.interfaces.BookInCart;
 import java.util.List;
 import javax.swing.JPanel;
 
 
 /**
- *
+ * CartPanel represents the user interface for the shopping cart in the application.
+ * It provides functionalities to view cart items, their total value, and proceed to the order form.
+ * It listens for updates to the cart and refreshes the cart contents and total value accordingly.
+ * 
  * @author Wiktor
  */
 public class CartPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ClientPanel
-     */
+    
     private MainFrame mainFrame;
+     /**
+     * Creates a new CartPanel for displaying the cart information.
+     * Initializes the panel and sets up listeners to update the cart items and total value.
+     *
+     * @param mainFrame the main frame containing the cart panel.
+     */
     public CartPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -147,19 +151,39 @@ public class CartPanel extends javax.swing.JPanel {
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the event when the "Back" button is clicked.
+     * Navigates back to the previous panel (Client Panel).
+     * 
+     * @param evt the action event that triggered this method.
+     */
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         mainFrame.showPanel("client");
     }//GEN-LAST:event_BackBtnActionPerformed
-
+    /**
+     * Handles the event when the "Orders" button is clicked.
+     * Navigates to the Orders panel.
+     * 
+     * @param evt the action event that triggered this method.
+     */
     private void OrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersBtnActionPerformed
         mainFrame.showPanel("orders");
     }//GEN-LAST:event_OrdersBtnActionPerformed
-
+    /**
+     * Handles the event when the "Log Out" button is clicked.
+     * Navigates to the Login panel.
+     * 
+     * @param evt the action event that triggered this method.
+     */
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
-
+    /**
+     * Handles the event when the "Order" button is clicked.
+     * Navigates to the order form and populates it with the books currently in the cart.
+     * 
+     * @param evt the action event that triggered this method.
+     */
     private void OrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderBtnActionPerformed
         
         
@@ -173,10 +197,20 @@ public class CartPanel extends javax.swing.JPanel {
             }
         mainFrame.showPanel("ordersForm");
     }//GEN-LAST:event_OrderBtnActionPerformed
-     public JPanel getCartItemsBoxPanel() {
+     
+     /**
+     * Returns the panel containing the cart items.
+     * 
+     * @return the panel containing the cart items.
+     */
+    public JPanel getCartItemsBoxPanel() {
         return CartItemsBoxPanel;
     }
-
+    
+    /**
+     * Refreshes the cart items displayed in the cart panel.
+     * This method is triggered when the cart is updated, and it updates the UI with the current items in the cart.
+     */
      private void refreshCartItems() {
          CartItemsBoxPanel.removeAll();
           List<BookInCart> books = Cart.getInstance().getItems();
@@ -189,6 +223,10 @@ public class CartPanel extends javax.swing.JPanel {
             CartItemsBoxPanel.repaint();
      }
      
+     /**
+     * Refreshes the total value label when the total value of the cart changes.
+     * This method is triggered when the cart's value is updated, reflecting the new total amount.
+     */
      private void refreshCartValue(){
          TotalValueLabel.setText(Cart.getInstance().getTotalValue() + " ZŁ");
      }

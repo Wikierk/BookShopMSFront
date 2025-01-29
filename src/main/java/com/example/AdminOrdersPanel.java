@@ -14,6 +14,11 @@ import javax.swing.JPanel;
 /**
  *
  * @author Wiktor
+ * /
+ * AdminOrdersPanel represents the admin panel for managing orders.
+ * It allows the administrator to view and manage book orders.
+ * The panel dynamically loads orders from the server and displays them.
+ *
  */
 public class AdminOrdersPanel extends javax.swing.JPanel {
 
@@ -21,7 +26,11 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
      * Creates new form ClientPanel
      */
     private MainFrame mainFrame;
-
+    /**
+     * Creates a new AdminOrdersPanel.
+     *
+     * @param mainFrame The main frame of the application.
+     */
     public AdminOrdersPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
@@ -128,19 +137,38 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
 
         add(MainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Handles the event when the "Users" button is clicked.
+     * Switches the view to the admin user management panel.
+     *
+     * @param evt The action event triggered by clicking the Users button.
+     */
     private void UsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersBtnActionPerformed
         mainFrame.showPanel("adminUsers");
     }//GEN-LAST:event_UsersBtnActionPerformed
-
+    /**
+     * Handles the event when the "Log Out" button is clicked.
+     * Switches the view to the login panel.
+     *
+     * @param evt The action event triggered by clicking the Log Out button.
+     */
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         mainFrame.showPanel("login");
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
+    /**
+     * Handles the event when the "Books" button is clicked.
+     * Switches the view to the book management panel.
+     *
+     * @param evt The action event triggered by clicking the Books button.
+     */
     private void BooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BooksBtnActionPerformed
         mainFrame.showPanel("admin");
     }//GEN-LAST:event_BooksBtnActionPerformed
-
+   /**
+     * Refreshes the OrdersBoxPanel by fetching and displaying orders from the server.
+     * The method removes existing orders, retrieves new data, and updates the panel.
+     */
     public void refreshOrdersBoxPanel() {
         OrdersBoxPanel.removeAll();
         OrdersBoxPanel.revalidate();
@@ -170,7 +198,12 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
             OrdersBoxPanel.add(singleOrderPanel);
         }
     }
-    
+        /**
+     * Event handler for when the panel is shown.
+     * Automatically refreshes the orders list when the panel becomes visible.
+     *
+     * @param evt The component event triggered when the panel is shown.
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         refreshOrdersBoxPanel();
     }//GEN-LAST:event_formComponentShown
