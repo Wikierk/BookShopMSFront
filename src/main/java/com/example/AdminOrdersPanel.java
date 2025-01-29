@@ -4,6 +4,13 @@
  */
 package com.example;
 
+import com.example.dto.OrderDto;
+import com.example.requests.SelectOrdersRequest;
+import com.example.responses.Response;
+import com.example.responses.ResponseType;
+import com.example.responses.SelectOrdersResponse;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Wiktor
@@ -134,10 +141,38 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
         mainFrame.showPanel("admin");
     }//GEN-LAST:event_BooksBtnActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+    public void refreshOrdersBoxPanel() {
         OrdersBoxPanel.removeAll();
         OrdersBoxPanel.revalidate();
         OrdersBoxPanel.repaint();
+        OrderDto[] orders = {};
+        SelectOrdersRequest selectOrdersRequest = new SelectOrdersRequest();
+        try {
+            Client client = BookShopManagementSystem.getClient();
+            if (client != null) {
+                String response = client.sendMessage(selectOrdersRequest.create());
+                String[] result = Response.split(response);
+                System.out.println("Server response: " + response);
+                if((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
+                    SelectOrdersResponse selectOrdersResponse = new SelectOrdersResponse(result[1]);
+                    orders = selectOrdersResponse.orders;
+                }
+
+            } else {
+                System.out.println("Client is not connected.");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        for (OrderDto order : orders) {
+            JPanel singleOrderPanel = new OrderAdminPanel(order, mainFrame,this);
+            OrdersBoxPanel.add(singleOrderPanel);
+        }
+    }
+    
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        refreshOrdersBoxPanel();
     }//GEN-LAST:event_formComponentShown
 
 

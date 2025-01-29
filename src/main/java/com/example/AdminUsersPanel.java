@@ -3,14 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.example;
-
-import com.example.dto.BookDto;
+import com.example.dto.Role;
 import com.example.dto.UserDto;
-import com.example.requests.SelectBooksRequest;
 import com.example.requests.SelectUsersRequest;
 import com.example.responses.Response;
 import com.example.responses.ResponseType;
-import com.example.responses.SelectBooksResponse;
 import com.example.responses.SelectUsersResponse;
 import javax.swing.JPanel;
 
@@ -184,9 +181,8 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println(e);
         }
-
         for (UserDto user : users) {
-            if(!user.role.equals("admin")){
+            if(user.role != Role.Admin){
                 JPanel singleUserPanel = new UserAdminPanel(user,mainFrame, this);
                 UsersBoxPanel.add(singleUserPanel);
             }

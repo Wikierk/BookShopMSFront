@@ -4,6 +4,14 @@
  */
 package com.example;
 
+import com.example.dto.OrderDto;
+import com.example.dto.OrderStatus;
+import com.example.dto.UpdateOrderStatusDto;
+import com.example.requests.UpdateOrderStatusRequest;
+import com.example.responses.Response;
+import com.example.responses.ResponseType;
+import com.example.responses.SelectBooksResponse;
+
 /**
  *
  * @author Wiktor
@@ -13,8 +21,21 @@ public class OrderAdminPanel extends javax.swing.JPanel {
     /**
      * Creates new form OrderAdminPanel
      */
-    public OrderAdminPanel() {
+    OrderDto order;
+    MainFrame mainFrame;
+    AdminOrdersPanel adminOrdersPanel;
+    public OrderAdminPanel(OrderDto order, MainFrame mainFrame, AdminOrdersPanel adminOrdersPanel) {
         initComponents();
+        this.order = order;
+        IdLabel.setText("Order ID: " +  String.valueOf(order.id));
+        StreetLabel.setText("Street: " + order.street);
+        CityLabel.setText("City: " +order.city);
+        ZipLabel.setText("Zip: " +order.zip);
+        DateLabel.setText("Order Date: " +order.date);
+        UserIdLabel.setText("User ID: " + String.valueOf(order.userId));
+        StatusComboBox.setSelectedItem(OrderStatus.toString(order.status));
+        this.mainFrame = mainFrame;
+        this.adminOrdersPanel = adminOrdersPanel;
     }
 
     /**
@@ -37,27 +58,29 @@ public class OrderAdminPanel extends javax.swing.JPanel {
         ZipLabel = new javax.swing.JLabel();
         DatePanel = new javax.swing.JPanel();
         DateLabel = new javax.swing.JLabel();
-        UserIdPanel = new javax.swing.JPanel();
-        UserIdLabel = new javax.swing.JLabel();
         StatusPanel = new javax.swing.JPanel();
         StatusComboBox = new javax.swing.JComboBox<>();
+        UserIdPanel = new javax.swing.JPanel();
+        UserIdLabel = new javax.swing.JLabel();
         BtnPanel = new javax.swing.JPanel();
         EditStatusBtn = new javax.swing.JButton();
         Details = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), javax.swing.BorderFactory.createTitledBorder("")));
+        setMinimumSize(new java.awt.Dimension(250, 490));
+        setPreferredSize(new java.awt.Dimension(250, 490));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        OrderInfoPanel.setPreferredSize(new java.awt.Dimension(218, 120));
+        OrderInfoPanel.setMinimumSize(new java.awt.Dimension(218, 180));
+        OrderInfoPanel.setPreferredSize(new java.awt.Dimension(218, 180));
         OrderInfoPanel.setLayout(new javax.swing.BoxLayout(OrderInfoPanel, javax.swing.BoxLayout.Y_AXIS));
 
-        IdPanel.setPreferredSize(new java.awt.Dimension(225, 10));
+        IdPanel.setPreferredSize(new java.awt.Dimension(225, 30));
         IdPanel.setLayout(new java.awt.BorderLayout());
 
         IdLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         IdLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         IdLabel.setText("ID");
-        IdLabel.setToolTipText("");
-        IdLabel.setPreferredSize(new java.awt.Dimension(38, 20));
         IdPanel.add(IdLabel, java.awt.BorderLayout.CENTER);
 
         OrderInfoPanel.add(IdPanel);
@@ -102,22 +125,21 @@ public class OrderAdminPanel extends javax.swing.JPanel {
 
         OrderInfoPanel.add(DatePanel);
 
-        UserIdPanel.setPreferredSize(new java.awt.Dimension(225, 10));
+        StatusPanel.setLayout(new java.awt.BorderLayout());
+
+        StatusComboBox.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        StatusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "InPreparation", "Sent", "Delivered" }));
+        StatusPanel.add(StatusComboBox, java.awt.BorderLayout.CENTER);
+
+        UserIdPanel.setPreferredSize(new java.awt.Dimension(225, 30));
         UserIdPanel.setLayout(new java.awt.BorderLayout());
 
         UserIdLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         UserIdLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        UserIdLabel.setText("USERID");
-        UserIdLabel.setToolTipText("");
-        UserIdLabel.setPreferredSize(new java.awt.Dimension(38, 20));
+        UserIdLabel.setText("UserId");
         UserIdPanel.add(UserIdLabel, java.awt.BorderLayout.CENTER);
 
-        OrderInfoPanel.add(UserIdPanel);
-
-        StatusPanel.setLayout(new java.awt.BorderLayout());
-
-        StatusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "STATUS" }));
-        StatusPanel.add(StatusComboBox, java.awt.BorderLayout.CENTER);
+        StatusPanel.add(UserIdPanel, java.awt.BorderLayout.PAGE_START);
 
         OrderInfoPanel.add(StatusPanel);
 
@@ -149,11 +171,38 @@ public class OrderAdminPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EditStatusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditStatusBtnActionPerformed
+        String newStatus = StatusComboBox.getSelectedItem().toString();
+        if (!newStatus.isEmpty()) {
+            
+            UpdateOrderStatusDto updateOrderStatusDto = new UpdateOrderStatusDto(order.id, OrderStatus.fromString(newStatus));
+            UpdateOrderStatusRequest updateOrderStatusRequest = new UpdateOrderStatusRequest(updateOrderStatusDto);
+
+            try {
+                Client client = BookShopManagementSystem.getClient();
+                    if (client != null) {
+                        String response = client.sendMessage(updateOrderStatusRequest.create());
+                        System.out.println("Server response: " + response);
+                        String[] result = Response.split(response);
+                        if((ResponseType.fromResponseHeader(result[0]) == ResponseType.Ok)) {
+                            Toast toast = new Toast(adminOrdersPanel, "Status Edited", 1000);
+                        }else{
+                            ToastFailed toastFailed = new ToastFailed(adminOrdersPanel, "Status Edit failed", 1000);
+                            
+                        }
+                    }else{
+                        System.out.println("Client is not connected.");
+                        }
+                    }catch (Exception e) {
+                        System.out.println(e);
+                    }
+        }
 
     }//GEN-LAST:event_EditStatusBtnActionPerformed
 
     private void DetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetailsActionPerformed
-        // TODO add your handling code here:
+        OrderAdminDetailsPanel orderAdminDetailsPanel = new OrderAdminDetailsPanel(mainFrame,order);
+        mainFrame.mainPanel.add(orderAdminDetailsPanel, "orderAdminDetail");
+        mainFrame.showPanel("orderAdminDetail");
     }//GEN-LAST:event_DetailsActionPerformed
 
 

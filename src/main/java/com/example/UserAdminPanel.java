@@ -56,7 +56,10 @@ public class UserAdminPanel extends javax.swing.JPanel {
         EditBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(218, 120));
+        setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), javax.swing.BorderFactory.createTitledBorder("")));
+        setMaximumSize(new java.awt.Dimension(250, 420));
+        setMinimumSize(new java.awt.Dimension(250, 420));
+        setPreferredSize(new java.awt.Dimension(250, 420));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         UserInfoPanel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), javax.swing.BorderFactory.createTitledBorder("")));
