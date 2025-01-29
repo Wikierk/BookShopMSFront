@@ -20,10 +20,12 @@ public class BookFormPanel extends javax.swing.JPanel {
      */
     MainFrame mainFrame;
     BookDto book;
+
     public BookFormPanel(MainFrame mainFrame) {
         initComponents();
         this.mainFrame = mainFrame;
     }
+
     public BookFormPanel(MainFrame mainFrame, BookDto book) {
         initComponents();
         this.mainFrame = mainFrame;
@@ -113,6 +115,7 @@ public class BookFormPanel extends javax.swing.JPanel {
         PriceLabel.setText("Price");
         EmailPanel.add(PriceLabel, java.awt.BorderLayout.PAGE_START);
 
+        PriceTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         PriceTextField.setPreferredSize(new java.awt.Dimension(64, 25));
         PriceTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,33 +188,45 @@ public class BookFormPanel extends javax.swing.JPanel {
         String title = TitleTextField.getText();
         String author = AuthorTextField.getText();
         String priceText = PriceTextField.getText();
-        BigDecimal price = new BigDecimal(priceText);
 
         if (!title.isEmpty() && !author.isEmpty() && !priceText.isEmpty()) {
-            NewBookDto newBookDto = new NewBookDto(title, author, price);
-            AddBookRequest addBookRequest = new AddBookRequest(newBookDto);
-
             try {
-                Client client = BookShopManagementSystem.getClient();
-                if (client != null) {
-                    String response = client.sendMessage(addBookRequest.create());
-                    System.out.println("Server response: " + response);
-                } else {
-                    System.out.println("Client is not connected.");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+                // Próba konwersji ceny na BigDecimal
+                BigDecimal price = new BigDecimal(priceText);
 
-            TitleTextField.setText("");
-            AuthorTextField.setText("");
-            PriceTextField.setText("");
-            InfoLabel.setForeground(new java.awt.Color(40, 252, 3));
-            InfoLabel.setText("Book added!");
+                NewBookDto newBookDto = new NewBookDto(title, author, price);
+                AddBookRequest addBookRequest = new AddBookRequest(newBookDto);
+
+                try {
+                    Client client = BookShopManagementSystem.getClient();
+                    if (client != null) {
+                        String response = client.sendMessage(addBookRequest.create());
+                        System.out.println("Server response: " + response);
+                    } else {
+                        System.out.println("Client is not connected.");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+                // Czyszczenie pól i informacja o sukcesie
+                TitleTextField.setText("");
+                AuthorTextField.setText("");
+                PriceTextField.setText("");
+                InfoLabel.setForeground(new java.awt.Color(40, 252, 3));
+                InfoLabel.setText("Book added!");
+
+            } catch (NumberFormatException e) {
+                // Obsługa błędu jeśli użytkownik podał niepoprawną wartość w priceText
+                InfoLabel.setForeground(new java.awt.Color(255, 51, 51));
+                InfoLabel.setText("Invalid price! Enter a number.");
+            }
         } else {
+            // Jeśli którekolwiek pole jest puste
             InfoLabel.setForeground(new java.awt.Color(255, 51, 51));
-            InfoLabel.setText("Fill all field!");
+            InfoLabel.setText("Fill all fields!");
         }
+
 
     }//GEN-LAST:event_AddButtonMouseClicked
 
@@ -264,9 +279,11 @@ public class BookFormPanel extends javax.swing.JPanel {
     public javax.swing.JLabel getInfoLabel() {
         return this.InfoLabel;
     }
+
     public javax.swing.JButton getAddButton() {
         return this.AddButton;
     }
+
     public javax.swing.JLabel getTitleLabel() {
         return this.NewBookLabel;
     }
