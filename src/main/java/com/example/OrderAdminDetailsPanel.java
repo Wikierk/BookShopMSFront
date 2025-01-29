@@ -156,7 +156,7 @@ public class OrderAdminDetailsPanel extends javax.swing.JPanel {
         totalValue = new BigDecimal(0);
         BookOrderDetailsDto[] books = {};
         UserDto user;
-        SelectUserForOrderRequest selectUserForOrderRequest = new SelectUserForOrderRequest(order.userId);
+        SelectUserForOrderRequest selectUserForOrderRequest = new SelectUserForOrderRequest(order.id);
         try {
             Client client = BookShopManagementSystem.getClient();
             if (client != null) {

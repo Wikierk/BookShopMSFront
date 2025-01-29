@@ -23,9 +23,9 @@ public class UserInfoAdminPanel extends javax.swing.JPanel {
         initComponents();
         this.mainFrame = mainFrame;
         this.user = user;
-        NameLabel.setText(user.name);
-        EmailLabel.setText(user.email);
-        RoleLabel.setText(user.role.toString());
+        NameLabel.setText("Name: " + user.name);
+        EmailLabel.setText("Email: " +  user.email);
+        RoleLabel.setText("Role: " + user.role.toString());
     }
 
     /**
